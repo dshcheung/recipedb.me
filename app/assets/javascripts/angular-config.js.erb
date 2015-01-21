@@ -1,0 +1,9 @@
+var app = angular.module("recipedb",['ngRoute']);
+  
+app.config(['$routeProvider', function($routeProvider){
+  $routeProvider.when('/', {
+    templateUrl: "<%= asset_path('home.html') %>",
+    controller: 'HomeCtrl' // the name of this controller should match with the actual name of the actual controller
+  })
+}]);
+
