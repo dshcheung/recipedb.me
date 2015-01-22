@@ -7,9 +7,15 @@ class CreateRecipes < ActiveRecord::Migration
       t.string :recipe_url_code #(unique with domain_name_id)
       t.string :recipe_name
       t.text :recipe_description
-      t.string :recipe_video_url #(could be nil)
-      t.string :recipe_img_url #(serialize array of images urls)
-      t.integer :recipe_original_servings
+      t.text :recipe_img_url #(serialize array of images urls)
+      t.text :recipe_img_collection_url
+      t.integer :scrape_collection_completed
+      t.integer :recipe_prep_time
+      t.integer :recipe_cook_time
+      t.integer :recipe_ready_time
+      t.integer :recipe_rest_time
+      t.integer :recipe_original_servings_amount
+      t.string :recipe_original_servings_type
       t.text :recipe_instructions
 
       t.timestamps

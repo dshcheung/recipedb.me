@@ -1,4 +1,7 @@
 class Recipe < ActiveRecord::Base
+
+  serialize :recipe_instructions, Array 
+
   # has_many :recipe_category_lists
   # has_many :categories, through: :recipe_category_lists
   # has_many :recipe_ingredient_lists
