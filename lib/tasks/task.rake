@@ -26,11 +26,11 @@ namespace :ar do
         recipe_authors.each_with_index do |author, index|
           #check if OutsideProfile Exists, if not, create one and continue
           if author.css('a').any?
-            author_name = author.css('a').text().squish
+            author_name = author.css('a').text.squish
             author_href_array = author.css('a').attr('href').to_s.split('/')
             outside_profile_url = "http://allrecipes.com/cook/" + author_href_array[4]
           else
-            author_name = author.text().squish
+            author_name = author.text.squish
             outside_profile_url = "http://allrecipes.com/"
           end
           author_existence = OutsideProfile.find_by(username: author_name, outside_profile_url: outside_profile_url)
@@ -48,8 +48,8 @@ namespace :ar do
           recipe_entry.outside_profile_id = author_existence.id
           recipe_entry.domain_name_id = 1 #change variable after testing
           recipe_entry.recipe_url_code = recipe_url_array[4]
-          recipe_entry.recipe_name = recipe_url_code_elements[index].text()
-          recipe_entry.recipe_description = recipe_descriptions[index].text()
+          recipe_entry.recipe_name = recipe_url_code_elements[index].text
+          recipe_entry.recipe_description = recipe_descriptions[index].text
 
           #go to part two of scrapping process to scrape recipe in depth information
           get_recipe_indepth_info(recipe_url, recipe_entry)
@@ -69,6 +69,8 @@ namespace :ar do
   def get_recipe_indepth_info(recipe_url, recipe_entry)
     require 'open-uri'
     require 'nokogiri'
+    require 'unitwise'
+    require 'unitwise/ext'
 
     @tries = 0
     begin
@@ -76,38 +78,69 @@ namespace :ar do
       browser = open(recipe_url).read
       html_doc = Nokogiri::HTML(browser)
 
-      #extract information and putting it in recipe_entry
+      #extract img info
       recipe_entry.recipe_img_collection_url = html_doc.css('#lnkOpenCarousel').attr("href").to_s
       recipe_entry.scrape_collection_completed = 0
-      # recipe_entry.recipe_original_servings_amount = html_doc.css('#lblYield').text().split(' ')[0].to_i
 
-      prepTimeHour = html_doc.css('#prepTimeHour em').text().to_i
-      prepTimeMin = html_doc.css('#prepMinsSpan em').text().to_i
-      prepTimeMin = prepTimeHour * 60 + prepTimeMin
-      cookTimeHour = html_doc.css('#cookHoursSpan em').text().to_i
-      cookTimeMin = html_doc.css('#cookMinsSpan em').text().to_i
-      cookTimeMin = cookTimeHour * 60 + cookTimeMin
-      readyTimeHour = html_doc.css('#totalHoursSpan em').text.to_i
-      readyTimeMin = html_doc.css('#totalMinsSpan em').text.to_i
-      readyTimeMin = readyTimeHour * 60 + readyTimeMin
+      #extract time info
+      prepTimeMin = return_total_minutes(html_doc.css('#prepTimeHour em').text.to_i, html_doc.css('#prepMinsSpan em').text.to_i)
+      cookTimeMin = return_total_minutes(html_doc.css('#cookHoursSpan em').text.to_i, html_doc.css('#cookMinsSpan em').text.to_i)
+      readyTimeMin = return_total_minutes(html_doc.css('#totalHoursSpan em').text.to_i, html_doc.css('#totalMinsSpan em').text.to_i)
       restTimeMin = readyTimeMin - prepTimeMin - cookTimeMin
-
       recipe_entry.recipe_prep_time = prepTimeMin
       recipe_entry.recipe_cook_time = cookTimeMin
       recipe_entry.recipe_ready_time = readyTimeMin
       recipe_entry.recipe_rest_time = restTimeMin
 
-      recipe_entry.recipe_original_servings_amount = html_doc.css('#lblYield').text()[/\d+/]
-      recipe_entry.recipe_original_servings_type = html_doc.css('#lblYield').text()[/\s(.*)/].gsub('- ', '').squish
+      #extract servings info =
+      recipe_entry.recipe_original_servings_amount = html_doc.css('#lblYield').text[/\d+/]
+      recipe_entry.recipe_original_servings_type = html_doc.css('#lblYield').text[/\s(.*)/].gsub('- ', '').squish
 
+      #extract instructions info
       recipe_instructions_elements = html_doc.css('div > div > ol > li > span')
       recipe_instructions_array = []
-      recipe_instructions_elements.each_with_index do |elements, index|
-        recipe_instructions_array.push(elements.text())
+      recipe_instructions_elements.each do |elements|
+        recipe_instructions_array.push(elements.text)
       end
       recipe_entry.recipe_instructions = recipe_instructions_array
 
-      
+      #extract ingredients info
+      recipe_ingredients = []
+      recipe_ingredients_elements = html_doc.css('#liIngredient')
+      recipe_ingredients_elements.each do |element|
+        #extract recipe_amount_metrix
+        recipe_amount_metrix = element.attr("data-grams")
+
+        #extract recipe_amount_us & recipe_unit_us
+        #check if there is brackets, if true, then get information from bracket instead
+        elements_has_brackets = element.css('#lblIngAmount').text[/(\((.*)\))/]
+        if elements_has_brackets == nil
+          recipe_amount_us = element.css('#lblIngAmount').text[/(\d+)/].to_i
+          recipe_unit_us = get_clean_unit_us(element.css('#lblIngAmount').text[/(?!\d+)\w+/])
+        else
+          recipe_amount_us = elements_has_brackets[/(\d+)/].to_i
+          recipe_unit_us = get_clean_unit_us(elements_has_brackets[/(?!\d+)\w+/])
+        end
+        #check if there are fractions, if true, replace recipe_units_us
+        elements_has_slash = element.css('#lblIngAmount').text[/(\d+\/\d+)/]
+        if elements_has_slash != nil
+          recipe_amount_us = element.css('#lblIngAmount').text[/(\d+)/].to_d + eval(element.css('#lblIngAmount').text[/(\d+\/\d+)/]+".0")
+        end
+
+        #extract allrecipe_ingredient_code
+        # allrecipe_ingredient_code = 
+        # recipe_ingredient_name = 
+
+        #initial hash for 1 ingredient
+        # {ingredient_id: ,amount_metrix:, amount_us:, unit_us: }
+        ## recipe_ingredient_hash = {}
+        #run find_create_ingredient() which returns the ingredient_id
+
+        # recipe_ingredients_hash.ingredient_id = find_create_ingredient(allrecipe_ingredient_code, recipe_ingredient_name) 
+        ## recipe_ingredients_hash.recipe_amount_metrix = recipe_amount_metrix
+        ## recipe_ingredients_hash.recipe_amount_us = recipe_amount_us
+        ## recipe_ingredients_hash.recipe_unit_us = recipe_unit_us
+      end
     rescue OpenURI::HTTPError => e
       case rescue_me(e, i)
       when 1
@@ -115,6 +148,18 @@ namespace :ar do
       when 2
         return
       end
+    end
+  end
+
+  def return_total_minutes(hours, minutes)
+    return hours * 60 + minutes
+  end
+
+  def get_clean_unit_us(dirty_str)
+    if dirty_str != nil && dirty_str[/s$/] != nil 
+      return dirty_str[0..-2]
+    else
+      return dirty_str
     end
   end
 

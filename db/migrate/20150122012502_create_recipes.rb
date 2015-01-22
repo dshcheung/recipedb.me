@@ -17,6 +17,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.integer :recipe_original_servings_amount
       t.string :recipe_original_servings_type
       t.text :recipe_instructions
+      t.text :recipe_ingredients
 
       t.timestamps
     end

@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150122012512) do
     t.integer  "recipe_original_servings_amount"
     t.string   "recipe_original_servings_type"
     t.text     "recipe_instructions"
+    t.text     "recipe_ingredients"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
