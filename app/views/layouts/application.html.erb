@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html ng-app="recipedb">
 <head>
-  <title>RecipedbMe</title>
+  <title>RecipeDB.me</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link href='https://fonts.googleapis.com/css?family=Yellowtail|Bad+Script|Marck+Script|Bitter|Lobster|Special+Elite|Satisfy|Damion|Architects+Daughter|Cookie' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag 'application' %>
+  <%= favicon_link_tag 'fork-and-spoon-cross-hi.png' %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-view>
+<body class="body" ng-view>
 
 <%= yield %>
 

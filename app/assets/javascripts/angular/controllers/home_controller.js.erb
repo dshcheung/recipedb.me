@@ -1,0 +1,5 @@
+app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+  $scope.mainNavBar = "<%= asset_path('navBarPartial.html') %>";
+  $scope.mainFooter = "<%= asset_path('footerPartial.html') %>";
+  $scope.course = "<img class='folder-courses' height='72px' width='72px'>";
+}]);
