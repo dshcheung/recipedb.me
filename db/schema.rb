@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122012512) do
+ActiveRecord::Schema.define(version: 20150123014304) do
+
+  create_table "ingredient_names", force: true do |t|
+    t.string   "recipe_ingredient_sub_name"
+    t.integer  "ingredient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ingredients", force: true do |t|
+    t.integer  "ar_ingredient_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "outside_profiles", force: true do |t|
     t.integer  "display_format"
@@ -19,6 +32,16 @@ ActiveRecord::Schema.define(version: 20150122012512) do
     t.string   "full_name"
     t.string   "site_name"
     t.string   "outside_profile_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recipe_ingredient_lists", force: true do |t|
+    t.integer  "recipe_id"
+    t.integer  "ingredient_id"
+    t.integer  "recipe_amount_us"
+    t.string   "recipe_unit_us"
+    t.integer  "recipe_amount_metric"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

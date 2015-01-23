@@ -4,8 +4,8 @@ class Recipe < ActiveRecord::Base
 
   # has_many :recipe_category_lists
   # has_many :categories, through: :recipe_category_lists
-  # has_many :recipe_ingredient_lists
-  # has_many :ingredients, through: :recipe_ingredient_lists
+  has_many :recipe_ingredient_lists
+  has_many :ingredients, through: :recipe_ingredient_lists
   # belongs_to :user
   belongs_to :outside_profile
   # belongs_to :domain_name
