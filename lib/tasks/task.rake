@@ -3,6 +3,34 @@ namespace :allrecipe do
     get_ar_url(args.start_frequency.to_i)
   end
 
+  task :category_tags => :enviornment do 
+    get_category_tags()
+  end
+
+  def get_category_tags()
+    require 'open-uri'
+    require 'nokogiri'
+
+    @tries
+    begin
+      url = "http://allrecipes.com/recipes/main.aspx?"
+      browser = open(url).read
+      html_doc = Nokogiri::HTML(browser)
+
+      category_urls = html_doc.css('a#hlSubNavItem')
+      category_urls.each do |category_url|
+        puts category_url
+      end
+    rescue
+      case rescue_me(e)
+      when 1
+        retry
+      when 2
+        next
+      end
+    end
+  end
+
   def get_ar_url(start_frequency)
     require 'open-uri'
     require 'nokogiri'
