@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123062021) do
+ActiveRecord::Schema.define(version: 20150124141305) do
+
+  create_table "categories", force: true do |t|
+    t.string   "main_category"
+    t.string   "sub_category"
+    t.text     "sub_category_url"
+    t.integer  "scrape_category_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["main_category"], name: "index_categories_on_main_category"
+  add_index "categories", ["sub_category"], name: "index_categories_on_sub_category"
 
   create_table "domain_names", force: true do |t|
     t.string   "name"
@@ -43,6 +55,17 @@ ActiveRecord::Schema.define(version: 20150123062021) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "recipe_category_lists", force: true do |t|
+    t.integer  "recipe_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recipe_category_lists", ["category_id"], name: "index_recipe_category_lists_on_category_id"
+  add_index "recipe_category_lists", ["recipe_id", "category_id"], name: "index_recipe_category_lists_on_recipe_id_and_category_id"
+  add_index "recipe_category_lists", ["recipe_id"], name: "index_recipe_category_lists_on_recipe_id"
 
   create_table "recipe_ingredient_lists", force: true do |t|
     t.integer  "recipe_id"
@@ -83,12 +106,6 @@ ActiveRecord::Schema.define(version: 20150123062021) do
   add_index "recipes", ["name"], name: "index_recipes_on_name"
   add_index "recipes", ["outside_profile_id"], name: "index_recipes_on_outside_profile_id"
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
-
-  create_table "tests", force: true do |t|
-    t.string   "hihi"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "user_bookmarks", force: true do |t|
     t.integer  "user_id"

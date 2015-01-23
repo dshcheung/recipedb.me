@@ -1,13 +1,5 @@
 namespace :allrecipe do
-  task :init, [:start_frequency] => :environment do |task, args|
-    get_ar_url(args.start_frequency.to_i)
-  end
-
   task :image_collections => :environment do 
-    get_img_urls()
-  end
-
-  def get_img_urls()
     require 'open-uri'
     require 'nokogiri'
 
@@ -44,10 +36,52 @@ namespace :allrecipe do
     end
   end
  
+  task :category_tags => :environment do 
+    get_category_info("Initial Level", "http://allrecipes.com/recipes/main.aspx?")
+  end
 
-  def get_ar_url(start_frequency)
+  #run infinitly as long as there is a sub_category
+  def get_category_info(main_category_name, main_category_url)
     require 'open-uri'
     require 'nokogiri'
+
+    @tries
+    begin
+      puts main_category_name
+      puts main_category_url
+      browser = open(main_category_url).read
+      html_doc = Nokogiri::HTML(browser)
+
+      sub_category_elements = html_doc.css('a#hlSubNavItem')
+      if sub_category_elements.any?
+        sub_category_elements.each do |sub_category_element|
+          #prevent inconsistent href links
+          sub_category_url = sub_category_element.attr("href")
+          if sub_category_url[/(http:\/\/allrecipes.com)/] == nil
+            sub_category_url = "http://allrecipes.com" + sub_category_url
+          end
+          create_category(main_category_name, sub_category_element.text, sub_category_url)
+          get_category_info(sub_category_element.text, sub_category_url)
+        end
+      end
+    rescue OpenURI::HTTPError => e
+      case rescue_me(e)
+      when 1
+        retry
+      when 2
+        return
+      end
+    end
+  end
+
+  def create_category(main_category_name, sub_category_name, sub_category_url)
+    Category.create(main_category: main_category_name, sub_category: sub_category_name, sub_category_url: sub_category_url, scrape_category_status: 0)
+  end
+
+  task :init, [:start_frequency] => :environment do |task, args|
+    require 'open-uri'
+    require 'nokogiri'
+    start_frequency = args.start_frequency.to_i
     end_frequency = start_frequency + 9
 
     for i in start_frequency..end_frequency
@@ -78,21 +112,24 @@ namespace :allrecipe do
           if author_existence == nil
             author_existence = OutsideProfile.create(display_format: 1, username: author_name, outside_profile_url: outside_profile_url)
           end
-          #create a new recipe entry
-          new_recipe = author_existence.recipes.new
 
           #extract information and putting it in new_recipe
           url = url_code_elements[index].attr('href')
           url_array = url.split('/')
 
-          new_recipe.outside_profile_id = author_existence.id
-          new_recipe.domain_name_id = 1.to_i
-          new_recipe.url_code = url_array[4]
-          new_recipe.name = url_code_elements[index].text
-          new_recipe.description = descriptions[index].text
+          if Recipe.find_by(url_code: url_array[4], domain_name_id: 1) == nil
+            #create a new recipe entry
+            new_recipe = author_existence.recipes.new
 
-          #go to part two of scrapping process to scrape recipe in depth information
-          get_recipe_indepth_info(url, new_recipe)
+            new_recipe.outside_profile_id = author_existence.id
+            new_recipe.domain_name_id = 1.to_i
+            new_recipe.url_code = url_array[4]
+            new_recipe.name = url_code_elements[index].text
+            new_recipe.description = descriptions[index].text
+
+            #go to part two of scrapping process to scrape recipe in depth information
+            get_recipe_indepth_info(url, new_recipe)
+          end
         end
       rescue OpenURI::HTTPError => e
         case rescue_me(e)
@@ -144,7 +181,7 @@ namespace :allrecipe do
       new_recipe.instructions = instructions_array
 
       #save new_recipe
-      new_recipe.save
+      new_recipe.save!
 
       #extract ingredients info
       ingredients = []
