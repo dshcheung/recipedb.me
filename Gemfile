@@ -48,3 +48,4 @@ gem 'pry'
 gem "paperclip", "~>4.2"
 gem 'aws-sdk', '~> 1.5.7'
 gem 'angularjs-rails'
+gem 'font-awesome-sass'

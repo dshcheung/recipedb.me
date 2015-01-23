@@ -1,0 +1,123 @@
+$color-light-yellow: #FFF888;
+$color-dirt-yellow: #E8AC06;
+$color-orange: #FF8508;
+$color-red: #E83505;
+$color-raisin: #5C0B22;
+$texture-picnic-pattern: linear-gradient(
+      rgba(0, 0, 0, 0.45), 
+      rgba(0, 0, 0, 0.45)
+    ), image-url('lunch_1x.jpg');
+$texture-food-pattern: linear-gradient(
+      rgba(0, 0, 0, 0.45), 
+      rgba(0, 0, 0, 0.45)
+), image-url('food.png');
+$texture-marble-pattern: linear-gradient(
+      rgba(0.2, 0.2, 0.2, 0.45), 
+      rgba(0.2, 0.2, 0.2, 0.45)
+), image-url('congruent_outline.png');
+
+// $font4: 'Yellowtail', cursive;
+// $font4: 'Bad Script', cursive;
+// $font4: 'Marck Script', cursive;
+$font-items: 'Bitter', serif;
+// $font4: 'Lobster', cursive;
+// $font4: 'Special Elite', cursive;
+$font-title: 'Satisfy', cursive;
+// $font4: 'Damion', cursive;
+$font-footer: 'Architects Daughter', cursive;
+// $font4: 'Cookie', cursive;
+
+.finder-body {
+  background: white;
+  // height: 580px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.col-xs-10.recipe-profile {
+  background: #666;
+  // margin-top: 10px;
+  padding: 0;
+  display: inline-block;
+}
+
+.recipe-info {
+  border: 2px solid black;
+  display: inline-block;
+  background: $color-light-yellow;
+}
+
+.recipe-div1 {
+  border-bottom: 1px dotted black;
+}
+
+.recipe-title {
+  font-size: 40px;
+  display: inline-block;
+  // border-bottom: 1px dotted black;
+}
+
+.recipe-author {
+  font-size: 11px;
+  display: inline-block;
+  // border-bottom: 1px dotted black;
+}
+
+.recipe-servings {
+  font-size: 11px;
+}
+
+.recipe-ingredients {
+
+}
+// recipe-ingredient
+// recipe-preptime
+// recipe-cooktime
+// recipe-resttime
+// recipe-directions
+
+@media (max-width: 768px) {
+  .recipe-profile {
+    height: 200px;
+  }
+  .recipe-info {
+    // height: 50px;
+    margin: 20px 0;
+  }
+}
+
+@media (min-width: 420px) {
+  .recipe-profile {
+    height: 300px;
+  }
+  .recipe-info {
+    
+  }
+}
+
+@media (min-width: 768px) {
+  .recipe-profile {
+  //   width: 320px;
+    height: 280px;
+  }
+  .recipe-info {
+    
+  }
+}
+
+@media (min-width: 992px) {
+  .recipe-profile {
+    // width: 370px;
+    height: 400px;
+  }
+  .recipe-info {
+    
+  }
+}
+
+@media (min-width: 1200px) {
+  .recipe-profile {
+    width: 420px;
+    height: 420px;
+  }
+}

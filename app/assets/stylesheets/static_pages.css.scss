@@ -1,3 +1,277 @@
-// Place all the styles related to the static_pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$color-light-yellow: #FFF888;
+$color-dirt-yellow: #E8AC06;
+$color-orange: #FF8508;
+$color-red: #E83505;
+$color-raisin: #5C0B22;
+$texture-picnic-pattern: linear-gradient(
+      rgba(0, 0, 0, 0.45), 
+      rgba(0, 0, 0, 0.45)
+    ), image-url('lunch_1x.jpg');
+$texture-food-pattern: linear-gradient(
+      rgba(0, 0, 0, 0.45), 
+      rgba(0, 0, 0, 0.45)
+), image-url('food.png');
+$texture-marble-pattern: linear-gradient(
+      rgba(0.2, 0.2, 0.2, 0.45), 
+      rgba(0.2, 0.2, 0.2, 0.45)
+), image-url('congruent_outline.png');
+
+// $font4: 'Yellowtail', cursive;
+// $font4: 'Bad Script', cursive;
+// $font4: 'Marck Script', cursive;
+$font-items: 'Bitter', serif;
+// $font4: 'Lobster', cursive;
+// $font4: 'Special Elite', cursive;
+$font-title: 'Satisfy', cursive;
+// $font4: 'Damion', cursive;
+$font-footer: 'Architects Daughter', cursive;
+// $font4: 'Cookie', cursive;
+
+.body {
+  background: $color-raisin;
+  // background: $texture3;
+  position: relative;
+  min-height: 100%;
+}
+
+.nav-header {
+  height: 60px;
+}
+
+.main-body {
+  margin: 90px 0 0 0;
+  width: 100%;
+  min-height:640px;
+}
+
+.navbar-background {
+  background: $color-orange;
+  border: 1px solid $color-light-yellow;
+}
+
+.nav-header .navbar-logo {
+  font-family: $font-title;
+  color: $color-raisin;
+  display: inline-block;
+  text-decoration: none;
+  &:hover{
+    color: $color-red;
+  }
+}
+
+.form-group .form-control{
+  // padding: 0 0 0 5px;
+  border: 1px solid $color-light-yellow;
+  margin: 5px;
+  z-index: 1;
+  display: inline-block;
+  width: 84px;
+  &:focus {
+    width: 155px;
+  }
+}
+
+.nav-dropdown-lines {
+  border: 1px solid $color-raisin;
+}
+
+.nav-index {
+  padding: 10px 0 35px;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: white;
+  height: 30px;
+  margin: 0;
+  border-bottom: 2px solid $color-raisin;
+  border-right: 2px solid $color-raisin;
+  &:hover {
+    font-size: 105%;
+    border-bottom: 2px solid white;
+    border-bottom-right-radius: 3.5px;
+  }
+}
+
+.nav-tabs-text {
+  color: $color-raisin;
+  font-family: $font-items;
+}
+
+.nav-header .nav-form {
+  margin: 0;
+  margin-top: 9px;
+  // margin-bottom: 7px;
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.form-group {
+  display: inline-block;
+  .form-control {
+    background: $color-raisin;
+    color: $color-light-yellow;
+    border: 2px solid $color-orange;
+    // padding-bottom: 2px;
+    &:focus {
+      border: 1px solid transparent;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $color-red;
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $color-red;
+    }
+  }
+}
+
+.nav-icons {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  .dropdown-toggle {
+    color: $color-raisin;
+    display: inline-block;
+    float: right;
+    font-family: $font-title;
+    font-size: 18px;
+    text-decoration: none;
+    &:hover {
+      color: $color-red;
+    }
+  }
+  .dropdown-menu {
+    background: $color-dirt-yellow;
+    float: right;
+  }
+}
+
+.fa.fa-cutlery,
+.fa.fa-archive,
+.fa.fa-shopping-cart {
+  color: $color-raisin;
+  font-size: 22px;
+  float: right;
+  margin:0 15px 0 0;
+  z-index: -1;
+  &:hover {
+    color: $color-red;
+    text-decoration: none;
+  }
+}
+
+.jumbo {
+  background: white;
+  min-height: 500px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-right: 2px solid $color-raisin;
+  margin: 0;
+  padding: 0;
+}
+
+.course-item {
+  display: inline-block;
+  background: $color-orange;
+  border: 1px solid $color-light-yellow;
+  border-radius: 30px;
+  color: transparent;
+  font-size: 12px;
+  text-align: center;
+  font-family: $font-items;
+  &:hover {
+    background: linear-gradient(
+      rgba(0, 0, 0, 0.3), 
+      rgba(0, 0, 0, 0.7)
+    ), $color-red;
+    color: $color-light-yellow;
+  }
+}
+
+// .course-caption {
+//   font-size: 12px;
+//   text-align: center;
+// }
+
+.container.footer-background {
+  background: $color-orange;
+  width: 100%;
+  border: 1px solid $color-light-yellow;
+  height: 35px;
+  position: absolute;
+  bottom: 0;
+  // padding-top: 5px;
+  // margin: 80px 0 0 0;
+}
+
+.footer-disclaimer {
+  font-family: $font-footer;
+  color: $color-raisin;
+  font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+  .nav-header .navbar-logo {
+    font-size: 25px;
+    margin: 10px 0 0 0;
+    padding: 0;
+  }
+  .nav-tabs-text {
+    font-size: 11px; 
+  }
+  .course-item {
+    height: 100px;
+    width: 100px;
+    margin: 10px 0 0 10px;
+    padding: 13px;
+  }
+  .footer-disclaimer {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-header .navbar-logo {
+    font-size: 30px;
+    margin: 10px 10px 0 0;
+    padding: 0;
+  }
+  .nav-tabs-text {
+    font-size: 16px; 
+  }
+  .course-item {
+    height: 120px;
+    width: 120px;
+    margin: 20px 0 0 20px;
+    padding: 24px 0;
+  }
+  .footer-disclaimer {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 992px) {
+  .nav-header .navbar-logo {
+    font-size: 35px;
+    margin: 5px 10px 0 0;
+    padding: 0;
+  }
+  .nav-tabs-text {
+    font-size: 19px; 
+  }
+  .course-item {
+    height: 140px;
+    width: 140px;
+    margin: 30px 0 0 30px;
+    padding: 40px 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .course-item {
+    height: 150px;
+    width: 150px;
+    margin: 40px 0 0 40px;
+    padding: 40px 0;
+  }
+}

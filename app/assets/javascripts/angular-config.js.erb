@@ -5,5 +5,12 @@ app.config(['$routeProvider', function($routeProvider){
     templateUrl: "<%= asset_path('home.html') %>",
     controller: 'HomeCtrl' // the name of this controller should match with the actual name of the actual controller
   })
+  .when('/search', {
+    templateUrl: "<%= asset_path('recipeFinder.html') %>",
+    controller: 'RecipeFinderCtrl'
+  })
 }]);
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
