@@ -1,0 +1,61 @@
+<div ng-include="mainNavBar"></div>
+
+<div class="main-body">
+  <div class="finder-body container">
+
+    <div class="recipe-button-row row">
+      <button class="col-xs-offset-2 col-xs-2 btn btn-danger recipe-back-button">Back <i class="fa fa-step-backward"></i></button>
+      <button class="col-xs-offset-1 col-xs-2 btn btn-warning recipe-back-button">Save <i class="fa fa-bookmark-o"></i></button>
+      <button class="col-xs-offset-1 col-xs-2 btn btn-success recipe-back-button">Add List <i class="fa fa-shopping-cart"></i></button>
+    </div>
+
+    <div class="row">
+      <!-- <div class="recipe-image col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6 col-md-5"> -->
+      <div class="recipe-profile col-xs-offset-1 col-xs-10 col-sm-5">
+        <img class="recipe-image" ng-src="assets/recipedb-default-img.png" alt="Recipe image">
+      </div>
+      <!-- </div> -->
+      <div class="recipe-info col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-5">
+        <div class="recipe-div1 row">
+          <p class="recipe-title">Title</p>
+          <p class="recipe-author">By Author</p>
+        </div>
+        <div class="recipe-div2 row">
+          <p class="recipe-description">Description</p>
+          <p class="recipe-servings">Servings</p>
+        </div>
+        <div class="recipe-div3 row">
+          <p class="recipe-ingredients">Ingredients
+            <ul>
+              <li class="recipe-ingredient"></li>
+              <li class="recipe-ingredient"></li>
+              <li class="recipe-ingredient"></li>
+              <li class="recipe-ingredient"></li>
+              <li class="recipe-ingredient"></li>
+            </ul>
+          </p>
+        </div>
+        <div class="recipe-div4 row">
+          <p class="recipe-preptime col-xs-4">Prep. Time</p>
+          <p class="recipe-cooktime col-xs-4">Cooking Time</p>
+          <p class="recipe-resttime col-xs-4">Rest Time</p>
+        </div>
+        <div class="recipe-div5 row">
+          <p class="recipe-directions">Directions
+            <ul>
+              <li class="recipe-step"></li>
+              <li class="recipe-step"></li>
+              <li class="recipe-step"></li>
+              <li class="recipe-step"></li>
+              <li class="recipe-step"></li>
+              <li class="recipe-step"></li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div ng-include="mainFooter"></div>

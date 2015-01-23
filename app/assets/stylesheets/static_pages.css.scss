@@ -143,21 +143,22 @@ $font-footer: 'Architects Daughter', cursive;
     background: $color-dirt-yellow;
     float: right;
   }
-}
-
-.fa.fa-cutlery,
-.fa.fa-archive,
-.fa.fa-shopping-cart {
-  color: $color-raisin;
-  font-size: 22px;
-  float: right;
-  margin:0 15px 0 0;
-  z-index: -1;
-  &:hover {
-    color: $color-red;
-    text-decoration: none;
+  .fa.fa-cutlery,
+  .fa.fa-archive,
+  .fa.fa-shopping-cart {
+    color: $color-raisin;
+    font-size: 22px;
+    float: right;
+    margin:0 15px 0 0;
+    z-index: -1;
+    &:hover {
+      color: $color-red;
+      text-decoration: none;
+    }
   }
 }
+
+
 
 .jumbo {
   background: white;
