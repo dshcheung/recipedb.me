@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123052508) do
+ActiveRecord::Schema.define(version: 20150123062021) do
 
   create_table "domain_names", force: true do |t|
     t.string   "domain_name"
@@ -94,5 +94,40 @@ ActiveRecord::Schema.define(version: 20150123052508) do
   add_index "user_bookmarks", ["recipe_id"], name: "index_user_bookmarks_on_recipe_id"
   add_index "user_bookmarks", ["user_id", "recipe_id"], name: "index_user_bookmarks_on_user_id_and_recipe_id"
   add_index "user_bookmarks", ["user_id"], name: "index_user_bookmarks_on_user_id"
+
+  create_table "user_recipe_images", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_img_file_name"
+    t.string   "user_img_content_type"
+    t.integer  "user_img_file_size"
+    t.datetime "user_img_updated_at"
+  end
+
+  add_index "user_recipe_images", ["recipe_id"], name: "index_user_recipe_images_on_recipe_id"
+  add_index "user_recipe_images", ["user_id", "recipe_id"], name: "index_user_recipe_images_on_user_id_and_recipe_id"
+  add_index "user_recipe_images", ["user_id"], name: "index_user_recipe_images_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "username",                            null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end
