@@ -1,7 +1,7 @@
 class Recipe < ActiveRecord::Base
 
-  serialize :recipe_img_urls, Array
-  serialize :recipe_instructions, Array 
+  serialize :img_urls, Array
+  serialize :instructions, Array 
 
   # has_many :recipe_category_lists
   # has_many :categories, through: :recipe_category_lists
@@ -12,5 +12,5 @@ class Recipe < ActiveRecord::Base
   belongs_to :domain_name
   has_many :user_recipe_images
 
-  validates_uniqueness_of :recipe_url_code, scope: :domain_name_id
+  validates_uniqueness_of :url_code, scope: :domain_name_id
 end

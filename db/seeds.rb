@@ -1,1 +1,1 @@
-DomainName.create(domain_name: "http://allrecipes.com/Recipe/")
+DomainName.create(name: "http://allrecipes.com/Recipe/")

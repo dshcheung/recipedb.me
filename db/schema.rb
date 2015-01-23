@@ -14,13 +14,13 @@
 ActiveRecord::Schema.define(version: 20150123062021) do
 
   create_table "domain_names", force: true do |t|
-    t.string   "domain_name"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "ingredient_names", force: true do |t|
-    t.string   "recipe_ingredient_sub_name"
+    t.string   "ingredient_sub_name"
     t.integer  "ingredient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 20150123062021) do
   create_table "recipe_ingredient_lists", force: true do |t|
     t.integer  "recipe_id"
     t.integer  "ingredient_id"
-    t.integer  "recipe_amount_us"
-    t.string   "recipe_unit_us"
-    t.integer  "recipe_amount_metric"
-    t.string   "recipe_unit_metric"
+    t.integer  "amount_us"
+    t.string   "unit_us"
+    t.integer  "amount_metric"
+    t.string   "unit_metric"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,26 +62,26 @@ ActiveRecord::Schema.define(version: 20150123062021) do
   create_table "recipes", force: true do |t|
     t.integer  "user_id"
     t.integer  "outside_profile_id"
-    t.string   "domain_name_id"
-    t.string   "recipe_url_code"
-    t.string   "recipe_name"
-    t.text     "recipe_description"
-    t.text     "recipe_img_urls"
-    t.text     "recipe_img_collection_url"
+    t.integer  "domain_name_id"
+    t.string   "url_code"
+    t.string   "name"
+    t.text     "description"
+    t.text     "img_urls"
+    t.text     "img_collection_url"
     t.integer  "scrape_collection_completed"
-    t.integer  "recipe_prep_time"
-    t.integer  "recipe_cook_time"
-    t.integer  "recipe_ready_time"
-    t.integer  "recipe_rest_time"
-    t.integer  "recipe_original_servings_amount"
-    t.string   "recipe_original_servings_type"
-    t.text     "recipe_instructions"
+    t.integer  "prep_time"
+    t.integer  "cook_time"
+    t.integer  "ready_time"
+    t.integer  "rest_time"
+    t.integer  "original_servings_amount"
+    t.string   "original_servings_type"
+    t.text     "instructions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "recipes", ["name"], name: "index_recipes_on_name"
   add_index "recipes", ["outside_profile_id"], name: "index_recipes_on_outside_profile_id"
-  add_index "recipes", ["recipe_name"], name: "index_recipes_on_recipe_name"
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
 
   create_table "user_bookmarks", force: true do |t|

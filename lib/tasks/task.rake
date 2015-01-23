@@ -1,30 +1,14 @@
 namespace :allrecipe do
-  task :init, [:sFrequency] => :environment do |task, args|
-    get_ar_url(args.sFrequency.to_i)
+  task :init, [:start_frequency] => :environment do |task, args|
+    get_ar_url(args.start_frequency.to_i)
   end
 
-  task :image_collection => :environment do 
-    gather_img_urls()
-  end
-
-  def gather_img_urls()
+  def get_ar_url(start_frequency)
     require 'open-uri'
     require 'nokogiri'
+    end_frequency = start_frequency + 9
 
-    recipes = Recipe.all
-    recipes.each do |recipe|
-      if recipe.
-    end
-  
-  end
-
-  def get_ar_url(sFrequency)
-    require 'open-uri'
-    require 'nokogiri'
-    eFrequency = sFrequency + 9
-    @skipped_page = []
-
-    for i in sFrequency..eFrequency
+    for i in start_frequency..end_frequency
       puts "page " + i.to_s
       @tries = 0
       begin
@@ -33,12 +17,12 @@ namespace :allrecipe do
         html_doc = Nokogiri::HTML(browser)
 
         #gather all information into arrays
-        recipe_descriptions = html_doc.css('div > div > div > div > span.popReview')
-        recipe_url_code_elements = html_doc.css('div > div > div > h3 > a')
-        recipe_authors = html_doc.css('div.searchResult.hub-list-view > div.search_mostPop > div.searchRtSd > div.search_mostPop_Review > span:nth-child(2)')
+        descriptions = html_doc.css('div > div > div > div > span.popReview')
+        url_code_elements = html_doc.css('div > div > div > h3 > a')
+        authors = html_doc.css('div.searchResult.hub-list-view > div.search_mostPop > div.searchRtSd > div.search_mostPop_Review > span:nth-child(2)')
 
         #loop each author and check if OutsideProfile exists, if not, create one and create new_recipe
-        recipe_authors.each_with_index do |author, index|
+        authors.each_with_index do |author, index|
           #check if OutsideProfile Exists, if not, create one and continue
           if author.css('a').any?
             author_name = author.css('a').text.squish
@@ -56,21 +40,20 @@ namespace :allrecipe do
           new_recipe = author_existence.recipes.new
 
           #extract information and putting it in new_recipe
-          recipe_url = recipe_url_code_elements[index].attr('href')
-          recipe_url_array = recipe_url.split('/')
-          #check if domain exist, if not, create one and continue
+          url = url_code_elements[index].attr('href')
+          url_array = url.split('/')
 
           new_recipe.outside_profile_id = author_existence.id
-          new_recipe.domain_name_id = 1 #change variable after testing
-          new_recipe.recipe_url_code = recipe_url_array[4]
-          new_recipe.recipe_name = recipe_url_code_elements[index].text
-          new_recipe.recipe_description = recipe_descriptions[index].text
+          new_recipe.domain_name_id = 1.to_i
+          new_recipe.url_code = url_array[4]
+          new_recipe.name = url_code_elements[index].text
+          new_recipe.description = descriptions[index].text
 
           #go to part two of scrapping process to scrape recipe in depth information
-          get_recipe_indepth_info(recipe_url, new_recipe)
+          get_recipe_indepth_info(url, new_recipe)
         end
       rescue OpenURI::HTTPError => e
-        case rescue_me(e, i)
+        case rescue_me(e)
         when 1
           retry
         when 2
@@ -80,7 +63,7 @@ namespace :allrecipe do
     end
   end
 
-  def get_recipe_indepth_info(recipe_url, new_recipe)
+  def get_recipe_indepth_info(url, new_recipe)
     require 'open-uri'
     require 'nokogiri'
     require 'unitwise'
@@ -88,12 +71,12 @@ namespace :allrecipe do
 
     @tries = 0
     begin
-      puts recipe_url
-      browser = open(recipe_url).read
+      puts url
+      browser = open(url).read
       html_doc = Nokogiri::HTML(browser)
 
       #extract img info
-      new_recipe.recipe_img_collection_url = html_doc.css('#lnkOpenCarousel').attr("href").to_s
+      new_recipe.img_collection_url = html_doc.css('#lnkOpenCarousel').attr("href").to_s
       new_recipe.scrape_collection_completed = 0
 
       #extract time info
@@ -101,63 +84,63 @@ namespace :allrecipe do
       cookTimeMin = return_total_minutes(html_doc.css('#cookHoursSpan em').text.to_i, html_doc.css('#cookMinsSpan em').text.to_i)
       readyTimeMin = return_total_minutes(html_doc.css('#totalHoursSpan em').text.to_i, html_doc.css('#totalMinsSpan em').text.to_i)
       restTimeMin = readyTimeMin - prepTimeMin - cookTimeMin
-      new_recipe.recipe_prep_time = prepTimeMin
-      new_recipe.recipe_cook_time = cookTimeMin
-      new_recipe.recipe_ready_time = readyTimeMin
-      new_recipe.recipe_rest_time = restTimeMin
+      new_recipe.prep_time = prepTimeMin
+      new_recipe.cook_time = cookTimeMin
+      new_recipe.ready_time = readyTimeMin
+      new_recipe.rest_time = restTimeMin
 
       #extract servings info
-      new_recipe.recipe_original_servings_amount = html_doc.css('#lblYield').text[/\d+/]
-      new_recipe.recipe_original_servings_type = html_doc.css('#lblYield').text[/\s(.*)/].gsub('- ', '').squish
+      new_recipe.original_servings_amount = html_doc.css('#lblYield').text[/\d+/]
+      new_recipe.original_servings_type = html_doc.css('#lblYield').text[/\s(.*)/].gsub('- ', '').squish
 
       #extract instructions info
-      recipe_instructions_elements = html_doc.css('div > div > ol > li > span')
-      recipe_instructions_array = []
-      recipe_instructions_elements.each do |elements|
-        recipe_instructions_array.push(elements.text)
+      instructions_elements = html_doc.css('div > div > ol > li > span')
+      instructions_array = []
+      instructions_elements.each do |elements|
+        instructions_array.push(elements.text)
       end
-      new_recipe.recipe_instructions = recipe_instructions_array
+      new_recipe.instructions = instructions_array
 
       #save new_recipe
       new_recipe.save
 
       #extract ingredients info
-      recipe_ingredients = []
-      recipe_ingredients_elements = html_doc.css('#liIngredient')
-      recipe_ingredients_elements.each do |element|
+      ingredients = []
+      ingredients_elements = html_doc.css('#liIngredient')
+      ingredients_elements.each do |element|
         #extract allrecipe_ingredient_code
         #find or create ar_ingredient_code entry and create ingredient_sub_name
         ar_ingredient_code = element.attr('data-ingredientid').to_i
         ar_ingredient_code_existence = find_create_ingredient(ar_ingredient_code)
 
         #extract ingredient_sub_name and create entry
-        recipe_ingredient_sub_name = element.css('#lblIngName').text
-        ar_ingredient_code_existence.ingredient_names.create(recipe_ingredient_sub_name: recipe_ingredient_sub_name)
+        ingredient_sub_name = element.css('#lblIngName').text
+        ar_ingredient_code_existence.ingredient_names.create(ingredient_sub_name: ingredient_sub_name)
 
-        #extract recipe_amount_metric
-        recipe_amount_metric = element.attr("data-grams")
+        #extract amount_metric
+        amount_metric = element.attr("data-grams")
 
-        #extract recipe_amount_us & recipe_unit_us
+        #extract amount_us & unit_us
         #check if there is brackets, if true, then get information from bracket instead
         elements_has_brackets = element.css('#lblIngAmount').text[/(\((.*)\))/]
         if elements_has_brackets == nil
-          recipe_amount_us = element.css('#lblIngAmount').text[/(\d+)/].to_i
-          recipe_unit_us = get_clean_unit_us(element.css('#lblIngAmount').text[/(?!\d+)\w+/])
+          amount_us = element.css('#lblIngAmount').text[/(\d+)/].to_i
+          unit_us = get_clean_unit_us(element.css('#lblIngAmount').text[/(?!\d+)\w+/])
         else
-          recipe_amount_us = elements_has_brackets[/(\d+)/].to_i
-          recipe_unit_us = get_clean_unit_us(elements_has_brackets[/(?!\d+)\w+/])
+          amount_us = elements_has_brackets[/(\d+)/].to_i
+          unit_us = get_clean_unit_us(elements_has_brackets[/(?!\d+)\w+/])
         end
-        #check if there are fractions, if true, replace recipe_units_us
+        #check if there are fractions, if true, replace units_us
         elements_has_slash = element.css('#lblIngAmount').text[/(\d+\/\d+)/]
         if elements_has_slash != nil
-          recipe_amount_us = element.css('#lblIngAmount').text[/(\d+)/].to_d + eval(element.css('#lblIngAmount').text[/(\d+\/\d+)/]+".0")
+          amount_us = element.css('#lblIngAmount').text[/(\d+)/].to_d + eval(element.css('#lblIngAmount').text[/(\d+\/\d+)/]+".0")
         end
 
         #create recipe_ingredient_list entry
-        new_recipe.recipe_ingredient_lists.create(ingredient_id: ar_ingredient_code_existence.id, recipe_amount_us: recipe_amount_us, recipe_unit_us: recipe_unit_us, recipe_amount_metric: recipe_amount_metric, recipe_unit_metric: "gram")
+        new_recipe.recipe_ingredient_lists.create(ingredient_id: ar_ingredient_code_existence.id, amount_us: amount_us, unit_us: unit_us, amount_metric: amount_metric, unit_metric: "gram")
       end
     rescue OpenURI::HTTPError => e
-      case rescue_me(e, i)
+      case rescue_me(e)
       when 1
         retry
       when 2
@@ -186,28 +169,27 @@ namespace :allrecipe do
     end
   end
 
-  def rescue_me(e, i)
+  def rescue_me(e)
     puts e
     case e.io.status[0]
     when "403"
       puts "Error...Forbidden...Skipped"
       return 2
     when "404"
-      return attempt_retry(i)
+      return attempt_retry()
     else #500
-      return attempt_retry(i)
+      return attempt_retry()
     end
   end
 
-  def attempt_retry(i)
+  def attempt_retry()
     @tries += 1
     if @tries < 3
       puts "Attempting to Retry..." + @tries.to_s + "...In 5 Seconds"
       sleep 5
       return 1
     else
-      @skipped_page.push(i)
-      puts "Skipped the following page " + i.to_s
+      puts "Skipped the page"
       return 2
     end
   end
