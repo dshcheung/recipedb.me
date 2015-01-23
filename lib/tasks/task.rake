@@ -1,6 +1,21 @@
-namespace :ar do
-  task :ar_init, [:sFrequency] => :environment do |task, args|
+namespace :allrecipe do
+  task :init, [:sFrequency] => :environment do |task, args|
     get_ar_url(args.sFrequency.to_i)
+  end
+
+  task :image_collection => :environment do 
+    gather_img_urls()
+  end
+
+  def gather_img_urls()
+    require 'open-uri'
+    require 'nokogiri'
+
+    recipes = Recipe.all
+    recipes.each do |recipe|
+      if recipe.
+    end
+  
   end
 
   def get_ar_url(sFrequency)

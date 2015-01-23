@@ -188,11 +188,8 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.0)
   coffee-rails (~> 4.0.0)
   devise
-<<<<<<< HEAD
   font-awesome-sass
-=======
   dotenv-rails
->>>>>>> added domain_name, user_bookmark, devise user, user_recipe_image. Added paperclip, remotipart for remote file upload, dotenv for security. Added add_index to .rb files
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (~> 4.2)
