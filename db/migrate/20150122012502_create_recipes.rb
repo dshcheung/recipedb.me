@@ -7,7 +7,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.string :recipe_url_code #(unique with domain_name_id)
       t.string :recipe_name
       t.text :recipe_description
-      t.text :recipe_img_url #(serialize array of images urls)
+      t.text :recipe_img_urls #(serialize array of images urls)
       t.text :recipe_img_collection_url
       t.integer :scrape_collection_completed
       t.integer :recipe_prep_time
@@ -17,9 +17,12 @@ class CreateRecipes < ActiveRecord::Migration
       t.integer :recipe_original_servings_amount
       t.string :recipe_original_servings_type
       t.text :recipe_instructions
-      t.text :recipe_ingredients
 
       t.timestamps
     end
+    
+    add_index :recipes, :user_id
+    add_index :recipes, :outside_profile_id
+    add_index :recipes, :recipe_name
   end
 end

@@ -43,12 +43,24 @@ gem 'spring',        group: :development
 # Debugging tools
 gem 'better_errors'
 gem 'binding_of_caller'
+
+# User authentication model
 gem 'devise'
 gem 'pry'
+
+# img upload and amazon s3 server
 gem "paperclip", "~>4.2"
 gem 'aws-sdk', '~> 1.5.7'
+
+# front-end javascript
 gem 'angularjs-rails'
 gem 'font-awesome-sass'
 
 # unit conversion
 gem 'unitwise'
+
+# remote upload file for paperclip
+gem 'remotipart', '~> 1.2'
+
+#env file protection gem
+gem 'dotenv-rails', :groups => [:development, :test]
