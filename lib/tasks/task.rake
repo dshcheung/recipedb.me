@@ -35,9 +35,82 @@ namespace :allrecipe do
       end
     end
   end
+
+  task :recipe_category_relations => :environment do
+    require 'open-uri'
+    require 'nokogiri'
+    categories = Category.all
+    categories.each do |category|
+      @tries = 0
+      begin
+        # 0 = have not started, 1 = started but not finished, 2 = completed
+        if category.scrape_category_status == 0 || category.scrape_category_status == 1
+          category.update(scrape_category_status: 1)
+          url = category.sub_category_url
+          puts url
+          browser = open(url).read
+          html_doc = Nokogiri::HTML(browser)
+
+          recipe_amounts = html_doc.css('div > div.hubs-wrapper.fl-left > div.search-tools > p:nth-child(2).searchResultsCount.results > span:nth-child(1).emphasized').text.gsub(',', '').to_i
+
+          pages_to_loop = (recipe_amounts / 20.0).ceil
+          for i in 1..pages_to_loop do
+            puts "page " + i.to_s
+            get_recipe_basic_info(category.sub_category_url + "&page=" + i.to_s, category.id)
+          end
+        else
+          next
+        end
+      rescue OpenURI::HTTPError => e
+        case rescue_me(e)
+        when 1
+          retry
+        when 2
+          next
+        end
+      end
+    end
+  end
+
+  def get_recipe_basic_info(url, category_id)
+    require 'open-uri'
+    require 'nokogiri'
+
+    @tries = 0
+    begin
+      puts url
+      browser = open(url).read
+      html_doc = Nokogiri::HTML(browser)
+      
+      url_code_elements = html_doc.css('div > div > div > h3 > a')
+      authors = html_doc.css('div.searchResult.hub-list-view > div.search_mostPop > div.searchRtSd > div.search_mostPop_Review > span:nth-child(2)')
+      authors.each_with_index do |author, index|
+        if author.css('a').any?
+          author_name = author.css('a').text.squish
+        else
+          author_name = author.text.squish
+        end
+        url_code = url_code_elements[index].attr('href').split('/')[4]
+        author_existence = OutsideProfile.find_by(username: author_name)
+        if author_existence != nil
+          recipe_existence = author_existence.recipes.find_by(url_code: url_code)
+          if recipe_existence != nil
+            RecipeCategoryList.create(recipe_id: recipe_existence.id, category_id: category_id)
+          end
+        end
+      end
+    rescue OpenURI::HTTPError => e
+      case rescue_me(e)
+      when 1
+        retry
+      when 2
+        return
+      end
+    end
+  end
  
   task :category_tags => :environment do 
-    get_category_info("Initial Level", "http://allrecipes.com/recipes/main.aspx?")
+    get_category_info("Initial Level", "http://allrecipes.com/recipes/main.aspx?vm=l")
   end
 
   #run infinitly as long as there is a sub_category
@@ -45,7 +118,7 @@ namespace :allrecipe do
     require 'open-uri'
     require 'nokogiri'
 
-    @tries
+    @tries = 0
     begin
       puts main_category_name
       puts main_category_url
@@ -56,9 +129,12 @@ namespace :allrecipe do
       if sub_category_elements.any?
         sub_category_elements.each do |sub_category_element|
           #prevent inconsistent href links
-          sub_category_url = sub_category_element.attr("href")
+          sub_category_url = sub_category_element.attr("href") + "&vm=l"
           if sub_category_url[/(http:\/\/allrecipes.com)/] == nil
             sub_category_url = "http://allrecipes.com" + sub_category_url
+          end
+          if sub_category_url == main_category_url
+            next
           end
           create_category(main_category_name, sub_category_element.text, sub_category_url)
           get_category_info(sub_category_element.text, sub_category_url)
@@ -79,10 +155,11 @@ namespace :allrecipe do
   end
 
   task :init, [:start_frequency] => :environment do |task, args|
+    start_time = Time.now
     require 'open-uri'
     require 'nokogiri'
     start_frequency = args.start_frequency.to_i
-    end_frequency = start_frequency + 9
+    end_frequency = start_frequency + 2
 
     for i in start_frequency..end_frequency
       puts "page " + i.to_s
@@ -140,6 +217,8 @@ namespace :allrecipe do
         end
       end
     end
+    end_time = Time.now
+    puts end_time - start_time
   end
 
   def get_recipe_indepth_info(url, new_recipe)
@@ -181,7 +260,7 @@ namespace :allrecipe do
       new_recipe.instructions = instructions_array
 
       #save new_recipe
-      new_recipe.save!
+      new_recipe.save
 
       #extract ingredients info
       ingredients = []
