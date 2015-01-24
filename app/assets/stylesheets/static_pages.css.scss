@@ -80,21 +80,27 @@ $font-footer: 'Architects Daughter', cursive;
   text-align: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: white;
+  background: #888;
   height: 30px;
   margin: 0;
-  border-bottom: 2px solid $color-raisin;
-  border-right: 2px solid $color-raisin;
+  border-bottom: 4px solid $color-raisin;
+  border-left: 4px solid $color-raisin;
+  border-right: 4px solid $color-raisin;
   &:hover {
     font-size: 105%;
-    border-bottom: 2px solid white;
-    border-bottom-right-radius: 3.5px;
+    border-bottom: 4px solid white;
+    border-right: 4px solid white;
+    border-left: 4px solid white;
+    // border-bottom-left-radius: 5px;
+    // border-bottom-right-radius: 5px;
+    background: white;
   }
 }
 
 .nav-tabs-text {
   color: $color-raisin;
   font-family: $font-items;
+
 }
 
 .nav-header .nav-form {
@@ -158,14 +164,13 @@ $font-footer: 'Architects Daughter', cursive;
   }
 }
 
-
-
 .jumbo {
   background: white;
   min-height: 500px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  border-right: 2px solid $color-raisin;
+  // border-right: 2px solid $color-raisin;
+  // border-left: 2px solid $color-raisin;
   margin: 0;
   padding: 0;
 }

@@ -22,7 +22,7 @@ $texture-wood-pattern: linear-gradient(
 $texture-notebook-pattern: linear-gradient(
       rgba(0.1, 0.1, 0.1, 0.1), 
       rgba(0.1, 0.1, 0.1, 0)
-), image-url('notebook.png');
+), image-url('notebook_@2X.png');
 
 // $font4: 'Yellowtail', cursive;
 // $font4: 'Bad Script', cursive;
@@ -35,7 +35,7 @@ $font-title: 'Satisfy', cursive;
 $font-footer: 'Architects Daughter', cursive;
 // $font4: 'Cookie', cursive;
 
-.finder-body {
+.recipe-body {
   // background: white;
   background: $texture-wood-pattern;
   // height: 580px;
