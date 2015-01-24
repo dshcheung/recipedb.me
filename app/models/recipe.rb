@@ -3,8 +3,8 @@ class Recipe < ActiveRecord::Base
   serialize :img_urls, Array
   serialize :instructions, Array 
 
-  # has_many :recipe_category_lists
-  # has_many :categories, through: :recipe_category_lists
+  has_many :recipe_category_lists
+  has_many :categories, through: :recipe_category_lists
   has_many :recipe_ingredient_lists
   has_many :ingredients, through: :recipe_ingredient_lists
   belongs_to :user
