@@ -9,6 +9,10 @@ app.config(['$routeProvider', function($routeProvider){
     templateUrl: "<%= asset_path('recipeFinder.html') %>",
     controller: 'RecipeFinderCtrl'
   })
+  .when('/recipe', {
+    templateUrl: "<%= asset_path('recipe.html') %>",
+    controller: 'RecipeCtrl'
+  })
 }]);
 
 $(function () {

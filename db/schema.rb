@@ -84,6 +84,12 @@ ActiveRecord::Schema.define(version: 20150123062021) do
   add_index "recipes", ["outside_profile_id"], name: "index_recipes_on_outside_profile_id"
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
 
+  create_table "tests", force: true do |t|
+    t.string   "hihi"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_bookmarks", force: true do |t|
     t.integer  "user_id"
     t.integer  "recipe_id"
