@@ -4,13 +4,13 @@ task :init, [:start_page] => :environment do |task, args|
   require 'open-uri'
   require 'nokogiri'
   start_page = args.start_page.to_i
-  end_page = start_page + 2
+  end_page = start_page + 41
 
   for i in start_page..end_page
     puts "page " + i.to_s
     @tries = 0
     begin
-      url = "http://allrecipes.com/recipes/main.aspx?vm=l&Page="+i.to_s
+      url = "http://allrecipes.com/recipes/main.aspx?vm=l&st=t&Page="+i.to_s
       puts "scraping ----> " + url
       browser = open(url).read
       html_doc = Nokogiri::HTML(browser)

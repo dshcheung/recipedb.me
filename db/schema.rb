@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150124141305) do
 
   create_table "categories", force: true do |t|
     t.string   "main_category"
+    t.text     "main_category_url"
     t.string   "sub_category"
     t.text     "sub_category_url"
     t.integer  "scrape_category_status"
