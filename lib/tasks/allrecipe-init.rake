@@ -48,7 +48,7 @@ task :init, [:start_page] => :environment do |task, args|
           new_recipe.outside_profile_id = author_existence.id
           new_recipe.domain_name_id = 1
           new_recipe.url_code = url_code
-          new_recipe.name = url_code_elements[index].text
+          new_recipe.name = url_code_elements[index].text.split.map(&:capitalize).join(' ')
           new_recipe.description = descriptions[index].text
           new_recipe.save
 
@@ -95,9 +95,51 @@ def get_recipe_indepth_info(url, new_recipe)
     new_recipe.update(ready_time: readyTimeMin)
     new_recipe.update(rest_time: restTimeMin)
 
+    servings_element = html_doc.css('#lblYield').text.gsub('-', ' ').gsub('  ', ' ').gsub('(','').gsub(')','').downcase
+    #if str has d x d
+    if servings_element[/(\d+ ?x ?\d+)/] != nil 
+      #if servings_element has d before d x d
+      if servings_element[/(\d+( ?[^x])\d+)/] != nil
+        servings_amount = servings_element[/(\d+)/]
+        servings_type = servings_element[/(\(?\d+ ?x ?\d+.*)/].gsub(' x ', 'x')
+      else
+        servings_amount = nil
+        servings_type = servings_element
+      end
+    #if servings have d to d
+    elsif servings_element[/(\d+ ?to ?\d+)/] != nil
+      num1 = servings_element[/(\d+)/].to_i
+      num2 = servings_element[/(?!\d+ ?to ?)(\d+)/].to_i
+      servings_amount = (num1 + num2) / 2
+      servings_type = get_clean_servings_type(servings_element, servings_element[/(\d+ ?to ?\d+)/])
+    #if servings have d / d
+    elsif servings_element[/(\d+ ?\/ ?\d+)/] != nil
+      if servings_element[/(\d+ ?\d ?)([ ]\d+ ?\/ ?\d+)/] != nil
+        servings_amount = servings_element[/(\d+)/]
+        first_digit_char = servings_element[/(\d+)/].length
+        total_char = servings_element.length
+        servings_type = servings_element[first_digit_char..total_char]
+      else
+        num1 = servings_element[/(\d+)/].to_i
+        num2 = eval(servings_element[/(\d+ ?\/ ?\d+)/] + ".0")
+        servings_amount = num1 + num2
+        servings_type = get_clean_servings_type(servings_element, servings_element[/(\d+ ?\/ ?\d+)/])
+      end
+    else
+      servings_amount = servings_element[/\d+/]
+      servings_type = servings_element[/\s(.*)/]
+    end
     #extract servings info
-    new_recipe.update(original_servings_amount: html_doc.css('#lblYield').text[/\d+/])
-    new_recipe.update(original_servings_type: html_doc.css('#lblYield').text[/\s(.*)/].gsub('- ', '').squish)
+    if servings_amount != nil
+      new_recipe.update(original_servings_amount: servings_amount)
+    else
+      new_recipe.update(original_servings_amount: 1)
+    end
+    if servings_type != nil
+      new_recipe.update(original_servings_type: servings_type.squish.split.map(&:capitalize).join(' '))
+    else
+      new_recipe.update(original_servings_type: servings_type)
+    end
 
     #extract instructions info
     instructions_elements = html_doc.css('div > div > ol > li > span')
