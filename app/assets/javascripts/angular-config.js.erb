@@ -2,29 +2,37 @@ var app = angular.module("recipedb",['ngRoute', 'ui.bootstrap']);
   
 app.config(['$routeProvider', function($routeProvider){
   $routeProvider.when('/', {
-    templateUrl: "<%= asset_path('home.html') %>",
-    controller: 'HomeCtrl' // the name of this controller should match with the actual name of the actual controller
+    templateUrl: "<%= asset_path('pages/home.html') %>",
+    controller: 'HomeCtrl'
   })
   .when('/search', {
-    templateUrl: "<%= asset_path('recipeFinder.html') %>",
+    templateUrl: "<%= asset_path('pages/recipeFinder.html') %>",
     controller: 'RecipeFinderCtrl'
   })
   .when('/recipes/:id', {
-    templateUrl: "<%= asset_path('recipe.html') %>",
+    templateUrl: "<%= asset_path('pages/recipe.html') %>",
     controller: 'RecipeCtrl'
   })
-  .when('/myrecipes', {
-    templateUrl: "<%= asset_path('myRecipes.html') %>",
-    controller: 'MyRecipesCtrl'
+  .when('/myrecipes/:id', {
+    templateUrl: "<%= asset_path('pages/myRecipes.html') %>",
+    controller: 'MyRecipeCtrl'
   })
   .when('/create', {
-    templateUrl: "<%= asset_path('createRecipe.html') %>",
+    templateUrl: "<%= asset_path('pages/createRecipe.html') %>",
     controller: 'createRecipeCtrl'
   })
-
-
 }]);
 
-// $(function () {
-//   $('[data-toggle="tooltip"]').tooltip()
-// })
+app.directive('mainNavBar', function(){
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path('partials/navBarPartial.html') %>"
+  }
+})
+
+app.directive('mainFooter', function(){
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path('partials/footerPartial.html') %>"
+  }
+})

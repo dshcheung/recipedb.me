@@ -1,11 +1,11 @@
-app.controller('LoginModalCtrl', ['$scope', '$modal', '$log', function ($scope, $modal, $log) {
+app.controller('RegModalCtrl', ['$scope', '$modal', '$log', function ($scope, $modal, $log) {
 
   $scope.items = ['item1', 'item2', 'item3'];
 
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: "<%= asset_path('loginModalContent.html') %>",
+      templateUrl: "<%= asset_path('modals/registrationModalContent.html') %>",
       controller: 'ModalInstanceCtrl',
       size: size,
       resolve: {
