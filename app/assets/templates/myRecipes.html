@@ -1,14 +1,21 @@
 <div ng-include="mainNavBar"></div>
 
 <div class="main-body">
-  <div class="finder-body container-fluid">
+  <div class="my-recipes-body container-fluid">
 
     <div class="row">
-      <div class="filter-tags col-xs-12">
+      <div class="my-recipes-title">My Recipe Collection</div>
+    </div>
+
+    <div class="row">
+      <div class="filter-tags col-xs-10">
         <div class="filter-tags-heading">Searched tags:</div>
         <div class="filter-tag">Chicken <i class="fa fa-times"></i></div>
         <div class="filter-tag">Peas <i class="fa fa-times"></i></div>
       </div>
+      <a class="create-recipe-button col-xs-2 btn btn-warning" href="/#/create">
+        Add a Recipe
+      </a>
     </div>
 
     <div class="row">
@@ -22,8 +29,7 @@
 
         <!-- filter by meals -->
         <div class="filter-meals-wrapper row">
-          <div class="filter-meals-heading col-xs-12 col-md-3">
-              Meal:
+          <div class="filter-meals-heading col-xs-12 col-md-3">Meal:
           </div>
           <div class="filter-meals-selection col-xs-12 col-md-9">
             <div class="row row-condensed">
@@ -48,8 +54,7 @@
 
         <!-- filter by time -->
         <div class="filter-time-wrapper row">
-          <div class="filter-time-heading col-xs-12 col-md-3">
-            Timeframe:
+          <div class="filter-time-heading col-xs-12 col-md-3">Timeframe:
           </div>
           <div class="filter-time-scroll col-xs-12 col-md-9">
 
