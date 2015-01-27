@@ -1,13 +1,142 @@
 <div ng-include="mainNavBar"></div>
 
 <div class="main-body">
-  <div class="finder-body container">
+  <div class="finder-body container-fluid">
+
     <div class="row">
-      <div class="filter-window col-xs-5">
-        
+      <div class="filter-tags col-xs-12">
+        <div class="filter-tags-heading">Searched tags:</div>
+        <div class="filter-tag">Chicken <i class="fa fa-times"></i></div>
+        <div class="filter-tag">Peas <i class="fa fa-times"></i></div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="filter col-xs-12 col-sm-7">
+        
+        <div class="filter-keyword-wrapper row">
+          <input type="text" class="filter-keyword-search col-xs-offset-2 col-xs-8" placeholder="Search Keywords">
+        </div>
+
+        <div class="filter-meals-wrapper row">
+          <div class="filter-meals-heading col-xs-12 col-md-3">
+              Meal:
+          </div>
+          <div class="filter-meals-selection col-xs-12 col-md-9">
+            <div class="row row-condensed">
+              <div class="col-xs-4">
+                <label class="filter-meals-select">
+                  Breakfast <input class="filter-meals-checkbox" type="checkbox">
+                </label>
+              </div>
+              <div class="col-xs-4">
+                <label class="filter-meals-select">
+                  Lunch <input class="filter-meals-checkbox" type="checkbox">
+                </label>
+              </div>
+              <div class="col-xs-4">
+                <label class="filter-meals-select">
+                  Dinner <input class="filter-meals-checkbox" type="checkbox">
+                </label>
+              </div>
+            </div>
+          </div>
+          <accordion>
+            <accordion-group is-open="status.open" class="col-xs-12">
+                <accordion-heading>
+                  See More
+                  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </accordion-heading>
+                This is just some content to illustrate fancy headings.
+            </accordion-group>
+          </accordion>
+          <!-- <div class="filter-meals-showmore col-xs-12">
+              More options
+          </div> -->
+        </div>
+
+        <div class="filter-course-wrapper row">
+          <div class="filter-course-heading col-xs-12">
+            Course:
+          </div>
+          <div class="filter-course-selection col-xs-12">
+            <div class="row row-condensed">
+              <div class="col-xs-4">
+                <label class="filter-course-select">
+                  Appetizers <input class="filter-course-checkbox" type="checkbox">
+                </label>
+              </div>
+              <div class="col-xs-4">
+                <label class="filter-course-select">
+                  Salads <input class="filter-course-checkbox" type="checkbox">
+                </label>
+              </div>
+              <div class="col-xs-4">
+                <label class="filter-course-select">
+                  Soup <input class="filter-course-checkbox" type="checkbox">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-time-wrapper row">
+          <div class="filter-time-heading col-xs-12">
+            Timeframe:
+          </div>
+          <div class="filter-time-scroll col-xs-12">
+
+          </div>
+        </div>
+
+        <div class="filter-cuisine-wrapper row">
+          <div class="filter-cuisine-heading col-xs-12">
+            Cuisine:
+          </div>
+          <div class="filter-cuisine-selection col-xs-12">
+            <div class="row row-condensed">
+              <div class="col-xs-4">
+                <label class="filter-cuisine-select">
+                  Chinese <input class="filter-cuisine-checkbox" type="checkbox">
+                </label>
+              </div>
+              <div class="col-xs-4">
+                <label class="filter-cuisine-select">
+                  French <input class="filter-cuisine-checkbox" type="checkbox">
+                </label>
+              </div>
+              <div class="col-xs-4">
+                <label class="filter-cuisine-select">
+                  American <input class="filter-cuisine-checkbox" type="checkbox">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      <div class="filter-more-options row">
+        <button class="filter-more-options-button btn btn-warning btn-sm" ng-click="status.open = !status.open">Toggle options</button>
+      </div>
+
+    </div>
+        <!-- <i class="fa fa-angle-double-down"></i> -->
+    <div class="filter-results col-xs-12 col-sm-5">
+      <div ng-repeat="recipe in recipes" class="filter-result">
+        <a href="/#/recipes/{{ recipe.id }}"><img class="filter-result-image" src="{{ recipe.images[0] }}"></a>
+        <div class="filter-result-info">
+          <a href="/#/recipes/{{ recipe.id }}"><p class="filter-result-title">{{ recipe.title }}</p></a>
+          <p class="filter-result-author">By {{ recipe.author }}</p>
+          <i class="fa fa-bookmark-o"></i>
+        </div>
+      </div>
+    </div>
+  
   </div>
 </div>
+
+
+
+
+
 
 <div ng-include="mainFooter"></div>

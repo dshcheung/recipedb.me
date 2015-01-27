@@ -4,8 +4,8 @@ $color-orange: #FF8508;
 $color-red: #E83505;
 $color-raisin: #5C0B22;
 $texture-picnic-pattern: linear-gradient(
-      rgba(0, 0, 0, 0.45), 
-      rgba(0, 0, 0, 0.45)
+      rgba(0, 0, 0, 0.2), 
+      rgba(0, 0, 0, 0.2)
     ), image-url('lunch_1x.jpg');
 $texture-food-pattern: linear-gradient(
       rgba(0, 0, 0, 0.45), 
@@ -30,9 +30,241 @@ $font-footer: 'Architects Daughter', cursive;
 
 .finder-body {
   // background: white;
-  background: $texture-marble-pattern;
+  background: $texture-picnic-pattern;
   // height: 580px;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 8px 8px 25px #111;
 }
+
+.row .filter-tags {
+  // background: $color-light-yellow;
+  background: white;
+  // opacity: 0.7;
+  min-height: 25px;
+  padding: 5px;
+  .filter-tags-heading {
+    font-family: $font-items;
+    color: $color-raisin;
+    text-decoration: underline;
+    display: inline-block;
+  }
+  .filter-tag {
+    margin: 0 10px 0 0;
+    border: 1px solid black;
+    border-radius: 15px;
+    box-shadow: 1px 1px 2px #666;
+    font-family: $font-items;
+    padding: 0 5px 0 5px;
+    background: $color-light-yellow;
+    max-width: 88px;
+    display: inline-block;
+    &:hover {
+      background: $color-red;
+      color: $color-light-yellow;
+      cursor: pointer;
+    }
+  }
+}
+
+.filter-meals-select .row {
+  margin: 0;
+  padding: 0;
+}
+
+.row .filter {
+  background: white;
+  // background: #CCC;
+  // padding: 0;
+  border: 1px solid #BBB;
+  .filter-keyword-wrapper {
+    font-weight: bold;
+    padding: 5px 0;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px solid #BBB;
+    .filter-keyword-search {
+      // margin: 5px 0;
+      text-align: center;
+    }
+  }
+  .filter-meals-wrapper {
+    border-bottom: 1px solid #BBB;
+    .filter-meals-heading {
+      // display: inline-block;
+      margin: 5px 0;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+    .filter-meals-select {
+      padding: 5px 0 5px 0;
+      margin: 0 0 10px 0;
+      display: block;
+      text-align: center;
+      font-size: 12px;
+      vertical-align: middle;
+      border: 1px solid #999;
+      border-radius: 10px;
+      background: #ccc;
+      font-weight: normal;
+      &:hover {
+        cursor: pointer;
+      }
+      .filter-meals-checkbox {
+        height: 20px;
+        width: 20px;
+        vertical-align: middle;
+      }
+    }
+    .filter-meals-showmore {
+      // margin: 5px 0;
+      // font-weight: bold;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .filter-course-wrapper {
+    // padding: 10px 0;
+    border-bottom: 1px solid #BBB;
+    .filter-course-heading {
+      // display: inline-block;
+      margin: 5px 0;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+    .filter-course-select {
+      padding: 5px 0 5px 0;
+      margin: 0 0 5px 0;
+      display: block;
+      font-size: 12px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #999;
+      border-radius: 10px;
+      background: #ccc;
+      font-weight: normal;
+      &:hover {
+        cursor: pointer;
+      }
+      .filter-course-checkbox {
+        height: 20px;
+        width: 20px;
+        vertical-align: middle;
+      }
+    }
+  }
+  .filter-time-wrapper {
+    // padding: 10px 0;
+    border-bottom: 1px solid #BBB;
+    .filter-time-heading {
+      // display: inline-block;
+      margin: 5px 0;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+  .filter-cuisine-wrapper {
+    // padding: 10px 0;
+    border-bottom: 1px solid #BBB;
+    .filter-cuisine-heading {
+      // display: inline-block;
+      margin: 5px 0;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+    .filter-cuisine-select {
+      padding: 5px 0 5px 0;
+      margin: 0 0 5px 0;
+      display: block;
+      font-size: 12px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #999;
+      border-radius: 10px;
+      background: #ccc;
+      font-weight: normal;
+      &:hover {
+        cursor: pointer;
+      }
+      .filter-cuisine-checkbox {
+        height: 20px;
+        width: 20px;
+        vertical-align: middle;
+      }
+    }
+  }
+  .filter-more-options.row {
+    .filter-more-options-button {
+      margin: 5px;
+    }
+  }
+}
+
+.row .filter-results {
+  // background: $color-dirt-yellow;
+  padding: 0;
+  // height: 50px;
+  border: 1px solid black;
+  .filter-result {
+    background: white;
+    height: 60px;
+    padding: 7px;
+    border-bottom: 1px solid black;
+    .filter-result-image {
+      width: 45px;
+      height: 45px;
+      background: red;
+      vertical-align: top;
+      display: inline-block;
+    }
+    .fa .fa-bookmark-o {
+      display: inline;
+      float: right;
+    }
+    .filter-result-info {
+      background: white;
+      height: 45px;
+      display: inline-block;
+      padding: 0 10px 0 10px;
+      text-overflow: clip;
+      .filter-result-title {
+        display: inline-block;
+        font-size: 12px;
+        margin: 0;
+        padding: 0;
+      }
+      .filter-result-author {
+        display: inline;
+        font-size: 10px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  
+}
+
+@media (min-width: 420px) {
+  
+}
+
+@media (min-width: 768px) {
+  
+}
+
+@media (min-width: 992px) {
+  
+}
+
+@media (min-width: 1200px) {
+
+}
+
+
