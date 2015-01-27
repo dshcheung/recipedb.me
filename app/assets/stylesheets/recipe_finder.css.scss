@@ -72,6 +72,12 @@ $font-footer: 'Architects Daughter', cursive;
   padding: 0;
 }
 
+.main-body .finder-body .row .filter accordion div div div h4 {
+  font-size: 10px;
+  // color: red;
+}
+
+
 .row .filter {
   background: white;
   // background: #CCC;
@@ -92,14 +98,14 @@ $font-footer: 'Architects Daughter', cursive;
     border-bottom: 1px solid #BBB;
     .filter-meals-heading {
       // display: inline-block;
-      margin: 5px 0;
+      margin: 10px 0;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 16px;
       text-align: center;
     }
     .filter-meals-select {
       padding: 5px 0 5px 0;
-      margin: 0 0 10px 0;
+      margin: 5px 0;
       display: block;
       text-align: center;
       font-size: 12px;
@@ -123,20 +129,24 @@ $font-footer: 'Architects Daughter', cursive;
       font-size: 12px;
       text-align: center;
     }
+    .filter-all-options {
+      font-size: 12px;
+      // padding: 0;
+    }
   }
   .filter-course-wrapper {
     // padding: 10px 0;
     border-bottom: 1px solid #BBB;
     .filter-course-heading {
       // display: inline-block;
-      margin: 5px 0;
+      margin: 10px 0;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 16px;
       text-align: center;
     }
     .filter-course-select {
       padding: 5px 0 5px 0;
-      margin: 0 0 5px 0;
+      margin: 5px 0;
       display: block;
       font-size: 12px;
       text-align: center;
@@ -160,9 +170,9 @@ $font-footer: 'Architects Daughter', cursive;
     border-bottom: 1px solid #BBB;
     .filter-time-heading {
       // display: inline-block;
-      margin: 5px 0;
+      margin: 10px 0;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 16px;
       text-align: center;
     }
   }
@@ -171,14 +181,18 @@ $font-footer: 'Architects Daughter', cursive;
     border-bottom: 1px solid #BBB;
     .filter-cuisine-heading {
       // display: inline-block;
-      margin: 5px 0;
+      margin: 10px 0;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 16px;
       text-align: center;
+    }
+    .filter-cuisine-selection {
+      font-size: 14px;
+      padding: 5px 20px;
     }
     .filter-cuisine-select {
       padding: 5px 0 5px 0;
-      margin: 0 0 5px 0;
+      margin: 5px 0;
       display: block;
       font-size: 12px;
       text-align: center;

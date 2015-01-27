@@ -5,7 +5,7 @@ app.controller('RegModalCtrl', function ($scope, $modal, $log) {
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'myModalContent.html',
+      templateUrl: "<%= asset_path('registrationModalContent.html') %>",
       controller: 'ModalInstanceCtrl',
       size: size,
       resolve: {

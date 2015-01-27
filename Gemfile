@@ -67,3 +67,8 @@ gem 'dotenv-rails', :groups => [:development, :test]
 
 # angular ui bootstrap
 gem 'angular-ui-bootstrap-rails'
+
+gem 'jquery-ui-rails'
+
+# angular slider bootstrap
+gem 'bootstrap-slider-rails'

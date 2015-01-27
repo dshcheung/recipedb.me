@@ -17,23 +17,10 @@
         
         <a href="" popover-popup-delay="000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button">Username<span class="caret"></span></a>
         <a href="" popover-popup-delay="000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="visible-xs dropdown-toggle" data-toggle="dropdown" role="button"><i class="fa fa-user"></i><span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu" ng-controller="RegModalCtrl">
-          <script type="text/ng-template" id="myModalContent.html">
-              <div class="registration-modal-title modal-header row">
-                  <h3 class="modal-title">Registration</h3>
-              </div>
-              <div class="registration-modal-inputs modal-body row">
-                  <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Email">
-                  <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Username">
-                  <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Password">
-                  <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Confirm Password">
-              </div>
-              <div class="modal-footer row">
-                  <button class="registration-modal-button col-xs-offset-1 col-xs-10 btn btn-warning" ng-click="ok()">Sign Up</button>
-              </div>
-          </script>
+        <ul class="dropdown-menu" role="menu">
 
-          <li><a href="" ng-click="open('sm')">Sign Up</a></li>
+          <li><a href="" ng-controller="RegModalCtrl" ng-click="open('sm')">Sign Up</a></li>
+          <li><a href="" ng-controller="LoginModalCtrl" ng-click="open('sm')">Login</a></li>
           <li><a href="">Edit Profile</a></li>
           <li><a href="">Logout</a></li>
         </ul>
