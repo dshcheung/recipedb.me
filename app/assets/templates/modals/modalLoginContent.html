@@ -2,9 +2,9 @@
     <h3 class="modal-title">Login</h3>
 </div>
 <div class="login-modal-inputs modal-body row">
-    <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Email">
-    <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Password">
-</div>
-<div class="modal-footer row">
+  <form ng-controller="UserCtrl" ng-submit="userSignIn()">
+    <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Email" ng-model="loginEmail">
+    <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Password" ng-model="loginPassword">
     <button class="login-modal-button col-xs-offset-1 col-xs-10 btn btn-warning" ng-click="ok()">OK</button>
+  </form>
 </div>
