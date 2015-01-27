@@ -72,3 +72,5 @@ gem 'jquery-ui-rails'
 
 # angular slider bootstrap
 gem 'bootstrap-slider-rails'
+
+gem 'jquery-sliders-rails'

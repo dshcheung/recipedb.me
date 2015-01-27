@@ -11,10 +11,11 @@
  * file per style scope.
  *
  *= require_tree .
- *= require bootstrap-slider
  *= require_self
  */
+ 
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery.sliders";

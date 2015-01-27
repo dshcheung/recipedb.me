@@ -25,24 +25,6 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     // console.log(xhr);
   });
   
-  
-    $(window).ready(function () {
-      $('div.sliderGallery').each(function () {
-        var ul = $('ul', this);
-        var productWidth = ul.innerWidth() - $(this).outerWidth();
-
-        var slider = $('.slider', this).slider({ 
-          handle: '.handle',
-          minValue: 0, 
-          maxValue: productWidth, 
-          slide: function (ev, ui) {
-            ul.css('left', '-' + ui.value + 'px');
-          }, 
-          stop: function (ev, ui) {
-            ul.animate({ 'left' : '-' + ui.value + 'px' }, 500, 'linear');
-          }
-        });
-      });
-    });
+  $scope.isCollapsed = true;
 
 }]);

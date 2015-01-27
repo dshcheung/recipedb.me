@@ -17,7 +17,7 @@
 
         <!-- keyword search -->
         <div class="filter-keyword-wrapper row">
-          <input type="text" class="filter-keyword-search col-xs-offset-1 col-xs-10" placeholder="Search Keywords">
+          <input type="text" class="filter-keyword-search col-xs-offset-1 col-xs-10" placeholder="Search Ingredients">
         </div>
 
         <!-- filter by meals -->
@@ -44,14 +44,6 @@
               </div>
             </div>
           </div>
-          <!-- <accordion class="col-xs-12 filter-all-options">
-            <accordion-group is-open="status.open" heading="See More">
-                <accordion-heading>
-                  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                </accordion-heading>
-                This is just some content to illustrate fancy headings.
-            </accordion-group>
-          </accordion> -->
         </div>
 
         <!-- filter by time -->
@@ -60,35 +52,48 @@
             Timeframe:
           </div>
           <div class="filter-time-scroll col-xs-12 col-md-9">
-            <!-- <div class="well">
-              Filter by time taken: 
-              <b>10mins</b>
-              <div class="slider slider-horizontal" style="width: 414px;">
-                <div class="slider-track">
-                  <div class="slider-selection" style="left: 29.7979797979798%; width: 14.6464646464646%;">
-                  </div>
-                  <div class="slider-handle round" style="left: 29.7979797979798%;">
-                  </div>
-                  <div class="slider-handle round" style="left: 44.4444444444444%;">
-                  </div>
+
+          </div>
+        </div>
+
+        <!-- filter by cuisine -->
+        <div class="filter-cuisine-wrapper row">
+          <div class="filter-cuisine-heading col-xs-3 col-md-3">Cuisine:
+          </div>
+          <div class="col-xs-9">
+            <div class="filter-cuisine-selection col-xs-12 col-md-9">
+              <div class="row row-condensed">
+                <div class="col-xs-3">
+                  <label class="filter-cuisine-select">
+                    Breakfast <input class="filter-cuisine-checkbox" type="checkbox">
+                  </label>
                 </div>
-                <div class="tooltip top" style="top: -40px; left: 122.681818181818px;">
-                  <div class="tooltip-arrow">
-                  </div>
-                  <div class="tooltip-inner">310 : 450
-                  </div>
+                <div class="col-xs-3">
+                  <label class="filter-cuisine-select">
+                    Lunch <input class="filter-cuisine-checkbox" type="checkbox">
+                  </label>
                 </div>
-                <input type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" id="sl2">
+                <div class="col-xs-3">
+                  <label class="filter-cuisine-select">
+                    Dinner <input class="filter-cuisine-checkbox" type="checkbox">
+                  </label>
+                </div>
+                <div class="col-xs-1">
+                  <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-right': !isCollapsed}"></i></button>
+                </div>
+                  <hr>
+                  <div collapse="isCollapsed">
+                    <div class="well well-lg">Some content</div> 
+                  </div>
               </div>
-              <b>300mins</b>
-            </div> -->
+            </div>
             
           </div>
         </div>
 
         <!-- filter by course -->
         <div class="filter-course-wrapper row">
-          <div class="filter-course-heading col-xs-12 col-md-3">
+          <!-- <div class="filter-course-heading col-xs-12 col-md-3">
             Course:
           </div>
           <div class="filter-course-selection col-xs-12 col-md-9">
@@ -109,33 +114,37 @@
                 </label>
               </div>
             </div>
-          </div>
+          </div> -->
+
           <accordion class="col-xs-12 filter-all-options">
             <accordion-group is-open="status.open">
-                <accordion-heading>
-                  See More
-                  <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                </accordion-heading>
-                This is just some content to illustrate fancy headings.
+              <accordion-heading>
+                Courses:
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+              </accordion-heading>
+              <div class="filter-course-selection col-xs-12 col-md-9">
+                <div class="row row-condensed">
+                  <div class="col-xs-4">
+                    <label class="filter-course-select">
+                      Appetizers <input class="filter-course-checkbox" type="checkbox">
+                    </label>
+                  </div>
+                  <div class="col-xs-4">
+                    <label class="filter-course-select">
+                      Salads <input class="filter-course-checkbox" type="checkbox">
+                    </label>
+                  </div>
+                  <div class="col-xs-4">
+                    <label class="filter-course-select">
+                      Soup <input class="filter-course-checkbox" type="checkbox">
+                    </label>
+                  </div>
+                </div>
+              </div>
             </accordion-group>
           </accordion>
         </div>
 
-        <!-- filter by cuisine -->
-        <div class="filter-cuisine-wrapper row">
-          <div class="filter-cuisine-heading col-xs-12 col-md-3">
-            Cuisine:
-          </div>
-          <div class="filter-cuisine-selection col-xs-12 col-md-9">
-            <!-- <div class="row row-condensed select select-block"> -->
-              <select name="cuisines">
-                <option value="0">Chinese</option>
-                <option value="1">French</option>
-                <option value="2">American</option>
-                <option value="3">India</option>
-              </select>
-          </div>
-        </div>
       
       <!-- more options filter -->
       <div class="filter-more-options row">

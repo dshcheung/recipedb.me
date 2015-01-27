@@ -73,8 +73,9 @@ $font-footer: 'Architects Daughter', cursive;
 }
 
 .main-body .finder-body .row .filter accordion div div div h4 {
-  font-size: 10px;
+  // font-size: 10px;
   // color: red;
+  text-align: center;
 }
 
 
@@ -96,22 +97,23 @@ $font-footer: 'Architects Daughter', cursive;
   }
   .filter-meals-wrapper {
     border-bottom: 1px solid #BBB;
+    padding: 5px 0;
     .filter-meals-heading {
       // display: inline-block;
-      margin: 10px 0;
+      margin: 5px 0;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 18px;
       text-align: center;
     }
     .filter-meals-select {
-      padding: 5px 0 5px 0;
-      margin: 5px 0;
+      padding: 5px 0;
+      margin: 1px 0;
       display: block;
       text-align: center;
-      font-size: 12px;
+      font-size: 14px;
       vertical-align: middle;
       border: 1px solid #999;
-      border-radius: 10px;
+      // border-radius: 10px;
       background: #ccc;
       font-weight: normal;
       &:hover {
@@ -135,18 +137,18 @@ $font-footer: 'Architects Daughter', cursive;
     }
   }
   .filter-course-wrapper {
-    // padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #BBB;
     .filter-course-heading {
       // display: inline-block;
-      margin: 10px 0;
+      margin: 5px 0;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 18px;
       text-align: center;
     }
     .filter-course-select {
-      padding: 5px 0 5px 0;
-      margin: 5px 0;
+      padding: 5px 0;
+      // margin: 5px 0;
       display: block;
       font-size: 12px;
       text-align: center;
@@ -166,33 +168,29 @@ $font-footer: 'Architects Daughter', cursive;
     }
   }
   .filter-time-wrapper {
-    // padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #BBB;
     .filter-time-heading {
       // display: inline-block;
-      margin: 10px 0;
+      margin: 5px 0;
       font-weight: bold;
       font-size: 16px;
       text-align: center;
     }
   }
   .filter-cuisine-wrapper {
-    // padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #BBB;
     .filter-cuisine-heading {
       // display: inline-block;
-      margin: 10px 0;
+      margin: 5px 0;
       font-weight: bold;
       font-size: 16px;
       text-align: center;
     }
-    .filter-cuisine-selection {
-      font-size: 14px;
-      padding: 5px 20px;
-    }
     .filter-cuisine-select {
-      padding: 5px 0 5px 0;
-      margin: 5px 0;
+      padding: 5px 0;
+      // margin: 5px 0;
       display: block;
       font-size: 12px;
       text-align: center;
@@ -209,11 +207,6 @@ $font-footer: 'Architects Daughter', cursive;
         width: 20px;
         vertical-align: middle;
       }
-    }
-  }
-  .filter-more-options.row {
-    .filter-more-options-button {
-      margin: 5px;
     }
   }
 }
