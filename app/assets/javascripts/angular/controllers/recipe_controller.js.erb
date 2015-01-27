@@ -1,4 +1,25 @@
 app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
   $scope.mainNavBar = "<%= asset_path('navBarPartial.html') %>";
   $scope.mainFooter = "<%= asset_path('footerPartial.html') %>";
+  // $scope.recipes = @recipes.
+
+  $http.get('/recipes/'+$routeParams.id+'.json').success(function(data, status, xhr){
+    $scope.name = data.title;
+    $scope.author = data.author;
+    $scope.description = data.description;
+    // $scope.ingredients = data.ingredients;
+    $scope.serving_size = data.serving_size;
+    $scope.serving_type = data.serving_type;
+    $scope.images = data.images;
+    $scope.prep_time = data.prep_time;
+    $scope.cook_time = data.cook_time;
+    $scope.ready_time = data.ready_time;
+    $scope.rest_time = data.rest_time;
+    $scope.instructions = data.instructions;
+
+    // $scope.current_user = data.current_user;
+    console.log(data);
+    // console.log(status);
+    // console.log(xhr);
+  });
 }]);

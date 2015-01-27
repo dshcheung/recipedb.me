@@ -1,0 +1,73 @@
+$color-light-yellow: #FFF888;
+$color-dirt-yellow: #E8AC06;
+$color-orange: #FF8508;
+$color-red: #E83505;
+$color-raisin: #5C0B22;
+$texture-picnic-pattern: linear-gradient(
+      rgba(0, 0, 0, 0.2), 
+      rgba(0, 0, 0, 0.2)
+    ), image-url('lunch_1x.jpg');
+$texture-food-pattern: linear-gradient(
+      rgba(0, 0, 0, 0.45), 
+      rgba(0, 0, 0, 0.45)
+), image-url('food.png');
+$texture-marble-pattern: image-url('congruent_outline.png');
+$texture-wood-pattern: linear-gradient(
+      rgba(0.2, 0.2, 0.2, 0.1), 
+      rgba(0.2, 0.2, 0.2, 0.1)
+), image-url('retina_wood.png');
+
+// $font4: 'Yellowtail', cursive;
+// $font4: 'Bad Script', cursive;
+// $font4: 'Marck Script', cursive;
+$font-items: 'Bitter', serif;
+// $font4: 'Lobster', cursive;
+// $font4: 'Special Elite', cursive;
+$font-title: 'Satisfy', cursive;
+// $font4: 'Damion', cursive;
+$font-footer: 'Architects Daughter', cursive;
+// $font4: 'Cookie', cursive;
+
+.jumbo.row{
+  background: #CCC;
+  height: 300px;
+  border-radius: 10px;
+  // border-right: 2px solid $color-raisin;
+  // border-left: 2px solid $color-raisin;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  .splash-item {
+    padding: 0;
+    margin: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0.6;
+  }
+}
+
+.search-wrapper {
+  margin: 40px 0;
+  .recipe-search {
+    font-size: 17px;
+  }
+  .fa.fa-search {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  
+}
+
+@media (min-width: 768px) {
+  
+}
+
+@media (min-width: 992px) {
+  
+}
+
+@media (min-width: 1200px) {
+  
+}

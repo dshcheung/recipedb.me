@@ -31,7 +31,7 @@ $font-items: 'Bitter', serif;
 // $font4: 'Lobster', cursive;
 // $font4: 'Special Elite', cursive;
 $font-title: 'Satisfy', cursive;
-// $font4: 'Damion', cursive;
+$font-timing: 'Damion', cursive;
 $font-footer: 'Architects Daughter', cursive;
 // $font4: 'Cookie', cursive;
 
@@ -99,12 +99,17 @@ div.recipe-profile {
   border-bottom: 1px dotted black;
   margin: 7px 0 0 0;
   padding: 0 0 0 15px;
+  .recipe-description-heading {
+    font-size: 16px;
+    display: inline-block;
+    font-weight: bold;
+  }
   .recipe-description {
-    font-size: 14px;
+    font-size: 12px;
     display: inline-block;
   }
   .recipe-servings {
-    font-size: 11px;
+    font-size: 14px;
     display: inline-block;
   }
 }
@@ -115,6 +120,8 @@ div.recipe-profile {
   padding: 0 0 0 15px;
   .recipe-ingredients {
     display: inline-block;
+    font-weight: bold;
+    font-size: 16px;
     .recipe-ingredient {
       display: inline-block;
     }
@@ -124,11 +131,26 @@ div.recipe-profile {
 .recipe-div4 {
   border-bottom: 1px dotted black;
   margin: 7px 0 0 0;
-  .recipe-preptime,
-  .recipe-cooktime,
-  .recipe-resttime {
+  .recipe-preptime-heading,
+  .recipe-cooktime-heading,
+  .recipe-resttime-heading {
     display: inline-block;
     font-size: 12px;
+    .recipe-preptime,
+    .recipe-cooktime,
+    .recipe-resttime {
+      display: inline;
+      font-size: 20px;
+      color: $color-dirt-yellow;
+      font-weight: bold;
+      font-family: $font-timing;
+      // text-shadow: 1px 1px 1px #111;
+      text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000; 
+    }
   }
 }
 
@@ -137,9 +159,10 @@ div.recipe-profile {
   margin: 7px 0 0 0;
   padding: 0 0 0 15px;
   .recipe-directions {
-    
-    .recipe-steps {
-      
+    font-size: 16px;
+    font-weight: bold;
+    .recipe-step {
+      font-size: 12px;
     }
   }
 }

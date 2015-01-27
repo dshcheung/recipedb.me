@@ -4,17 +4,18 @@ $color-orange: #FF8508;
 $color-red: #E83505;
 $color-raisin: #5C0B22;
 $texture-picnic-pattern: linear-gradient(
-      rgba(0, 0, 0, 0.45), 
-      rgba(0, 0, 0, 0.45)
+      rgba(0, 0, 0, 0.2), 
+      rgba(0, 0, 0, 0.2)
     ), image-url('lunch_1x.jpg');
 $texture-food-pattern: linear-gradient(
       rgba(0, 0, 0, 0.45), 
       rgba(0, 0, 0, 0.45)
 ), image-url('food.png');
-$texture-marble-pattern: linear-gradient(
-      rgba(0.2, 0.2, 0.2, 0.45), 
-      rgba(0.2, 0.2, 0.2, 0.45)
-), image-url('congruent_outline.png');
+$texture-marble-pattern: image-url('congruent_outline.png');
+$texture-wood-pattern: linear-gradient(
+      rgba(0.2, 0.2, 0.2, 0.1), 
+      rgba(0.2, 0.2, 0.2, 0.1)
+), image-url('retina_wood.png');
 
 // $font4: 'Yellowtail', cursive;
 // $font4: 'Bad Script', cursive;
@@ -67,7 +68,7 @@ $font-footer: 'Architects Daughter', cursive;
   display: inline-block;
   width: 84px;
   &:focus {
-    width: 155px;
+    width: 180px;
   }
 }
 
@@ -150,7 +151,7 @@ $font-footer: 'Architects Daughter', cursive;
     float: right;
   }
   .fa.fa-cutlery,
-  .fa.fa-archive,
+  .fa.fa-sliders,
   .fa.fa-shopping-cart {
     color: $color-raisin;
     font-size: 22px;
@@ -164,39 +165,35 @@ $font-footer: 'Architects Daughter', cursive;
   }
 }
 
-.jumbo {
-  background: white;
-  min-height: 500px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  // border-right: 2px solid $color-raisin;
-  // border-left: 2px solid $color-raisin;
-  margin: 0;
-  padding: 0;
-}
-
-.course-item {
-  display: inline-block;
-  background: $color-orange;
-  border: 1px solid $color-light-yellow;
-  border-radius: 30px;
-  color: transparent;
-  font-size: 12px;
+.login-modal-title {
   text-align: center;
-  font-family: $font-items;
-  &:hover {
-    background: linear-gradient(
-      rgba(0, 0, 0, 0.3), 
-      rgba(0, 0, 0, 0.7)
-    ), $color-red;
-    color: $color-light-yellow;
+  font-size: 12px;
+}
+.login-modal-inputs {
+  font-size: 16px;
+  .input-fields {
+    text-align: center;
   }
 }
+.login-modal-button {
+  text-align: center;
+  font-size: 16px;
+}
 
-// .course-caption {
-//   font-size: 12px;
-//   text-align: center;
-// }
+.login-modal-title {
+  text-align: center;
+  font-size: 12px;
+}
+.login-modal-inputs {
+  font-size: 16px;
+  .input-fields {
+    text-align: center;
+  }
+}
+.login-modal-button {
+  text-align: center;
+  font-size: 16px;
+}
 
 .container.footer-background {
   background: $color-orange;

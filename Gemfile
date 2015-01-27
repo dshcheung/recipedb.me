@@ -64,3 +64,13 @@ gem 'remotipart', '~> 1.2'
 
 #env file protection gem
 gem 'dotenv-rails', :groups => [:development, :test]
+
+# angular ui bootstrap
+gem 'angular-ui-bootstrap-rails'
+
+gem 'jquery-ui-rails'
+
+# angular slider bootstrap
+gem 'bootstrap-slider-rails'
+
+gem 'jquery-sliders-rails'
