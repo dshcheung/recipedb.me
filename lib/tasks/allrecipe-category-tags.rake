@@ -3,6 +3,10 @@ task :category_tags => :environment do
   get_category_info("Initial Level", "http://allrecipes.com/recipes/main.aspx?vm=l")
 end
 
+task :category_test => :environment do
+  get_category_info("Main Dish", "http://allrecipes.com/Recipes/Main-Dish/Main.aspx?prop24=hn_browsedeeper&evt19=1")
+end
+
 #run infinitly as long as there is a sub_category
 def get_category_info(main_category_name, main_category_url)
   require 'open-uri'
@@ -15,9 +19,19 @@ def get_category_info(main_category_name, main_category_url)
     html_doc = Nokogiri::HTML(browser)
     
     sub_category_elements = html_doc.css('a#hlSubNavItem')
-    if html_doc.css('ul#subNavGroupContainer.cat.related li') != nil
-      element_to_remove = (html_doc.css('ul#subNavGroupContainer.cat.related li').size.to_i + 1) * -1
-      sub_category_elements[0..element_to_remove]
+    elements_to_loop = sub_category_elements.length
+
+    related_category_elements = html_doc.css('ul#subNavGroupContainer.cat.related li a#hlSubNavItem')
+    elements_to_remove = related_category_elements.length
+
+    if related_category_elements != nil
+      if elements_to_remove == elements_to_loop
+        puts "skipped"
+        return
+      else
+        index = elements_to_loop - elements_to_remove - 1
+        sub_category_elements = sub_category_elements[0..index]
+      end
     end
 
     if sub_category_elements.any?
