@@ -13,6 +13,10 @@ app.config(['$routeProvider', function($routeProvider){
     templateUrl: "<%= asset_path('recipe.html') %>",
     controller: 'RecipeCtrl'
   })
+  .when('/myrecipes/:id', {
+    templateUrl: "<%= asset_path('myRecipes.html') %>",
+    controller: 'MyRecipeCtrl'
+  })
 
 
 }]);

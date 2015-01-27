@@ -137,25 +137,25 @@ $font-footer: 'Architects Daughter', cursive;
     }
   }
   .filter-course-wrapper {
-    padding: 5px 0;
+    padding: 5px 0 0 0;
     border-bottom: 1px solid #BBB;
     .filter-course-heading {
       // display: inline-block;
-      margin: 5px 0;
+      margin: 5px 0 0 0;
       font-weight: bold;
       font-size: 18px;
       text-align: center;
     }
     .filter-course-select {
-      padding: 5px 0;
+      padding: 6px 0;
       // margin: 5px 0;
       display: block;
-      font-size: 12px;
+      font-size: 14px;
       text-align: center;
       vertical-align: middle;
-      border: 1px solid #999;
-      border-radius: 10px;
-      background: #ccc;
+      // border: 1px solid #999;
+      // border-radius: 10px;
+      // background: #ccc;
       font-weight: normal;
       &:hover {
         cursor: pointer;
@@ -164,6 +164,16 @@ $font-footer: 'Architects Daughter', cursive;
         height: 20px;
         width: 20px;
         vertical-align: middle;
+      }
+    }
+    .filter-course-button {
+      text-align: center;
+      padding: 8px 0;
+      // float: middle;
+      background: white;
+      border:0;
+      &:focus {
+        outline:0;
       }
     }
   }
@@ -179,25 +189,25 @@ $font-footer: 'Architects Daughter', cursive;
     }
   }
   .filter-cuisine-wrapper {
-    padding: 5px 0;
+    padding: 5px 0 0 0;
     border-bottom: 1px solid #BBB;
     .filter-cuisine-heading {
       // display: inline-block;
-      margin: 5px 0;
+      margin: 5px 0 0 0;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 18px;
       text-align: center;
     }
     .filter-cuisine-select {
-      padding: 5px 0;
-      // margin: 5px 0;
+      padding: 6px 0 0 0;
+      margin: 0;
       display: block;
-      font-size: 12px;
+      font-size: 14px;
       text-align: center;
       vertical-align: middle;
-      border: 1px solid #999;
-      border-radius: 10px;
-      background: #ccc;
+      // border: 1px solid #999;
+      // border-radius: 10px;
+      // background: #ccc;
       font-weight: normal;
       &:hover {
         cursor: pointer;
@@ -208,6 +218,15 @@ $font-footer: 'Architects Daughter', cursive;
         vertical-align: middle;
       }
     }
+    .filter-cuisine-button {
+      text-align: center;
+      background: white;
+      padding: 8px 0;
+      border:0;
+      &:focus {
+        outline:0;
+      }
+    }
   }
 }
 
@@ -215,7 +234,7 @@ $font-footer: 'Architects Daughter', cursive;
   // background: $color-dirt-yellow;
   padding: 0;
   // height: 50px;
-  border: 1px solid black;
+  border: 1px solid #ABABAB;
   .filter-result {
     background: white;
     height: 60px;
