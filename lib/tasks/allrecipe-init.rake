@@ -194,6 +194,17 @@ def get_recipe_indepth_info(url, new_recipe)
   end
 end
 
+def get_clean_servings_type(dirty_str, target_split)
+  dirty_splited = dirty_str.split(target_split)
+  if dirty_splited.any?
+    index = dirty_splited.length - 1
+    clean_str = dirty_splited[index].squish
+  else
+    clean_str = nil
+  end
+  return clean_str
+end
+
 def find_create_ingredient(ar_ingredient_code)
   ar_ingredient_code_existence = Ingredient.find_by(ar_ingredient_code: ar_ingredient_code)
   if ar_ingredient_code_existence == nil
