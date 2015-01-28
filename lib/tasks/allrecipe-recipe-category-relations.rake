@@ -1,14 +1,16 @@
 desc "scrape the relationship between recipes and a category"
-task :recipe_category_relations => :environment do
+task :recipe_category_relations, [:starting_index] => :environment do |task, args|
   require 'open-uri'
   require 'nokogiri'
-  categories = Category.all
-  categories.each do |category|
+
+  starting_index = (args.starting_index.to_i * 175) + 1
+
+  Category.where(scrape_category_status: 0).find_each(start: starting_index, batch_size: 5) do |category|
     @tries = 0
     begin
       # 0 = have not started, 1 = started but not finished, 2 = completed
+      category.update(scrape_category_status: 1)
       if category.scrape_category_status == 0 || category.scrape_category_status == 1
-        category.update(scrape_category_status: 1)
         url = category.sub_category_url
         puts url
         browser = open(url).read
@@ -21,6 +23,7 @@ task :recipe_category_relations => :environment do
           puts "page " + i.to_s
           match_recipe_basic_info(category.sub_category_url + "&page=" + i.to_s, category.id)
         end
+        category.update(scrape_category_status: 2)
       else
         next
       end
@@ -28,6 +31,7 @@ task :recipe_category_relations => :environment do
       case rescue_me(e)
       when 1
         retry
+        category.update(scrape_category_status: 0)
       when 2
         next
       end
