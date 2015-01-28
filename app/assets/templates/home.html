@@ -3,7 +3,10 @@
 <div class="main-body container">
 
   <div class="jumbo row">
-    <img ng-repeat="recipe in recipes" class="splash-item img-responsive  col-xs-3 col-sm-2 col-lg-1" ng-src="{{ recipe.images[0] }}">
+    <div ng-repeat="recipe in recipes">
+      <img class="splash-item img-responsive  col-xs-3 col-sm-2 col-lg-1" ng-src="{{ recipe.images[0] }}">
+      <img class="splash-item img-responsive  col-xs-3 col-sm-2 col-lg-1" ng-src="{{ recipe.images[1] }}">
+    </div>
   </div>
 
   <div class="row">

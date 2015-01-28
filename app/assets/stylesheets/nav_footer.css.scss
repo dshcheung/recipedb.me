@@ -60,17 +60,6 @@ $font-footer: 'Architects Daughter', cursive;
   }
 }
 
-.form-group .form-control{
-  // padding: 0 0 0 5px;
-  border: 1px solid $color-light-yellow;
-  margin: 5px;
-  z-index: 1;
-  display: inline-block;
-  width: 84px;
-  &:focus {
-    width: 180px;
-  }
-}
 
 .nav-dropdown-lines {
   border: 1px solid $color-raisin;
@@ -115,7 +104,19 @@ $font-footer: 'Architects Daughter', cursive;
           box-shadow: none;
 }
 
-.form-group {
+.nav-form .form-group .form-control{
+  // padding: 0 0 0 5px;
+  border: 1px solid $color-light-yellow;
+  margin: 5px;
+  z-index: 1;
+  display: inline-block;
+  width: 84px;
+  &:focus {
+    width: 180px;
+  }
+}
+
+.nav-form .form-group {
   display: inline-block;
   .form-control {
     background: $color-raisin;
@@ -207,7 +208,7 @@ $font-footer: 'Architects Daughter', cursive;
 }
 
 .footer-disclaimer {
-  font-family: $font-footer;
+  font-family: Helvetica;
   color: $color-raisin;
   font-size: 14px;
 }

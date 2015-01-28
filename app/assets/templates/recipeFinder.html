@@ -1,7 +1,11 @@
 <div ng-include="mainNavBar"></div>
 
 <div class="main-body">
-  <div class="finder-body container-fluid">
+  <div class="recipe-finder-body container-fluid">
+
+    <div class="row">
+      <div class="recipe-finder-title">Recipe Finder</div>
+    </div>
 
     <div class="row">
       <div class="filter-tags col-xs-12">
@@ -78,10 +82,10 @@
                 </label>
               </div>
               <div class="col-xs-1">
-                <button class="filter-cuisine-button btn btn-default" ng-click="isCollapsed1 = !isCollapsed1"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': isCollapsed1, 'glyphicon-chevron-up': !isCollapsed1}"></i></button>
+                <button class="filter-cuisine-button btn btn-default" ng-click="cuisineCollapsed = !cuisineCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': cuisineCollapsed, 'glyphicon-chevron-up': !cuisineCollapsed}"></i></button>
               </div>
                 <hr>
-                <div collapse="isCollapsed1">
+                <div collapse="cuisineCollapsed">
                   <div class="well well-lg">
                     
                   </div> 
@@ -112,10 +116,10 @@
                 </label>
               </div>
               <div class="col-xs-1">
-                <button class="filter-course-button btn btn-default" ng-click="isCollapsed2 = !isCollapsed2"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': isCollapsed2, 'glyphicon-chevron-up': !isCollapsed2}"></i></button>
+                <button class="filter-course-button btn btn-default" ng-click="courseCollapsed = !courseCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': courseCollapsed, 'glyphicon-chevron-up': !courseCollapsed}"></i></button>
               </div>
                 <hr>
-                <div collapse="isCollapsed2">
+                <div collapse="courseCollapsed">
                   <div class="well well-lg">
                     
                   </div> 
@@ -127,7 +131,7 @@
       
       <!-- more options filter -->
       <!-- <div class="filter-more-options row">
-        <button class="filter-more-options-button btn btn-warning btn-sm" ng-click="isCollapsed1 = true">Show All Options</button>
+        <button class="filter-more-options-button btn btn-warning btn-sm" ng-click="cuisineCollapsed = true">Show All Options</button>
       </div> -->
 
     </div>

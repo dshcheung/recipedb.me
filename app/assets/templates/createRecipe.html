@@ -1,0 +1,108 @@
+<div ng-include="mainNavBar"></div>
+
+<div class="main-body container">
+  <!-- <div class="row"> -->
+  <form class="create-recipe-form">
+    <div class="form-group">
+      <div class="form-title form-control">
+        Create and add your own recipes
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="create-title">
+        <!-- <label for="exampleInputEmail1">Email address
+        </label>
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> -->
+        <label for="recipeTitleName">Recipe Name:</label>
+        <input type="text" class="form-control create-title-input" placeholder="What is your dish called?">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="create-description">
+        <!-- <label for="exampleInputEmail1">Email address
+        </label>
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> -->
+        <label for="recipeDescription">Description:</label>
+        <input type="text" class="form-control create-description-input" placeholder="Describe your dish...">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Ingredients">Add Ingredients</label>
+      <div class="row">
+        <div class="col-xs-2">
+          <select class="form-control">
+            <option val="1">1</option>
+          </select>
+        </div>
+        <div class="col-xs-4">
+          <select class="form-control">
+            <option val="1">pound</option>
+          </select>
+        </div>
+        <div class="col-xs-4">
+          <select class="form-control">
+            <option val="1">Beef</option>
+          </select>
+        </div>
+        <button class="btn btn-warning col-xs-1">+
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group create-timeframe">
+      <label for="Timing">Timeframes</label>
+      <div class="row">
+        <div class="col-xs-4">
+          <label>For Preparation:</label>
+          <select class="form-control">
+            <option val="1">1</option>
+          </select>
+        </div>
+        <div class="col-xs-4">
+          <label>For Cooking:</label>
+          <select class="form-control">
+            <option val="1">1</option>
+          </select>
+        </div>
+        <div class="col-xs-4">
+          <label>For Rest:</label>
+          <select class="form-control">
+            <option val="1">min</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="create-instructions">
+        <!-- <label for="exampleInputEmail1">Email address
+        </label>
+        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> -->
+        <label for="recipeInstructions">Instruction:</label>
+        <div class="row">
+          <div class="col-xs-10">
+            <input type="text" class="form-control create-instruction-input" placeholder="Step 1: ....">
+          </div>
+          <button class="btn btn-warning col-xs-1">+
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="recipeImageFile">Image upload</label>
+      <input type="file" id="recipeImageFile">
+      <p class="help-block">Upload a photo of your dish</p>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+
+  </form>
+  <!-- </div> -->
+</div>
+
+
+<div ng-include="mainFooter"></div>

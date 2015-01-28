@@ -1,9 +1,9 @@
-app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+app.controller('MyRecipesCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
 
   $scope.mainNavBar = "<%= asset_path('navBarPartial.html') %>";
   $scope.mainFooter = "<%= asset_path('footerPartial.html') %>";
 
-  $http.get('/recipes.json').success(function(data, status, xhr){
+  $http.get('/myrecipes.json').success(function(data, status, xhr){
     $scope.recipes = data.recipes;
     // $scope.name = data.title;
     // $scope.author = data.author;

@@ -8,8 +8,8 @@ $texture-picnic-pattern: linear-gradient(
       rgba(0, 0, 0, 0.2)
     ), image-url('lunch_1x.jpg');
 $texture-food-pattern: linear-gradient(
-      rgba(0, 0, 0, 0.45), 
-      rgba(0, 0, 0, 0.45)
+      rgba(0, 0, 0, 0.1), 
+      rgba(0, 0, 0, 0.1)
 ), image-url('food.png');
 $texture-marble-pattern: image-url('congruent_outline.png');
 $texture-wood-pattern: linear-gradient(
@@ -28,18 +28,39 @@ $font-title: 'Satisfy', cursive;
 $font-footer: 'Architects Daughter', cursive;
 // $font4: 'Cookie', cursive;
 
-.finder-body {
+.recipe-finder-body {
   // background: white;
-  background: $texture-picnic-pattern;
+  background: $texture-food-pattern;
   // height: 580px;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 8px 8px 25px #111;
 }
 
+.my-recipes-body {
+  // background: white;
+  background: $texture-wood-pattern;
+  // height: 580px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 8px 8px 25px #111;
+}
+
+.row .recipe-finder-title {
+  font-size: 28px;
+  font-family: Helvetica;
+  text-shadow: 1px 1px 2px #666;
+}
+
+.row .my-recipes-title {
+  font-size: 28px;
+  font-family: Helvetica;
+  text-shadow: 1px 1px 2px #666;
+}
+
 .row .filter-tags {
   // background: $color-light-yellow;
-  background: white;
+  background: transparent;
   // opacity: 0.7;
   min-height: 25px;
   padding: 5px;
@@ -65,19 +86,15 @@ $font-footer: 'Architects Daughter', cursive;
       cursor: pointer;
     }
   }
+  .add-recipe-button {
+    
+  }
 }
 
 .filter-meals-select .row {
   margin: 0;
   padding: 0;
 }
-
-.main-body .finder-body .row .filter accordion div div div h4 {
-  // font-size: 10px;
-  // color: red;
-  text-align: center;
-}
-
 
 .row .filter {
   background: white;
@@ -184,7 +201,7 @@ $font-footer: 'Architects Daughter', cursive;
       // display: inline-block;
       margin: 5px 0;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 18px;
       text-align: center;
     }
   }
@@ -193,7 +210,7 @@ $font-footer: 'Architects Daughter', cursive;
     border-bottom: 1px solid #BBB;
     .filter-cuisine-heading {
       // display: inline-block;
-      margin: 5px 0 0 0;
+      margin: 6px 0 0 0;
       font-weight: bold;
       font-size: 18px;
       text-align: center;
