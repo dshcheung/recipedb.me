@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.first(100)
     render 'index.json.jbuilder'
   end
 end
