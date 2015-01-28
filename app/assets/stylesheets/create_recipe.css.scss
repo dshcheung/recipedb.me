@@ -1,3 +1,14 @@
 .create-recipe-form {
   background: white;
+  padding: 0 10px;
+  .form-title {
+    font-size: 20px;
+  }
+  .form-group {
+    margin: 30px 0 0 0;
+  }
+}
+
+.select {
+  overflow: scroll;
 }
