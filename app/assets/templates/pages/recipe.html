@@ -2,17 +2,15 @@
 
 <div class="main-body">
   <div class="recipe-body container">
-
-    <div class="recipe-button-row row">
-      <button class="col-xs-offset-2 col-xs-2 btn btn-danger recipe-back-button">Back <i class="fa fa-step-backward"></i></button>
-      <button class="col-xs-offset-1 col-xs-2 btn btn-warning recipe-back-button">Save <i class="fa fa-bookmark-o"></i></button>
-      <button class="col-xs-offset-1 col-xs-2 btn btn-success recipe-back-button">Shopping <i class="fa fa-shopping-cart"></i></button>
-    </div>
-
     <div class="row">
       <!-- <div class="recipe-image col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6 col-md-5"> -->
-      <div class="recipe-profile col-xs-offset-1 col-xs-10 col-sm-5">
-        <img class="recipe-image" ng-src="{{ images[3] }}" alt="Recipe image">
+      <div class="recipe-button-row row">
+        <button class="col-xs-offset-2 col-xs-2 btn btn-danger recipe-back-button">Back <i class="fa fa-step-backward"></i></button>
+        <button class="col-xs-offset-1 col-xs-2 btn btn-warning recipe-back-button">Save <i class="fa fa-bookmark-o"></i></button>
+        <button class="col-xs-offset-1 col-xs-2 btn btn-success recipe-back-button">Shopping <i class="fa fa-shopping-cart"></i></button>
+      </div>
+      <div class="recipe-profile col-xs-6 col-sm-4">
+        <img ng-repeat="image in images" class="image-responsive recipe-image" ng-src="{{ image }}" alt="Recipe image">
         <!-- assets/recipedb-default-img.png -->
       </div>
       <!-- </div> -->

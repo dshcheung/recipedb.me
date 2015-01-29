@@ -4,9 +4,9 @@
 <div class="main-body">
   <div class="recipe-finder-body container-fluid">
     <div class="row">
-      <div class="recipe-finder-title col-xs-5">Recipe Finder
-      </div>
-      <a class="create-recipe-button btn btn-warning col-xs-offset-4 col-xs-3" href="/#/create">
+      <!-- <div class="recipe-finder-title col-xs-5">Recipe Finder
+      </div> -->
+      <a class="create-recipe-button btn btn-warning col-xs-12" href="/#/create">
         Add a Recipe
       </a>
       <!-- <button ng-click="clickMe()"></button> -->
@@ -22,7 +22,7 @@
             <div class="filter-tags-heading">Search for:</div>
             <div class="keyword-collection">
               <!-- list of keywords -->
-              <div ng-click="lessKeyword($index)" ng-repeat='keyword in keywords track by $index' class='filter-tag'>
+              <div ng-click="lessKeyword($index)" ng-repeat='keyword in search_parameters.keywords track by $index' class='filter-tag'>
                 {{ keyword }}
                 <i class='fa fa-times'></i>
               </div>
@@ -35,14 +35,14 @@
 
         <!-- filter by meals -->
         <div class="filter-meals-wrapper row">
-          <div class="filter-meals-heading col-xs-12 col-md-3">
+          <div class="filter-meals-heading col-xs-12">
               Meal:
           </div>
-          <div class="filter-meals-selection col-xs-12 col-md-9">
+          <div class="filter-meals-selection col-xs-12">
             <div class="row row-condensed">
               <div ng-repeat="meal in meals" class="col-xs-4">
-                <label class="filter-meals-select">
-                  {{ meal }} <input class="filter-meals-checkbox" type="checkbox" name="selectedMeals[]" value="{{ meal }}" ng-checked="select_meals.indexOf(meal) > -1" ng-click="toggleMeals(meal)">
+                <label class="filter-meals-select col-xs-offset-1 col-xs-10">
+                  {{ meal }} <input class="filter-check-checkbox" type="checkbox" name="selectedMeals[]" value="{{ meal }}" ng-checked="select_meals.indexOf(meal) > -1" ng-click="toggleMeals(meal)">
                 </label>
               </div>
             </div>
@@ -62,17 +62,17 @@
         </div>
 
         <!-- filter by cuisine -->
-        <div class="filter-cuisine-wrapper row">
-          <div class="filter-cuisine-heading col-xs-offset-4 col-xs-4">Cuisine:
+        <div class="filter-check-wrapper row">
+          <div class="filter-check-heading col-xs-offset-4 col-xs-4">Cuisine:
           </div>
           <div class="col-xs-offset-3 col-xs-1">
-            <button class="filter-cuisine-button btn btn-default" ng-click="cuisineCollapsed = !cuisineCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': cuisineCollapsed, 'glyphicon-chevron-up': !cuisineCollapsed}"></i></button>
+            <button class="filter-check-button btn btn-default" ng-click="cuisineCollapsed = !cuisineCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': cuisineCollapsed, 'glyphicon-chevron-up': !cuisineCollapsed}"></i></button>
           </div>
-          <div class="filter-cuisine-selection col-xs-12">
+          <div class="filter-check-selection col-xs-12">
             <div class="row row-condensed">
               <div ng-repeat="cuisine in cuisines" class="col-xs-4">
-                <label class="filter-cuisine-select">
-                  {{ cuisine }} <input class="filter-cuisine-checkbox" type="checkbox" name="selectedCuisines[]" value="{{ cuisine }}" ng-checked="select_cuisines.indexOf(cuisine) > -1" ng-click="toggleCuisines(cuisine)">
+                <label class="filter-check-select">
+                  {{ cuisine }} <input class="filter-check-checkbox" type="checkbox" name="selectedCuisines[]" value="{{ cuisine }}" ng-checked="select_cuisines.indexOf(cuisine) > -1" ng-click="toggleCuisines(cuisine)">
                 </label>
               </div>
             </div>
@@ -80,8 +80,8 @@
             <div collapse="cuisineCollapsed">
               <div class="well well-lg row">
                 <div ng-repeat="cuisine in cuisines_hidden" class="col-xs-4">
-                  <label class="filter-cuisine-select">
-                    {{ cuisine }} <input class="filter-cuisine-checkbox" type="checkbox" name="selectedCuisines[]" value="{{ cuisine }}" ng-checked="select_cuisines.indexOf(cuisine) > -1" ng-click="toggleCuisines(cuisine)">
+                  <label class="filter-check-select">
+                    {{ cuisine }} <input class="filter-check-checkbox" type="checkbox" name="selectedCuisines[]" value="{{ cuisine }}" ng-checked="select_cuisines.indexOf(cuisine) > -1" ng-click="toggleCuisines(cuisine)">
                   </label>
                 </div>
               </div> 
@@ -90,18 +90,18 @@
         </div>
 
         <!-- filter by occasion -->
-        <div class="filter-occasion-wrapper row">
-          <div class="filter-occasion-heading col-xs-offset-5 col-xs-3">Occasion:
+        <div class="filter-check-wrapper row">
+          <div class="filter-check-heading col-xs-offset-4 col-xs-4">Occasion:
           </div>
           <div class="col-xs-offset-3 col-xs-1">
-            <button class="filter-occasion-button btn btn-default" ng-click="occasionCollapsed = !occasionCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': occasionCollapsed, 'glyphicon-chevron-up': !occasionCollapsed}"></i></button>
+            <button class="filter-check-button btn btn-default" ng-click="occasionCollapsed = !occasionCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': occasionCollapsed, 'glyphicon-chevron-up': !occasionCollapsed}"></i></button>
           </div>
-          <div class="filter-occasion-selection col-xs-12">
+          <div class="filter-check-selection col-xs-12">
             <div class="row row-condensed">
 
               <div ng-repeat="occasion in occasions" class="col-xs-4">
-                <label class="filter-occasion-select">
-                  {{ occasion }} <input class="filter-occasion-checkbox" type="checkbox" name="selectedOccasions[]" value="{{ occasion }}" ng-checked="select_occasions.indexOf(occasion) > -1" ng-click="toggleOccasions(occasion)">
+                <label class="filter-check-select">
+                  {{ occasion }} <input class="filter-check-checkbox" type="checkbox" name="selectedOccasions[]" value="{{ occasion }}" ng-checked="select_occasions.indexOf(occasion) > -1" ng-click="toggleOccasions(occasion)">
                 </label>
               </div>
             </div>
@@ -109,8 +109,8 @@
             <div collapse="occasionCollapsed">
               <div class="well well-lg row">
                 <div ng-repeat="occasion in occasions_hidden" class="col-xs-4">
-                  <label class="filter-occasion-select">
-                    {{ occasion }} <input class="filter-occasion-checkbox" type="checkbox" name="selectedOccasions[]" value="{{ occasion }}" ng-checked="select_occasions.indexOf(occasion) > -1" ng-click="toggleOccasions(occasion)">
+                  <label class="filter-check-select">
+                    {{ occasion }} <input class="filter-check-checkbox" type="checkbox" name="selectedOccasions[]" value="{{ occasion }}" ng-checked="select_occasions.indexOf(occasion) > -1" ng-click="toggleOccasions(occasion)">
                   </label>
                 </div>
               </div>
@@ -119,16 +119,16 @@
         </div>
 
         <!-- filter by course -->
-        <div class="filter-course-wrapper row">
-          <div class="filter-course-heading col-xs-offset-5 col-xs-3">Course:
+        <div class="filter-check-wrapper row">
+          <div class="filter-check-heading col-xs-offset-4 col-xs-4">Course:
           </div>
           <div class="col-xs-offset-3 col-xs-1">
-            <button class="filter-course-button btn btn-default" ng-click="courseCollapsed = !courseCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': courseCollapsed, 'glyphicon-chevron-up': !courseCollapsed}"></i></button>
+            <button class="filter-check-button btn btn-default" ng-click="courseCollapsed = !courseCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': courseCollapsed, 'glyphicon-chevron-up': !courseCollapsed}"></i></button>
           </div>
-          <div class="filter-course-selection col-xs-12">
+          <div class="filter-check-selection col-xs-12">
             <div class="row row-condensed">
               <div ng-repeat="course in courses" class="col-xs-4">
-                <label class="filter-course-select">
+                <label class="filter-check-select">
                   {{ course }} <input class="filter-course-checkbox" type="checkbox" name="selectedCourses[]" value="{{ course }}" ng-checked="select_courses.indexOf(course) > -1" ng-click="toggleCourses(course)">
                 </label>
               </div>
@@ -137,7 +137,7 @@
             <div collapse="courseCollapsed">
               <div class="well well-lg row">
                 <div ng-repeat="course in courses_hidden" class="col-xs-4">
-                  <label class="filter-course-select">
+                  <label class="filter-check-select">
                     {{ course }} <input class="filter-course-checkbox" type="checkbox" name="selectedCourses[]" value="{{ course }}" ng-checked="select_courses.indexOf(course) > -1" ng-click="toggleCourses(course)">
                   </label>
                 </div>
@@ -145,7 +145,6 @@
             </div>
           </div>
         </div>
-
         
       </div>
 

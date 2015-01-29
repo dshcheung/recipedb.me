@@ -1,14 +1,14 @@
 @import "variables";
 
 .body {
-  background: $color-raisin;
+  background: white;
   // background: $texture3;
   position: relative;
   min-height: 100%;
 }
 
 .nav-header {
-  height: 40px;
+  height: 60px;
 }
 
 .main-body {
@@ -18,12 +18,15 @@
 }
 
 .navbar-background {
-  background: transparent;
+  background: white;
+  box-shadow: 2px 2px 15px #111;
+  // opacity: 0.5;
   // border: 1px solid $color-light-yellow;
 }
 
 .nav-header .navbar-logo {
   font-family: $font-title;
+  opacity: 1;
   color: $color-raisin;
   display: inline-block;
   text-decoration: none;
@@ -45,9 +48,9 @@
   background: #888;
   height: 30px;
   margin: 0;
-  border-bottom: 4px solid $color-raisin;
-  border-left: 4px solid $color-raisin;
-  border-right: 4px solid $color-raisin;
+  // border-bottom: 4px solid $color-raisin;
+  // border-left: 4px solid $color-raisin;
+  // border-right: 4px solid $color-raisin;
   &:hover {
     font-size: 105%;
     border-bottom: 4px solid white;
@@ -169,7 +172,7 @@
 }
 
 .container.footer-background {
-  background: $color-orange;
+  background: transparent;
   width: 100%;
   border: 1px solid $color-light-yellow;
   height: 35px;

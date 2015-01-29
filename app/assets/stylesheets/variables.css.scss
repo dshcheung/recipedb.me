@@ -1,3 +1,8 @@
+$color-airbnb-font: #565a5c;
+$color-airbnb-red: #ff5a5f;
+$color-airbnb-grey: #dce0e0;
+$color-airbnb-buttongrey: #edefed;
+$color-airbnb-buttonbordergrey: #dce0e0;
 $color-light-yellow: #FFF888;
 $color-dirt-yellow: #E8AC06;
 $color-orange: #FF8508;
@@ -23,6 +28,7 @@ $texture-notebook-pattern: linear-gradient(
       rgba(0.1, 0.1, 0.1, 0.1), 
       rgba(0.1, 0.1, 0.1, 0)
 ), image-url('notebook_@2X.png');
+$default-image: image-url('recipedb-default-img.png') no-repeat;
 
 // $font4: 'Yellowtail', cursive;
 // $font4: 'Bad Script', cursive;
@@ -34,5 +40,6 @@ $font-title: 'Satisfy', cursive;
 $font-timing: 'Damion', cursive;
 $font-footer: 'Architects Daughter', cursive;
 // $font4: 'Cookie', cursive;
+$font-airbnb: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 
 

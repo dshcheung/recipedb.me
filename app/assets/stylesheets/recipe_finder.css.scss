@@ -2,16 +2,36 @@
 
 .recipe-finder-body {
   // background: white;
-  background: $texture-food-pattern;
+  background: transparent;
+  color: $color-airbnb-font;
+  font-family: $font-airbnb;
   // height: 580px;
-  border-radius: 10px;
+  // border-radius: 10px;
   padding: 20px;
-  box-shadow: 8px 8px 25px #111;
+  // box-shadow: 8px 8px 25px #111;
+}
+
+.ui-slider-range.ui-widget-header.ui-corner-all {
+  background: $color-airbnb-red;
+  color: $color-airbnb-font;
+  border: 2px solid #f5f5f5;
+  height: 6px;
+  top: -2px;
+}
+
+#slider-range.ui-slider.ui-slider-horizontal {
+  height: 10px;
+  border: 4px solid #f5f5f5;
+  .ui-slider-handle {
+    top: -8px;
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .my-recipes-body {
   // background: white;
-  background: $texture-wood-pattern;
+  background: transparent;
   // height: 580px;
   border-radius: 10px;
   padding: 20px;
@@ -20,13 +40,16 @@
 
 .row .recipe-finder-title {
   font-size: 28px;
-  font-family: Helvetica;
-  text-shadow: 1px 1px 2px #666;
+  // font-family: Helvetica;
+  // text-shadow: 1px 1px 2px #666;
   display: inline-block;
 }
 
 .create-recipe-button.btn.btn-warning {
   display: inline-block;
+  // color: $color-airbnb-font;
+  background: $color-airbnb-red;
+  font-family: $font-airbnb;
 }
 
 .row .my-recipes-title {
@@ -37,7 +60,7 @@
 
 .row .filter-tags {
   // background: $color-light-yellow;
-  background: transparent;
+  // background: transparent;
   // opacity: 0.7;
   min-height: 25px;
   padding: 5px;
@@ -49,31 +72,41 @@
 
     margin: 0;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
   }
   .filter-tag {
-    margin: 0 10px 0 0;
-    border: 1px solid #ABABAB;
+    margin: 5px 10px 0 0;
+    border: 1px solid $color-airbnb-buttonbordergrey;
     // border-radius: 15px;
     // box-shadow: 1px 1px 2px #666;
-    font-family: Helvetica;
-    padding: 0 5px 0 5px;
-    background: #CCC;
+    // font-family: Helvetica;
+    padding: 5px 10px;
+    background: $color-airbnb-buttongrey;
+    color: $color-airbnb-font;
     // max-width: 88px;
     display: inline-block;
     &:hover {
-      background: $color-red;
-      color: black;
+      color: $color-airbnb-red;
+      // color: black;
       cursor: pointer;
     }
   }
 }
 .add-keyword-button.btn.btn-default {
   height: 30px;
-  padding: 4px 12px;
-  background: #ccc;
-  border: 1px solid #999;
+  // padding: 4px 12px;
+  // background: $color-airbnb-grey;
+  // border: 1px solid #999;
+
+  font-weight: normal;
+  // border: 1px solid $color-airbnb-grey2;
+  border: 1px solid $color-airbnb-buttonbordergrey;
+  background: $color-airbnb-buttongrey;
+  color: $color-airbnb-font;
+  padding: 5px 10px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 .filter-meals-select .row {
@@ -85,134 +118,69 @@
   background: white;
   // background: #CCC;
   // padding: 0;
-  border: 1px solid #BBB;
+  border: 1px solid $color-airbnb-grey;
   .filter-keyword-wrapper {
     // font-weight: bold;
     padding: 10px 0;
     font-size: 14px;
     text-align: center;
-    border-bottom: 1px solid #BBB;
+    border-bottom: 1px solid $color-airbnb-grey;
     .filter-keyword-search {
       // margin: 5px 0;
+      height:32px;
       // text-align: center;
-    }
-  }
-  .filter-meals-wrapper {
-    border-bottom: 1px solid #BBB;
-    padding: 5px 0;
-    .filter-meals-heading {
-      // display: inline-block;
-      margin: 5px 0;
-      font-weight: bold;
-      font-size: 18px;
-      text-align: center;
-    }
-    .filter-meals-select {
-      padding: 5px 0;
-      margin: 1px 0;
-      display: block;
-      text-align: center;
-      font-size: 14px;
-      vertical-align: middle;
-      border: 1px solid #999;
-      // border-radius: 10px;
-      background: #ccc;
-      font-weight: normal;
-      &:hover {
-        cursor: pointer;
-      }
-      .filter-meals-checkbox {
-        height: 20px;
-        width: 20px;
-        vertical-align: middle;
-      }
-    }
-    .filter-meals-showmore {
-      // margin: 5px 0;
-      // font-weight: bold;
-      font-size: 12px;
-      text-align: center;
-    }
-    .filter-all-options {
-      font-size: 12px;
-      // padding: 0;
-    }
-  }
-  .filter-course-wrapper {
-    padding: 5px 0 0 0;
-    border-bottom: 1px solid #BBB;
-    .filter-course-heading {
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .filter-course-selection{
-      padding:0;
-      margin: 0;
-      .row.row-condensed {
-        padding:0;
-        margin: 0;
-      }
-      hr {
-        margin: 0;
-        padding: 0;
-      }
-    }
-    .filter-course-select {
-      display: block;
-      font-size: 14px;
-      text-align: center;
-      vertical-align: middle;
-      font-weight: normal;
-      &:hover {
-        cursor: pointer;
-      }
-      .filter-course-checkbox {
-        height: 20px;
-        width: 20px;
-        vertical-align: middle;
-      }
-    }
-    .filter-course-button {
-      text-align: center;
-      padding: 8px 0;
-      // float: middle;
-      background: white;
-      border:0;
-      &:focus {
-        outline:0;
-      }
-    }
-    .well.well-lg {
-      // padding: 10px 0 -5px 0;
-      padding: 0;
     }
   }
   .filter-time-wrapper {
     padding: 5px 0;
-    border-bottom: 1px solid #BBB;
+    border-bottom: 1px solid $color-airbnb-grey;
     .filter-time-heading {
       // display: inline-block;
       // margin: 5px 0;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 14px;
       // text-align: center;
-      .filter-time-range {
+      #amount.filter-time-range {
         // text-align: center;
+        color: $color-airbnb-red;
         font-size: 14px;
       }
     }
   }
-  .filter-cuisine-wrapper {
+  .filter-meals-wrapper {
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid $color-airbnb-grey;
+    .filter-meals-heading {
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+    .filter-meals-selection {
+      padding:0;
+      margin: 0;
+      text-align: center;
+      .filter-meals-select {
+        font-weight: normal;
+        // border: 1px solid $color-airbnb-grey2;
+        border: 1px solid $color-airbnb-buttonbordergrey;
+        background: $color-airbnb-buttongrey;
+        padding: 5px 10px;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+    }
+  }
+  .filter-check-wrapper {
     padding: 5px 0 0 0;
-    border-bottom: 1px solid #BBB;
-    .filter-cuisine-heading {
+    border-bottom: 1px solid $color-airbnb-grey;
+    .filter-check-heading {
       // display: inline-block;
       // margin: 6px 0 0 0;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 14px;
       text-align: center;
     }
-    .filter-cuisine-selection{
+    .filter-check-selection{
       padding:0;
       margin: 0;
       .row.row-condensed {
@@ -224,7 +192,7 @@
         padding: 0;
       }
     }
-    .filter-cuisine-select {
+    .filter-check-select {
       padding: 6px 0 0 0;
       margin: 0;
       display: block;
@@ -235,66 +203,16 @@
       &:hover {
         cursor: pointer;
       }
-      .filter-cuisine-checkbox {
+      .filter-check-checkbox {
         height: 20px;
         width: 20px;
         vertical-align: middle;
       }
     }
-    .filter-cuisine-button {
+    .filter-check-button {
       text-align: center;
       background: white;
       padding: 8px 0;
-      border:0;
-      &:focus {
-        outline:0;
-      }
-    }
-    .well.well-lg {
-      // padding: 10px 0 -5px 0;
-      padding: 0;
-    }
-  }
-
-  .filter-occasion-wrapper {
-    padding: 5px 0 0 0;
-    border-bottom: 1px solid #BBB;
-    .filter-occasion-heading {
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .filter-occasion-selection{
-      padding:0;
-      margin: 0;
-      .row.row-condensed {
-        padding:0;
-        margin: 0;
-      }
-      hr {
-        margin: 0;
-        padding: 0;
-      }
-    }
-    .filter-occasion-select {
-      display: block;
-      font-size: 14px;
-      text-align: center;
-      vertical-align: middle;
-      font-weight: normal;
-      &:hover {
-        cursor: pointer;
-      }
-      .filter-occasion-checkbox {
-        height: 20px;
-        width: 20px;
-        vertical-align: middle;
-      }
-    }
-    .filter-occasion-button {
-      text-align: center;
-      padding: 8px 0;
-      // float: middle;
-      background: white;
       border:0;
       &:focus {
         outline:0;
