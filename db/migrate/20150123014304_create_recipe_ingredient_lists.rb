@@ -7,6 +7,7 @@ class CreateRecipeIngredientLists < ActiveRecord::Migration
       t.string :unit_us
       t.integer :amount_metric
       t.string :unit_metric
+      t.string :display_name
 
       t.timestamps
     end

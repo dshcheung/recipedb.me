@@ -154,13 +154,16 @@ def get_recipe_indepth_info(url, new_recipe)
     ingredients_elements = html_doc.css('#liIngredient')
     ingredients_elements.each do |element|
       #extract allrecipe_ingredient_code
-      #find or create ar_ingredient_code entry and create ingredient_sub_name
+      #find or create ar_ingredient_code entry and create ingredient_name
       ar_ingredient_code = element.attr('data-ingredientid').to_i
       ar_ingredient_code_existence = find_create_ingredient(ar_ingredient_code)
 
-      #extract ingredient_sub_name and create entry
-      ingredient_sub_name = element.css('#lblIngName').text
-      ar_ingredient_code_existence.ingredient_names.create(ingredient_sub_name: ingredient_sub_name)
+      #extract ingredient_name and create entry
+      ingredient_name = element.css('#lblIngName').text.gsub('  ', ' ').gsub('-', ' ').downcase
+      if ingredient_name != nil
+        ingredient_name = ingredient_name.squish
+      end
+      ar_ingredient_code_existence.ingredient_names.create(sub_name: ingredient_name)
 
       #extract amount_metric
       amount_metric = element.attr("data-grams")
@@ -182,7 +185,7 @@ def get_recipe_indepth_info(url, new_recipe)
       end
 
       #create recipe_ingredient_list entry
-      new_recipe.recipe_ingredient_lists.create(ingredient_id: ar_ingredient_code_existence.id, amount_us: amount_us, unit_us: unit_us, amount_metric: amount_metric, unit_metric: "gram")
+      new_recipe.recipe_ingredient_lists.create(ingredient_id: ar_ingredient_code_existence.id, amount_us: amount_us, unit_us: unit_us, amount_metric: amount_metric, unit_metric: "gram", display_name: ingredient_name)
     end
   rescue OpenURI::HTTPError => e
     case rescue_me(e)
