@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150124141305) do
   end
 
   create_table "ingredient_names", force: true do |t|
-    t.string   "ingredient_sub_name"
+    t.string   "sub_name"
     t.integer  "ingredient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150124141305) do
     t.string   "unit_us"
     t.integer  "amount_metric"
     t.string   "unit_metric"
+    t.string   "display_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
