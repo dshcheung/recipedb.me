@@ -25,9 +25,14 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', function(
 
   var ingredients = [];
   $scope.addIngredient = function() {
-    ingredient["number"] = $scope.newPostTitle;
-    ingredient["unit"] = $scope.newPostUrl;
-    ingredient["ingredient"] = $scope.newPostUrl;
+    console.log($scope.addIngredNumber,$scope.addIngredUnit,$scope.addIngredName);
+
+    ingredient["number"] = $scope.addIngredNumber;
+    ingredient["unit"] = $scope.addIngredUnit;
+    ingredient["ingredient"] = $scope.addIngredName;
+    ingredients.push(ingredient);
+    $('.added-ingredients tbody').prepend("<tr class='added-ingredient'><td class='col-xs-2'></td><td class='col-xs-1'>-</td><td class='col-xs-1'>"+$scope.addIngredNumber+"</td><td class='col-xs-2'>"+$scope.addIngredUnit+"</td><td class='col-xs-6'>"+$scope.addIngredName+"</td></tr>");
+
   }
 
   // cuisine = "";

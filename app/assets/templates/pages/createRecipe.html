@@ -33,36 +33,54 @@
       <label for="Ingredients">Add Ingredients</label>
       <div class="row">
         <div class="col-xs-2">
-          <input type="text" class="form-control" placeholder="#">
+          <input ng-model="addIngredNumber" type="text" class="form-control input-sm" placeholder="#">
         </div>
         <div class="col-xs-3">
-          <select class="form-control">
+          <select ng-model="addIngredUnit" class="form-control input-sm">
             <option val="0"></option>
             <option ng-repeat="measurment in measurements">  {{ measurment }}
             </option>
           </select>
         </div>
         <div class="col-xs-5">
-          <input type="text" class="form-control" placeholder="Ingredient">
+          <input ng-model="addIngredName" type="text" class="form-control input-sm" placeholder="Ingredient">
         </div>
-        <div class="btn btn-warning col-xs-1">+
-        </div>
+        <button type="submit" class="btn btn-warning col-xs-1">+
+        </button>
       </div>
+      <table class="added-ingredients table">
+        <tbody>
+          <tr class="added-ingredient">
+            <td class="col-xs-2"></td>
+            <td class="col-xs-1">-</td>
+            <td class="col-xs-1">1</td>
+            <td class="col-xs-2">gram(s)</td>
+            <td class="col-xs-6">cocaine</td>
+          </tr>
+          <!-- <tr class="added-ingredient">
+            <td class="col-xs-2"></td>
+            <td class="col-xs-1">-</td>
+            <td class="col-xs-1">1</td>
+            <td class="col-xs-2">gram(s)</td>
+            <td class="col-xs-6">cocaine</td>
+          </tr> -->
+        </tbody>
+      </table>
     </div>
 
     <div class="form-group create-timeframe">
       <div class="col-xs-4">
-        <label>Preparation Tie:</label>
+        <label>Preparation Time:</label>
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-xs-3">
             <p>Hours</p>
-            <select class="form-control">
+            <select class="input-sm">
               <option ng-repeat="hour in hours">{{ hour }}</option>
             </select>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-offset-1 col-xs-3">
             <p>Minutes</p>
-            <select class="form-control">
+            <select class="input-sm">
               <option ng-repeat="minute in minutes">{{ minute }}</option>
             </select>
           </div>
@@ -71,15 +89,15 @@
       <div class="col-xs-4">
         <label>Cooking Time:</label>
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-xs-3">
             <p>Hours</p>
-            <select class="form-control">
+            <select class="input-sm">
               <option ng-repeat="hour in hours">{{ hour }}</option>
             </select>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-offset-1 col-xs-3">
             <p>Minutes</p>
-            <select class="form-control">
+            <select class="input-sm">
               <option ng-repeat="minute in minutes">{{ minute }}</option>
             </select>
           </div>
@@ -88,15 +106,15 @@
       <div class="col-xs-4">
         <label>Rest Time:</label>
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-xs-3">
             <p>Hours</p>
-            <select class="form-control">
+            <select class="input-sm">
               <option ng-repeat="hour in hours">{{ hour }}</option>
             </select>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-offset-1 col-xs-3">
             <p>Minutes</p>
-            <select class="form-control">
+            <select class="input-sm">
               <option ng-repeat="minute in minutes">{{ minute }}</option>
             </select>
           </div>

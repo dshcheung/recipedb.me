@@ -65,20 +65,21 @@ $font-footer: 'Architects Daughter', cursive;
   min-height: 25px;
   padding: 5px;
   .filter-tags-heading {
-    font-family: $font-items;
+    font-family: Helvetica;
     color: $color-raisin;
-    text-decoration: underline;
+    font-size: 14px;
+    // text-decoration: underline;
     display: inline-block;
   }
   .filter-tag {
     margin: 0 10px 0 0;
-    border: 1px solid black;
-    border-radius: 15px;
-    box-shadow: 1px 1px 2px #666;
-    font-family: $font-items;
+    border: 1px solid #ABABAB;
+    // border-radius: 15px;
+    // box-shadow: 1px 1px 2px #666;
+    font-family: Helvetica;
     padding: 0 5px 0 5px;
-    background: $color-light-yellow;
-    max-width: 88px;
+    background: #CCC;
+    // max-width: 88px;
     display: inline-block;
     &:hover {
       background: $color-red;
@@ -86,9 +87,9 @@ $font-footer: 'Architects Daughter', cursive;
       cursor: pointer;
     }
   }
-  .add-recipe-button {
-    
-  }
+}
+.add-keyword-button {
+  height: 30px;
 }
 
 .filter-meals-select .row {
@@ -102,14 +103,14 @@ $font-footer: 'Architects Daughter', cursive;
   // padding: 0;
   border: 1px solid #BBB;
   .filter-keyword-wrapper {
-    font-weight: bold;
-    padding: 5px 0;
+    // font-weight: bold;
+    padding: 10px 0;
     font-size: 14px;
     text-align: center;
     border-bottom: 1px solid #BBB;
     .filter-keyword-search {
       // margin: 5px 0;
-      text-align: center;
+      // text-align: center;
     }
   }
   .filter-meals-wrapper {
@@ -157,22 +158,26 @@ $font-footer: 'Architects Daughter', cursive;
     padding: 5px 0 0 0;
     border-bottom: 1px solid #BBB;
     .filter-course-heading {
-      // display: inline-block;
-      margin: 5px 0 0 0;
       font-weight: bold;
       font-size: 18px;
-      text-align: center;
+    }
+    .filter-course-selection{
+      padding:0;
+      margin: 0;
+      .row.row-condensed {
+        padding:0;
+        margin: 0;
+      }
+      hr {
+        margin: 0;
+        padding: 0;
+      }
     }
     .filter-course-select {
-      padding: 6px 0;
-      // margin: 5px 0;
       display: block;
       font-size: 14px;
       text-align: center;
       vertical-align: middle;
-      // border: 1px solid #999;
-      // border-radius: 10px;
-      // background: #ccc;
       font-weight: normal;
       &:hover {
         cursor: pointer;
@@ -193,6 +198,10 @@ $font-footer: 'Architects Daughter', cursive;
         outline:0;
       }
     }
+    .well.well-lg {
+      // padding: 10px 0 -5px 0;
+      padding: 0;
+    }
   }
   .filter-time-wrapper {
     padding: 5px 0;
@@ -210,10 +219,22 @@ $font-footer: 'Architects Daughter', cursive;
     border-bottom: 1px solid #BBB;
     .filter-cuisine-heading {
       // display: inline-block;
-      margin: 6px 0 0 0;
+      // margin: 6px 0 0 0;
       font-weight: bold;
       font-size: 18px;
       text-align: center;
+    }
+    .filter-cuisine-selection{
+      padding:0;
+      margin: 0;
+      .row.row-condensed {
+        padding:0;
+        margin: 0;
+      }
+      hr {
+        margin: 0;
+        padding: 0;
+      }
     }
     .filter-cuisine-select {
       padding: 6px 0 0 0;
@@ -222,9 +243,6 @@ $font-footer: 'Architects Daughter', cursive;
       font-size: 14px;
       text-align: center;
       vertical-align: middle;
-      // border: 1px solid #999;
-      // border-radius: 10px;
-      // background: #ccc;
       font-weight: normal;
       &:hover {
         cursor: pointer;
@@ -243,6 +261,60 @@ $font-footer: 'Architects Daughter', cursive;
       &:focus {
         outline:0;
       }
+    }
+    .well.well-lg {
+      // padding: 10px 0 -5px 0;
+      padding: 0;
+    }
+  }
+
+  .filter-occasion-wrapper {
+    padding: 5px 0 0 0;
+    border-bottom: 1px solid #BBB;
+    .filter-occasion-heading {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .filter-occasion-selection{
+      padding:0;
+      margin: 0;
+      .row.row-condensed {
+        padding:0;
+        margin: 0;
+      }
+      hr {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .filter-occasion-select {
+      display: block;
+      font-size: 14px;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: normal;
+      &:hover {
+        cursor: pointer;
+      }
+      .filter-occasion-checkbox {
+        height: 20px;
+        width: 20px;
+        vertical-align: middle;
+      }
+    }
+    .filter-occasion-button {
+      text-align: center;
+      padding: 8px 0;
+      // float: middle;
+      background: white;
+      border:0;
+      &:focus {
+        outline:0;
+      }
+    }
+    .well.well-lg {
+      // padding: 10px 0 -5px 0;
+      padding: 0;
     }
   }
 }

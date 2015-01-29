@@ -17,11 +17,55 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
 
     // $scope.current_user = data.current_user;
     
-    console.log(data);
+    // console.log(data);
     // console.log(status);
     // console.log(xhr);
   });
   
   $scope.cuisineCollapsed = true;
   $scope.courseCollapsed = true;
+  $scope.occasionCollapsed = true;
+
+  $scope.courses = ["Appetizers","Mains","Desserts","Drinks","Sides","Soups","Salads","Bread"];
+
+  $scope.courses_hidden = ["Cheese Appetizers","Your Mains","Jim Desserts","Hot Drinks","Fruit Sides"," Cold Soups","Hot Salads","Fried Bread"];
+
+  $scope.cuisines = ["African","Asian","Oceania","Canadian","European","Latin American","Middle Eastern"];
+
+  $scope.cuisines_hidden = ["Chinese","Italian","French","Malaysian"];
+
+  $scope.occasions = ["Events and Gatherings", "BBQ and Grilling", "Everyday"];
+
+  $scope.occasions_hidden = ["Christmas", "Thanksgiving", "Easter", "Super Bowl®", "Labor Day", "Valentine's Day", "4th of July", "New Year's", "Halloween", "Mother's Day", "Mardi Gras", "Memorial Day", "Father's Day", "Hanukkah", "St. Patrick's Day", "Cinco de Mayo", "Passover", "Rosh Hashanah", "Ramadan", "Purim", "Lunar New Year", "Kwanzaa", "Veteran's Day"];
+
+  var keywords = [];
+
+  $scope.moreKeyword = function() {
+    // keywords.push($scope.addKeyword);
+    console.log($scope.addKeyword);
+    keywords.push($scope.addKeyword);
+    $('.keyword-collection').prepend("<div ng-submit='removeKeyword' class='filter-tag'>"+$scope.addKeyword+"<i class='fa fa-times'></i></div>");
+    console.log(keywords);
+    $('.filter-keyword-search').val('');
+  }
+
+  $scope.lessKeyword = function() {
+    // keywords.push($scope.addKeyword);
+    console.log($scope.removeKeyword);
+    keywords.push($scope.removeKeyword);
+    console.log(keywords);
+  }
+  // $scope.lessKeyword = function() {
+  //   console.log($scope.removeKeyword);
+  //   keywords.push($scope.removeKeyword);
+  // }
+  $scope.all_keywords = keywords;
+  // var request = {
+  //   "ingredients": "array of strings",
+  //   "meal": "array of strings",
+  //   "timeframe": "a number",
+  //   "cuisine": "array of strings",
+  //   "course": "array of strings"
+  // };
+
 }]);
