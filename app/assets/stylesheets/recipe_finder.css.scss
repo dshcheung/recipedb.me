@@ -1,32 +1,4 @@
-$color-light-yellow: #FFF888;
-$color-dirt-yellow: #E8AC06;
-$color-orange: #FF8508;
-$color-red: #E83505;
-$color-raisin: #5C0B22;
-$texture-picnic-pattern: linear-gradient(
-      rgba(0, 0, 0, 0.2), 
-      rgba(0, 0, 0, 0.2)
-    ), image-url('lunch_1x.jpg');
-$texture-food-pattern: linear-gradient(
-      rgba(0, 0, 0, 0.1), 
-      rgba(0, 0, 0, 0.1)
-), image-url('food.png');
-$texture-marble-pattern: image-url('congruent_outline.png');
-$texture-wood-pattern: linear-gradient(
-      rgba(0.2, 0.2, 0.2, 0.1), 
-      rgba(0.2, 0.2, 0.2, 0.1)
-), image-url('retina_wood.png');
-
-// $font4: 'Yellowtail', cursive;
-// $font4: 'Bad Script', cursive;
-// $font4: 'Marck Script', cursive;
-$font-items: 'Bitter', serif;
-// $font4: 'Lobster', cursive;
-// $font4: 'Special Elite', cursive;
-$font-title: 'Satisfy', cursive;
-// $font4: 'Damion', cursive;
-$font-footer: 'Architects Daughter', cursive;
-// $font4: 'Cookie', cursive;
+@import "variables";
 
 .recipe-finder-body {
   // background: white;
@@ -50,6 +22,11 @@ $font-footer: 'Architects Daughter', cursive;
   font-size: 28px;
   font-family: Helvetica;
   text-shadow: 1px 1px 2px #666;
+  display: inline-block;
+}
+
+.create-recipe-button.btn.btn-warning {
+  display: inline-block;
 }
 
 .row .my-recipes-title {
@@ -65,11 +42,15 @@ $font-footer: 'Architects Daughter', cursive;
   min-height: 25px;
   padding: 5px;
   .filter-tags-heading {
-    font-family: Helvetica;
-    color: $color-raisin;
-    font-size: 14px;
-    // text-decoration: underline;
-    display: inline-block;
+    // font-family: Helvetica;
+    // color: $color-raisin;
+    // font-size: 14px;
+    // display: inline-block;
+
+    margin: 0;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
   }
   .filter-tag {
     margin: 0 10px 0 0;
@@ -83,13 +64,16 @@ $font-footer: 'Architects Daughter', cursive;
     display: inline-block;
     &:hover {
       background: $color-red;
-      color: $color-light-yellow;
+      color: black;
       cursor: pointer;
     }
   }
 }
-.add-keyword-button {
+.add-keyword-button.btn.btn-default {
   height: 30px;
+  padding: 4px 12px;
+  background: #ccc;
+  border: 1px solid #999;
 }
 
 .filter-meals-select .row {
@@ -208,10 +192,14 @@ $font-footer: 'Architects Daughter', cursive;
     border-bottom: 1px solid #BBB;
     .filter-time-heading {
       // display: inline-block;
-      margin: 5px 0;
+      // margin: 5px 0;
       font-weight: bold;
       font-size: 18px;
-      text-align: center;
+      // text-align: center;
+      .filter-time-range {
+        // text-align: center;
+        font-size: 14px;
+      }
     }
   }
   .filter-cuisine-wrapper {
