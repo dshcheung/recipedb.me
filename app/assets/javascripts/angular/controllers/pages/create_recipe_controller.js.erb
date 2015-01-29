@@ -32,7 +32,6 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', function(
     ingredient["ingredient"] = $scope.addIngredName;
     ingredients.push(ingredient);
     $('.added-ingredients tbody').prepend("<tr class='added-ingredient'><td class='col-xs-2'></td><td class='col-xs-1'>-</td><td class='col-xs-1'>"+$scope.addIngredNumber+"</td><td class='col-xs-2'>"+$scope.addIngredUnit+"</td><td class='col-xs-6'>"+$scope.addIngredName+"</td></tr>");
-
   }
 
   // cuisine = "";

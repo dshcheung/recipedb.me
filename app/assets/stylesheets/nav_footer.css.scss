@@ -12,7 +12,7 @@
 }
 
 .main-body {
-  margin: 90px 0 0 0;
+  padding: 90px 0 90px 0;
   width: 100%;
   min-height:640px;
 }
@@ -31,7 +31,7 @@
   display: inline-block;
   text-decoration: none;
   &:hover{
-    color: $color-red;
+    color: $color-airbnb-red;
   }
 }
 
@@ -79,6 +79,10 @@
           box-shadow: none;
 }
 
+.fa.fa-home {
+  font-size: 28px;
+}
+
 .nav-form .form-group .form-control{
   // padding: 0 0 0 5px;
   border: 1px solid $color-light-yellow;
@@ -94,15 +98,16 @@
 .nav-form .form-group {
   display: inline-block;
   .form-control {
-    background: $color-raisin;
-    color: $color-light-yellow;
-    border: 2px solid $color-orange;
+    color: $color-airbnb-font;
+    border: 2px solid $color-raisin;
     // padding-bottom: 2px;
     &:focus {
-      border: 1px solid transparent;
+      // background: $color-airbnb-red;
+      color: $color-raisin;
+      // border: 1px solid transparent;
       outline: 0;
-      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $color-red;
-              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $color-red;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $color-airbnb-red;
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $color-airbnb-red;
     }
   }
 }
@@ -123,10 +128,10 @@
     }
   }
   .dropdown-menu {
-    background: $color-dirt-yellow;
+    background: $color-airbnb-buttongrey;
     float: right;
   }
-  .fa.fa-cutlery,
+  .fa.fa-heart,
   .fa.fa-sliders,
   .fa.fa-shopping-cart {
     color: $color-raisin;
@@ -135,7 +140,7 @@
     margin:0 15px 0 0;
     z-index: -1;
     &:hover {
-      color: $color-red;
+      color: $color-airbnb-red;
       text-decoration: none;
     }
   }
@@ -151,9 +156,10 @@
     text-align: center;
   }
 }
-.registration-modal-button {
+.registration-modal-button.btn {
   text-align: center;
   font-size: 16px;
+  background: $color-airbnb-red;
 }
 
 .login-modal-title {
@@ -166,24 +172,26 @@
     text-align: center;
   }
 }
-.login-modal-button {
+.login-modal-button.btn {
   text-align: center;
   font-size: 16px;
+  background: $color-airbnb-red;
 }
 
 .container.footer-background {
-  background: transparent;
+  background: white;
   width: 100%;
-  border: 1px solid $color-light-yellow;
+  box-shadow: 2px 2px 15px #111;
+  // border: 1px solid $color-light-yellow;
   height: 35px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   // padding-top: 5px;
-  // margin: 80px 0 0 0;
+  // margin: 60px 0 0 0;
 }
 
 .footer-disclaimer {
-  font-family: Helvetica;
+  font-family: $font-airbnb;
   color: $color-raisin;
   font-size: 14px;
 }

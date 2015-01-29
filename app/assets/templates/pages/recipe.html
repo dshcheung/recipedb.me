@@ -5,16 +5,22 @@
     <div class="row">
       <!-- <div class="recipe-image col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-6 col-md-5"> -->
       <div class="recipe-button-row row">
-        <button class="col-xs-offset-2 col-xs-2 btn btn-danger recipe-back-button">Back <i class="fa fa-step-backward"></i></button>
-        <button class="col-xs-offset-1 col-xs-2 btn btn-warning recipe-back-button">Save <i class="fa fa-bookmark-o"></i></button>
-        <button class="col-xs-offset-1 col-xs-2 btn btn-success recipe-back-button">Shopping <i class="fa fa-shopping-cart"></i></button>
+        <div class="col-xs-4 recipe-back-button">
+          <button class="col-xs-12 btn btn-danger">Back <i class="fa fa-step-backward"></i></button>
+        </div>
+        <div class="col-xs-4 recipe-back-button">
+          <button class="col-xs-12 btn btn-warning">Save <i class="fa fa-bookmark-o"></i></button>
+        </div>
+        <div class="col-xs-4 recipe-back-button">
+          <button class="col-xs-12 btn btn-success">Shopping <i class="fa fa-shopping-cart"></i></button>
+        </div>
       </div>
-      <div class="recipe-profile col-xs-6 col-sm-4">
+      <div class="recipe-profile col-xs-12 col-sm-4">
         <img ng-repeat="image in images" class="image-responsive recipe-image" ng-src="{{ image }}" alt="Recipe image">
         <!-- assets/recipedb-default-img.png -->
       </div>
       <!-- </div> -->
-      <div class="recipe-info col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-5">
+      <div class="recipe-info col-xs-12 col-sm-8">
         <div class="recipe-div1 row">
           <p class="recipe-title">{{ name }}</p>
           <p class="recipe-author">By {{ author }}</p>
@@ -27,7 +33,7 @@
         <div class="recipe-div3 row">
           <p class="recipe-ingredients">Ingredients
             <ul>
-              <li ng-repeat="ingredient in ingredients" class="recipe-ingredient">{{ ingredient }}</li>
+              <li ng-repeat="ingredient in ingredients" class="recipe-ingredient">{{ ingredient.amountUS }}{{ ingredient.unitUS }}</li>
             </ul>
           </p>
         </div>
@@ -54,7 +60,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 

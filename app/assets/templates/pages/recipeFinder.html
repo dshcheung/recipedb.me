@@ -6,9 +6,12 @@
     <div class="row">
       <!-- <div class="recipe-finder-title col-xs-5">Recipe Finder
       </div> -->
-      <a class="create-recipe-button btn btn-warning col-xs-12" href="/#/create">
+      <a class="create-recipe-button btn btn-default col-xs-6" href="/#/create">
         Add a Recipe
       </a>
+      <button ng-click="toggleFinder()" data-status="open" class="hide-finder-button btn btn-default col-xs-6">
+        Toggle Finder
+      </button>
       <!-- <button ng-click="clickMe()"></button> -->
     </div>
 
@@ -24,7 +27,8 @@
               <!-- list of keywords -->
               <div ng-click="lessKeyword($index)" ng-repeat='keyword in search_parameters.keywords track by $index' class='filter-tag'>
                 {{ keyword }}
-                <i class='fa fa-times'></i>
+                <!-- <i class='fa fa-times'></i> -->
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
             </div>
           </div>
@@ -35,14 +39,13 @@
 
         <!-- filter by meals -->
         <div class="filter-meals-wrapper row">
-          <div class="filter-meals-heading col-xs-12">
-              Meal:
+          <div class="filter-meals-heading col-xs-12"> <i class="fa fa-cutlery"></i> Meals 
           </div>
           <div class="filter-meals-selection col-xs-12">
             <div class="row row-condensed">
               <div ng-repeat="meal in meals" class="col-xs-4">
-                <label class="filter-meals-select col-xs-offset-1 col-xs-10">
-                  {{ meal }} <input class="filter-check-checkbox" type="checkbox" name="selectedMeals[]" value="{{ meal }}" ng-checked="select_meals.indexOf(meal) > -1" ng-click="toggleMeals(meal)">
+                <label class="filter-meals-select col-xs-offset-1 col-xs-10 pull-left">
+                  {{ meal }} <input class="checkbox pull-right filter-check-checkbox" type="checkbox" name="selectedMeals[]" value="{{ meal }}" ng-checked="select_meals.indexOf(meal) > -1" ng-click="toggleMeals(meal)">
                 </label>
               </div>
             </div>
@@ -51,8 +54,8 @@
 
         <!-- filter by time -->
         <div class="filter-time-wrapper row">
-            <label class="filter-time-heading col-xs-offset-5 co-xs-4" for="amount">Timeframe:
-              <input class="filter-time-range" type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            <label class="filter-time-heading col-xs-offset-5 co-xs-4" for="amount"><i class="fa fa-clock-o"></i> Timeframe 
+              <input class="filter-time-range" type="text" id="amount" readonly style="border:0">
             </label>
           <div class="filter-time-scroll col-xs-12">
             <p>
@@ -63,7 +66,7 @@
 
         <!-- filter by cuisine -->
         <div class="filter-check-wrapper row">
-          <div class="filter-check-heading col-xs-offset-4 col-xs-4">Cuisine:
+          <div class="filter-check-heading col-xs-offset-4 col-xs-4"><i class="fa fa-globe"></i> Cuisines 
           </div>
           <div class="col-xs-offset-3 col-xs-1">
             <button class="filter-check-button btn btn-default" ng-click="cuisineCollapsed = !cuisineCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': cuisineCollapsed, 'glyphicon-chevron-up': !cuisineCollapsed}"></i></button>
@@ -91,7 +94,7 @@
 
         <!-- filter by occasion -->
         <div class="filter-check-wrapper row">
-          <div class="filter-check-heading col-xs-offset-4 col-xs-4">Occasion:
+          <div class="filter-check-heading col-xs-offset-4 col-xs-4"><i class="fa fa-birthday-cake"></i> Occasions
           </div>
           <div class="col-xs-offset-3 col-xs-1">
             <button class="filter-check-button btn btn-default" ng-click="occasionCollapsed = !occasionCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': occasionCollapsed, 'glyphicon-chevron-up': !occasionCollapsed}"></i></button>
@@ -120,7 +123,7 @@
 
         <!-- filter by course -->
         <div class="filter-check-wrapper row">
-          <div class="filter-check-heading col-xs-offset-4 col-xs-4">Course:
+          <div class="filter-check-heading col-xs-offset-4 col-xs-4"><i class="fa fa-glass"></i> Courses
           </div>
           <div class="col-xs-offset-3 col-xs-1">
             <button class="filter-check-button btn btn-default" ng-click="courseCollapsed = !courseCollapsed"><i class="pull-up glyphicon" ng-class="{'glyphicon-chevron-down': courseCollapsed, 'glyphicon-chevron-up': !courseCollapsed}"></i></button>
@@ -129,7 +132,7 @@
             <div class="row row-condensed">
               <div ng-repeat="course in courses" class="col-xs-4">
                 <label class="filter-check-select">
-                  {{ course }} <input class="filter-course-checkbox" type="checkbox" name="selectedCourses[]" value="{{ course }}" ng-checked="select_courses.indexOf(course) > -1" ng-click="toggleCourses(course)">
+                  {{ course }} <input class="filter-check-checkbox" type="checkbox" name="selectedCourses[]" value="{{ course }}" ng-checked="select_courses.indexOf(course) > -1" ng-click="toggleCourses(course)">
                 </label>
               </div>
             </div>
@@ -138,7 +141,7 @@
               <div class="well well-lg row">
                 <div ng-repeat="course in courses_hidden" class="col-xs-4">
                   <label class="filter-check-select">
-                    {{ course }} <input class="filter-course-checkbox" type="checkbox" name="selectedCourses[]" value="{{ course }}" ng-checked="select_courses.indexOf(course) > -1" ng-click="toggleCourses(course)">
+                    {{ course }} <input class="filter-check-checkbox" type="checkbox" name="selectedCourses[]" value="{{ course }}" ng-checked="select_courses.indexOf(course) > -1" ng-click="toggleCourses(course)">
                   </label>
                 </div>
               </div>
@@ -151,11 +154,13 @@
     <!-- search results -->
       <div class="filter-results col-xs-12 col-sm-5">
         <div ng-repeat="recipe in recipes" class="filter-result">
-          <a href="/#/recipes/{{ recipe.id }}"><img class="filter-result-image" src="{{ recipe.images[0] }}"></a>
-          <div class="filter-result-info">
+          <div class="col-xs-2">
+            <a href="/#/recipes/{{ recipe.id }}"><img class="filter-result-image" src="{{ recipe.images[0] }}"></a>
+          </div>
+            <div class="filter-result-info col-xs-10">
             <a href="/#/recipes/{{ recipe.id }}"><p class="filter-result-title">{{ recipe.title }}</p></a>
             <p class="filter-result-author">By {{ recipe.author }}</p>
-            <i class="fa fa-bookmark-o"></i>
+            <i class="fa fa-heart-o pull-right"></i>
           </div>
         </div>
       </div>
