@@ -1,35 +1,7 @@
-$color-light-yellow: #FFF888;
-$color-dirt-yellow: #E8AC06;
-$color-orange: #FF8508;
-$color-red: #E83505;
-$color-raisin: #5C0B22;
-$texture-picnic-pattern: linear-gradient(
-      rgba(0, 0, 0, 0.2), 
-      rgba(0, 0, 0, 0.2)
-    ), image-url('lunch_1x.jpg');
-$texture-food-pattern: linear-gradient(
-      rgba(0, 0, 0, 0.45), 
-      rgba(0, 0, 0, 0.45)
-), image-url('food.png');
-$texture-marble-pattern: image-url('congruent_outline.png');
-$texture-wood-pattern: linear-gradient(
-      rgba(0.2, 0.2, 0.2, 0.1), 
-      rgba(0.2, 0.2, 0.2, 0.1)
-), image-url('retina_wood.png');
-
-// $font4: 'Yellowtail', cursive;
-// $font4: 'Bad Script', cursive;
-// $font4: 'Marck Script', cursive;
-$font-items: 'Bitter', serif;
-// $font4: 'Lobster', cursive;
-// $font4: 'Special Elite', cursive;
-$font-title: 'Satisfy', cursive;
-// $font4: 'Damion', cursive;
-$font-footer: 'Architects Daughter', cursive;
-// $font4: 'Cookie', cursive;
+@import "variables";
 
 .body {
-  background: $color-raisin;
+  background: white;
   // background: $texture3;
   position: relative;
   min-height: 100%;
@@ -46,12 +18,15 @@ $font-footer: 'Architects Daughter', cursive;
 }
 
 .navbar-background {
-  background: $color-orange;
-  border: 1px solid $color-light-yellow;
+  background: white;
+  box-shadow: 2px 2px 15px #111;
+  // opacity: 0.5;
+  // border: 1px solid $color-light-yellow;
 }
 
 .nav-header .navbar-logo {
   font-family: $font-title;
+  opacity: 1;
   color: $color-raisin;
   display: inline-block;
   text-decoration: none;
@@ -73,9 +48,9 @@ $font-footer: 'Architects Daughter', cursive;
   background: #888;
   height: 30px;
   margin: 0;
-  border-bottom: 4px solid $color-raisin;
-  border-left: 4px solid $color-raisin;
-  border-right: 4px solid $color-raisin;
+  // border-bottom: 4px solid $color-raisin;
+  // border-left: 4px solid $color-raisin;
+  // border-right: 4px solid $color-raisin;
   &:hover {
     font-size: 105%;
     border-bottom: 4px solid white;
@@ -166,17 +141,17 @@ $font-footer: 'Architects Daughter', cursive;
   }
 }
 
-.login-modal-title {
+.registration-modal-title {
   text-align: center;
   font-size: 12px;
 }
-.login-modal-inputs {
+.registration-modal-inputs {
   font-size: 16px;
   .input-fields {
     text-align: center;
   }
 }
-.login-modal-button {
+.registration-modal-button {
   text-align: center;
   font-size: 16px;
 }
@@ -197,7 +172,7 @@ $font-footer: 'Architects Daughter', cursive;
 }
 
 .container.footer-background {
-  background: $color-orange;
+  background: transparent;
   width: 100%;
   border: 1px solid $color-light-yellow;
   height: 35px;

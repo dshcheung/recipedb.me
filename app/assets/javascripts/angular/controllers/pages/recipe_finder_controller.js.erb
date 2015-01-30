@@ -1,5 +1,7 @@
 app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
 
+  $scope.search_parameters = {};
+
   $http.get('/recipes.json').success(function(data, status, xhr){
     $scope.recipes = data.recipes;
     // $scope.name = data.title;
@@ -17,11 +19,167 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
 
     // $scope.current_user = data.current_user;
     
-    console.log(data);
+    // console.log(data);
     // console.log(status);
     // console.log(xhr);
   });
   
-  $scope.cuisineCollapsed = true;
-  $scope.courseCollapsed = true;
+    // toggle hidden checkboxes
+  {
+    $scope.cuisineCollapsed = true;
+    $scope.courseCollapsed = true;
+    $scope.occasionCollapsed = true;
+  }
+
+    // data to populate recipe finder
+  {
+    $scope.meals = ["Breakfast","Lunch","Dinner"]
+
+    $scope.cuisines = ["African","Asian","Oceania","European","Latin American","Middle Eastern"];
+
+    $scope.cuisines_hidden = ["North African", "South African","Korean", "Chinese", "Japanese", "Bangladeshi", "Indian", "Iranian", "Pakistani", "Filipino", "Indonesian", "Malaysian", "Thai", "Vietnamese","Canadian","Italian", "Portuguese", "Scandinavian", "Austrian", "Belgian", "Dutch", "Eastern European", "French", "Swiss", "German", "Greek", "UK and Ireland", "Spanish","Caribbean", "Mexican","South American","Lebanese", "Israeli", "Turkish"]
+
+    $scope.courses = ["Appetizers","Mains","Desserts","Drinks","Sides","Soups","Salads","Bread"];
+
+    $scope.courses_hidden = ["Dips and Spreads", "Snack", "Wraps and Rolls Appetizers", "Antipasto", "Bread and Pastry Appetizers", "Crackers", "Deviled Eggs", "Pasta Appetizers", "Pastry Appetizers", "Dill Pickles and Sweet Pickles", "Pickled Eggs", "Popcorn", "Slow Cooker Appetizers", "Snacks for Kids", "Spicy Appetizers", "Bean and Pea Appetizers", "Cheese Appetizers", "Fruit Appetizers", "Meat and Poultry Appetizers", "Mushroom Appetizers", "Nuts and Seeds Appetizers", "Olive Appetizers", "Seafood Appetizers", "Vegetable Appetizers","Yeast Bread", "Bread Machine", "Holiday Bread", "Pastries", "Pizza Dough and Crusts", "Quick Bread","Deep Fried Main", "Eggplant Parmesan", "Steaks and Chops", "Stir-Fry", "Stuffed Main", "Burgers", "Calzones", "Casseroles", "Roasts", "Curry Main", "Meatballs", "Meatloaf", "Pizza", "Quiche", "Savory Pies", "Seafood Main", "Main Dish Soups and Stews", "Ribs", "Sandwiches and Wraps", "Main Dish Salads", "Pasta Main","Candy", "Cobbler", "Mousse", "Pie", "Crisps and Crumbles", "Custards and Puddings", "Cake", "Cookies", "Chocolate Desserts", "Frozen Desserts", "Fruit Desserts", "Nut Desserts", "Specialty Desserts", "Frostings and Fillings","Smoothies", "Coffee Drinks", "Eggnog", "Hot Chocolate", "Juice", "Lemonade", "Liqueurs", "Punch", "Shakes and Floats", "Shots", "Mocktails", "Mulled Wine", "Sangria", "Slushies", "Tea Drinks", "Beer Drinks", "Cider", "Cocktails","Beef and Pork Salads", "Coleslaw", "Curry Salad", "Egg Salad", "Fruit Salads", "Green Salads", "Grain Salads", "Pasta Salad", "Potato Salad", "Seafood Salads", "Taco Salad", "Vegetable Salads", "Bean and Pea Salads", "Waldorf Salad","Potato Side", "Applesauce", "Bean and Pea Side", "Curry Side", "Dumplings", "Fries", "Grain Side", "Rice Side", "Sauces and Condiments", "Side Dish Casseroles", "Stuffing and Dressing", "Vegetable Side", "Grits", "Polenta","Bisque", "Broth and Stock", "Chili", "Chowder", "Soup", "Stew"].sort();
+
+    $scope.occasions = ["Events and Gatherings", "BBQ and Grilling", "Everyday"];
+
+    $scope.occasions_hidden = ["Christmas", "Thanksgiving", "Easter", "Super Bowl®", "Labor Day", "Valentine's Day", "4th of July", "New Year's", "Halloween", "Mother's Day", "Mardi Gras", "Memorial Day", "Father's Day", "Hanukkah", "St. Patrick's Day", "Cinco de Mayo", "Passover", "Rosh Hashanah", "Ramadan", "Purim", "Lunar New Year", "Kwanzaa", "Veteran's Day"];
+  }
+
+    // keyword search
+  { 
+    $scope.search_parameters.keywords = [];
+    $scope.moreKeyword = function() {
+      if ($scope.addKeyword != "" && $scope.addKeyword != undefined) {
+        console.log($scope.addKeyword);
+        $scope.search_parameters.keywords.push($scope.addKeyword);
+        $('.filter-keyword-search').val('');
+      } else {
+        $('.filter-keyword-search').val('');
+        // needs notification of empty string
+      }
+      // console.log($scope.search_parameters.keywords);
+      console.log($scope.search_parameters);
+    }
+    $scope.lessKeyword = function(index) {
+      $scope.search_parameters.keywords.splice(index,1);
+    }
+  }
+
+    // meals search
+  {
+    $scope.search_parameters.select_meals = [];
+
+    // toggle selection for a given fruit by name
+    $scope.toggleMeals = function toggleMeals(meal) {
+      var idx = $scope.search_parameters.select_meals.indexOf(meal);
+
+      // is currently selected
+      if (idx > -1) {
+        $scope.search_parameters.select_meals.splice(idx, 1);
+      }
+
+      // is newly selected
+      else {
+        $scope.search_parameters.select_meals.push(meal);
+      }
+      // console.log($scope.search_parameters.select_meals);
+    };
+  }
+
+    // time slider function
+  {
+    $scope.search_parameters.timeframe = [0,120];
+
+    $(function() {
+      $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: 2400,
+        values: [ 0, 120 ],
+        slide: function( event, ui ) {
+          $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] + " mins" );
+          time_range_start = ui.values[ 0 ];
+          time_range_end = ui.values[ 1 ];
+          // console.log($scope.time_range_start +"-"+ $scope.time_range_end);
+          // $scope.search_parameters.timeframe = $( "#slider-range" ).slider( "values");
+          // console.log($scope.search_parameters);
+
+          $scope.search_parameters.timeframe = ui.values;
+          console.log($scope.search_parameters);
+        }
+      });
+      // initial slider values
+      $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ) +" mins" );
+    });
+
+    // $scope.clickMe = function() {
+    //   console.log($( "#slider-range" ).slider( "values"));
+    // };
+
+    // var time_range_start = 0;
+    // var time_range_end = $( "#slider-range" ).slider( "values",1 );
+    
+  }
+
+    // cuisine search
+  {
+    $scope.select_cuisines = [];
+
+    // toggle selection for a given fruit by name
+    $scope.toggleCuisines = function toggleCuisines(cuisine) {
+      var idx = $scope.select_cuisines.indexOf(cuisine);
+      // is currently selected
+      if (idx > -1) {
+        $scope.select_cuisines.splice(idx, 1);
+      }
+      // is newly selected
+      else {
+        $scope.select_cuisines.push(cuisine);
+      }
+      // console.log($scope.select_cuisines);
+    };
+  }
+
+    // course search
+  {
+    $scope.search_parameters.select_courses = [];
+
+    // toggle selection for a given fruit by name
+    $scope.toggleCourses = function toggleCourses(course) {
+      var idx = $scope.search_parameters.select_courses.indexOf(course);
+      // is currently selected
+      if (idx > -1) {
+        $scope.search_parameters.select_courses.splice(idx, 1);
+      }
+      // is newly selected
+      else {
+        $scope.search_parameters.select_courses.push(course);
+      }
+      // console.log($scope.select_courses);
+    };
+  }
+
+    // occasions search
+  {
+    $scope.search_parameters.select_occasions = [];
+
+    // toggle selection for a given fruit by name
+    $scope.toggleOccasions = function toggleOccasions(occasion) {
+      var idx = $scope.search_parameters.select_occasions.indexOf(occasion);
+      // is currently selected
+      if (idx > -1) {
+        $scope.search_parameters.select_occasions.splice(idx, 1);
+      }
+      // is newly selected
+      else {
+        $scope.search_parameters.select_occasions.push(occasion);
+      }
+      console.log($scope.search_parameters.select_occasions);
+    };
+  }
+
+
 }]);

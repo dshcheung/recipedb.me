@@ -4,4 +4,48 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', function(
   //   $scope.recipes = data.recipes;
   //   console.log(data);
   // });
+
+  var measures = ["dash(s)","pod(s)","container(s)","packet(s)", "ounce(s)", "sheet(s)", "basket(s)", "slab(s)","dash(es)","milliliter(s)","x","shell(s)","rack(s)","quart(s)","bunch(es)","serving(s)","chunk(s)","clove(s)","liter(s)","twist(s)","gallon(s)","grind(s)","stalk(s)","tub(s)","piece(s)","pint(s)","feet","prune(s)","fluid","shot(s)","envelope(s)","gram(s)","bottle(s)","slice(s)","inch(es)","pound(s)","oz","count(s)","tray(s)","kilogram(s)","jar(s)","leaf(s)","head(s)","round(s)","whole","squeeze(s)","wedge(s)","pat(s)","spash(es)","bone(s)","pounch(es)","hank(s)","loaf(s)","large","bag(s)","spear(s)","pinch(es)","strip(s)","thin","roll(s)","medium","jumbo","bite","square(s)","cube(s)","rib(s)","sprig(s)","drop(s)","crown(s)","cup(s)","leg(s)","stick(s)","tablespoon(s)","scoop(s)","link(s)","package(s)","mini","sleeve(s)","ear(s)","bulb(s)","box(es)"]
+
+  var hourArray = [];
+  for (var i = 0; i < 24 ; i++) {
+    hourArray.push(i);
+  }
+
+  var minuteArray = [];
+  for (var i = 0; i < 60 ; i++) {
+    minuteArray.push(i);
+  }
+
+  $scope.hours = hourArray;
+  $scope.minutes = minuteArray;
+
+  $scope.measurements = measures.sort()
+  // console.log($scope.measurements);
+
+  var ingredients = [];
+  $scope.addIngredient = function() {
+    console.log($scope.addIngredNumber,$scope.addIngredUnit,$scope.addIngredName);
+
+    ingredient["number"] = $scope.addIngredNumber;
+    ingredient["unit"] = $scope.addIngredUnit;
+    ingredient["ingredient"] = $scope.addIngredName;
+    ingredients.push(ingredient);
+    $('.added-ingredients tbody').prepend("<tr class='added-ingredient'><td class='col-xs-2'></td><td class='col-xs-1'>-</td><td class='col-xs-1'>"+$scope.addIngredNumber+"</td><td class='col-xs-2'>"+$scope.addIngredUnit+"</td><td class='col-xs-6'>"+$scope.addIngredName+"</td></tr>");
+
+  }
+
+  // cuisine = "";
+  // something.forEach(){
+  //   cusine += something.tile + "/"
+  // }
+
+  // $http.get.....
+
+  //   var data = {
+  //     cusine: cuisuine
+  //   }
+
+
+
 }]);

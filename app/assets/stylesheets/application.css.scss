@@ -14,8 +14,10 @@
  *= require_self
  */
  
+@import "variables";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "jquery.sliders";
+@import "jquery-ui";
+@import "jquery-ui/slider";

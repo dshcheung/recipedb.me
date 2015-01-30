@@ -18,5 +18,6 @@
 //= require angular-resource
 //= require angular-route
 //= require angular-ui-bootstrap-tpls
-//= require jquery.sliders
+//= require jquery-ui
+//= require jquery-ui/slider
 //= require_tree .
