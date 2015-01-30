@@ -1,12 +1,13 @@
 <div class="registration-modal-title modal-header row">
     <h3 class="modal-title">Registration</h3>
 </div>
+
 <div class="registration-modal-inputs modal-body row">
-    <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Email">
-    <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Username">
-    <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Password">
-    <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Confirm Password">
-</div>
-<div class="modal-footer row">
+  <form ng-controller="UserCtrl" ng-submit="userSignUp()">
+    <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Email" ng-model="signupEmail">
+    <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Username" ng-model="signupUsername">
+    <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Password" ng-model="signupPassword">
+    <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Confirm Password" ng-model="signupPasswordConfirm">
     <button class="registration-modal-button col-xs-offset-1 col-xs-10 btn btn-warning" ng-click="ok()">Sign Up</button>
+  </form>
 </div>

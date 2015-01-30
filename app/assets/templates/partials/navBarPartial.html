@@ -15,14 +15,14 @@
 
       <div class="nav-icons">
         
-        <a href="" popover-popup-delay="000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button">Username<span class="caret"></span></a>
+        <a ng-if="!user.status"href="" popover-popup-delay="000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button">Username<span class="caret"></span></a>
+        <a ng-if="user.status"href="" popover-popup-delay="000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button">{{ user.username }}<span class="caret"></span></a>
         <a href="" popover-popup-delay="000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="visible-xs dropdown-toggle" data-toggle="dropdown" role="button"><i class="fa fa-user"></i><span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
-
-          <li><a href="" ng-controller="RegModalCtrl" ng-click="open('lg')">Sign Up</a></li>
-          <li><a href="" ng-controller="LoginModalCtrl" ng-click="open('sm')">Login</a></li>
-          <li><a href="">Edit Profile</a></li>
-          <li><a href="">Logout</a></li>
+          <li ng-if="!user.status"><a href="" ng-controller="RegModalCtrl" ng-click="open('sm')">Sign Up</a></li>
+          <li ng-if="!user.status"><a href="" ng-controller="LoginModalCtrl" ng-click="open('sm')">Login</a></li>
+          <li ng-if="user.status"><a href="">Edit Profile</a></li>
+          <li ng-if="user.status"><a ng-controller="UserCtrl" ng-click="userSignOut()"href="">Logout</a></li>
         </ul>
 
         <a href="">

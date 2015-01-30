@@ -1,0 +1,55 @@
+app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
+
+  $scope.user = UserServices;
+
+  $http.get("/user/any").success(function(response,status){
+    console.log(response);
+    UserServices.status = response.signedIn;
+    UserServices.username = response.username;
+  });
+
+  $scope.userSignUp = function(){
+    var data = {
+      user: {
+        username: $scope.signupUsername,
+        email: $scope.signupEmail,
+        password: $scope.signupPassword,
+        password_confirmation: $scope.signupPasswordConfirm
+      },
+      commit: "Sign Up"
+    };
+
+    $http.post("/users/",data).success(function(response,status){
+      UserServices.status = true;
+      console.log(response);
+    }).error(function(response,status){
+      console.log(response);
+    });
+  };
+
+  $scope.userSignOut = function(){
+    $http.delete("/users/sign_out/").success(function(response,status){
+      console.log(response);
+      UserServices.status = false;
+    }).error(function(response,status){
+      cnsole.log(response);
+    });
+  };
+
+  $scope.userSignIn = function (){
+    var data = {
+      user: {
+        email: $scope.loginEmail,
+        password: $scope.loginPassword
+      },
+      commit: "Sign In"
+    };
+
+    $http.post("/users/sign_in/", data).success(function(response, status){
+      console.log(response);
+      UserServices.status = true;
+    }).error(function(response,status){
+      console.log(response);
+    });
+  };
+}]);

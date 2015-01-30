@@ -26,7 +26,8 @@ app.config(['$routeProvider', function($routeProvider){
 app.directive('mainNavBar', function(){
   return {
     restrict: 'E',
-    templateUrl: "<%= asset_path('partials/navBarPartial.html') %>"
+    templateUrl: "<%= asset_path('partials/navBarPartial.html') %>",
+    controller: "UserCtrl"
   }
 })
 

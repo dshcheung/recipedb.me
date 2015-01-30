@@ -1,8 +1,9 @@
-app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
 
   $http.get('/recipes.json').success(function(data, status, xhr){
     $scope.recipes = data.recipes;
     console.log(data);
   });
-}]);
 
+  $scope.user = UserServices;
+}]);
