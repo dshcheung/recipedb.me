@@ -5,5 +5,8 @@ Rails.application.routes.draw do
   
   root 'static_pages#index'
 
-  resources :recipes
+  get '/recipes', to: 'recipes#index'
+  get '/recipes/:id', to: 'recipes#show'
+  post '/recipes_search', to: 'recipes#search'
+  
 end
