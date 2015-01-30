@@ -48,20 +48,48 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     $scope.occasions_hidden = ["Christmas", "Thanksgiving", "Easter", "Super Bowl®", "Labor Day", "Valentine's Day", "4th of July", "New Year's", "Halloween", "Mother's Day", "Mardi Gras", "Memorial Day", "Father's Day", "Hanukkah", "St. Patrick's Day", "Cinco de Mayo", "Passover", "Rosh Hashanah", "Ramadan", "Purim", "Lunar New Year", "Kwanzaa", "Veteran's Day"];
   }
 
+    // toggle finder button
+    $scope.toggleFinder = function() {
+      if ($(".hide-finder-button").attr('data-status')=="open"){
+        $("div.filter").hide();
+        $(".hide-finder-button").attr('data-status',"closed");
+        console.log($(".hide-finder-button").attr('data-status'));
+      } else {
+        $("div.filter").show();
+        $(".hide-finder-button").attr('data-status',"open");
+        console.log($(".hide-finder-button").attr('data-status'));
+      }
+    }
+
     // keyword search
   { 
     $scope.search_parameters.keywords = [];
+
+    var checkDuplicates = function (keyword,array) {
+      for (var i= 0 ; i < array.length ; i++) {
+        if (keyword == array[i]) {
+          return true;
+        }
+      }
+    };
+
     $scope.moreKeyword = function() {
-      if ($scope.addKeyword != "" && $scope.addKeyword != undefined) {
-        console.log($scope.addKeyword);
-        $scope.search_parameters.keywords.push($scope.addKeyword);
-        $('.filter-keyword-search').val('');
+      if ($scope.addKeyword != undefined && $scope.addKeyword != "") {
+        if (checkDuplicates($scope.addKeyword,$scope.search_parameters.keywords) == true) {
+          $scope.addKeyword = '';
+        } else {
+          $scope.search_parameters.keywords.push($scope.addKeyword);
+          $scope.addKeyword = '';
+          console.log($scope.addKeyword);
+          // console.log(checkDuplicates($scope.addKeyword,$scope.search_parameters.keywords));
+          console.log($scope.search_parameters.keywords);
+        }
       } else {
-        $('.filter-keyword-search').val('');
+        $scope.addKeyword = '';
         // needs notification of empty string
       }
       // console.log($scope.search_parameters.keywords);
-      console.log($scope.search_parameters);
+      // console.log($scope.search_parameters);
     }
     $scope.lessKeyword = function(index) {
       $scope.search_parameters.keywords.splice(index,1);
@@ -70,22 +98,22 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
 
     // meals search
   {
-    $scope.search_parameters.select_meals = [];
+    $scope.search_parameters.categories = [];
 
     // toggle selection for a given fruit by name
     $scope.toggleMeals = function toggleMeals(meal) {
-      var idx = $scope.search_parameters.select_meals.indexOf(meal);
+      var idx = $scope.search_parameters.categories.indexOf(meal);
 
       // is currently selected
       if (idx > -1) {
-        $scope.search_parameters.select_meals.splice(idx, 1);
+        $scope.search_parameters.categories.splice(idx, 1);
       }
 
       // is newly selected
       else {
-        $scope.search_parameters.select_meals.push(meal);
+        $scope.search_parameters.categories.push(meal);
       }
-      // console.log($scope.search_parameters.select_meals);
+      // console.log($scope.search_parameters.categories);
     };
   }
 
@@ -126,37 +154,37 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
 
     // cuisine search
   {
-    $scope.select_cuisines = [];
+    $scope.search_parameters.categories = [];
 
     // toggle selection for a given fruit by name
     $scope.toggleCuisines = function toggleCuisines(cuisine) {
-      var idx = $scope.select_cuisines.indexOf(cuisine);
+      var idx = $scope.search_parameters.categories.indexOf(cuisine);
       // is currently selected
       if (idx > -1) {
-        $scope.select_cuisines.splice(idx, 1);
+        $scope.search_parameters.categories.splice(idx, 1);
       }
       // is newly selected
       else {
-        $scope.select_cuisines.push(cuisine);
+        $scope.search_parameters.categories.push(cuisine);
       }
-      // console.log($scope.select_cuisines);
+      // console.log($scope.search_parameters.categories);
     };
   }
 
     // course search
   {
-    $scope.search_parameters.select_courses = [];
+    $scope.search_parameters.categories = [];
 
     // toggle selection for a given fruit by name
     $scope.toggleCourses = function toggleCourses(course) {
-      var idx = $scope.search_parameters.select_courses.indexOf(course);
+      var idx = $scope.search_parameters.categories.indexOf(course);
       // is currently selected
       if (idx > -1) {
-        $scope.search_parameters.select_courses.splice(idx, 1);
+        $scope.search_parameters.categories.splice(idx, 1);
       }
       // is newly selected
       else {
-        $scope.search_parameters.select_courses.push(course);
+        $scope.search_parameters.categories.push(course);
       }
       // console.log($scope.select_courses);
     };
@@ -164,20 +192,20 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
 
     // occasions search
   {
-    $scope.search_parameters.select_occasions = [];
+    $scope.search_parameters.categories = [];
 
     // toggle selection for a given fruit by name
     $scope.toggleOccasions = function toggleOccasions(occasion) {
-      var idx = $scope.search_parameters.select_occasions.indexOf(occasion);
+      var idx = $scope.search_parameters.categories.indexOf(occasion);
       // is currently selected
       if (idx > -1) {
-        $scope.search_parameters.select_occasions.splice(idx, 1);
+        $scope.search_parameters.categories.splice(idx, 1);
       }
       // is newly selected
       else {
-        $scope.search_parameters.select_occasions.push(occasion);
+        $scope.search_parameters.categories.push(occasion);
       }
-      console.log($scope.search_parameters.select_occasions);
+      console.log($scope.search_parameters.categories);
     };
   }
 

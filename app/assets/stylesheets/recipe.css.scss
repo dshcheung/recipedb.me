@@ -9,22 +9,26 @@
   // box-shadow: 8px 8px 25px #111;
 }
 
-.recipe-button-row {
+.recipe-button-row.row {
   margin: 0 0 20px 0;
 }
 
 .recipe-back-button {
-  display: block;
+  display: inline-block;
+  padding: 0 3%;
   // box-shadow: 2px 2px 5px #111;
 }
 
 div.recipe-profile {
   // background: image-url('recipedb-default-img.png') no-repeat;
   // text-align: center;
-  background: transparent;
+  background: white;
   // border: 2px solid black;
   // margin: 0;
   // padding: 0;
+  overflow: hidden;
+  padding:0;
+  margin: 0;
   display: inline-block;
   // margin: 10px 0 0 0;
 }

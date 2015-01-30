@@ -35,7 +35,7 @@
   // height: 580px;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 8px 8px 25px #111;
+  box-shadow: 8px 8px 25px $color-airbnb-buttongrey;
 }
 
 .row .recipe-finder-title {
@@ -45,17 +45,18 @@
   display: inline-block;
 }
 
-.create-recipe-button.btn.btn-warning {
+.create-recipe-button.btn.btn-default {
   display: inline-block;
-  // color: $color-airbnb-font;
+  color: white;
   background: $color-airbnb-red;
   font-family: $font-airbnb;
+  box-shadow: 1px 1px 5px $color-airbnb-font;
 }
 
 .row .my-recipes-title {
   font-size: 28px;
   font-family: Helvetica;
-  text-shadow: 1px 1px 2px #666;
+  text-shadow: 1px 1px 2px $color-airbnb-buttongrey;
 }
 
 .row .filter-tags {
@@ -90,6 +91,10 @@
       color: $color-airbnb-red;
       // color: black;
       cursor: pointer;
+    }
+    .close {
+      margin: -2px 0 0 0;
+      padding: 0 0 0 5px;
     }
   }
 }
@@ -127,7 +132,10 @@
     border-bottom: 1px solid $color-airbnb-grey;
     .filter-keyword-search {
       // margin: 5px 0;
-      height:32px;
+      height:30px;
+      font-size: 14px;
+      color: $color-airbnb-font;
+      font-family: $font-airbnb;
       // text-align: center;
     }
   }
@@ -154,9 +162,10 @@
       font-weight: bold;
       font-size: 14px;
       text-align: center;
+      margin: 0 0 5px 0;
     }
     .filter-meals-selection {
-      padding:0;
+      padding: 6px 0 0 0;
       margin: 0;
       text-align: center;
       .filter-meals-select {
@@ -182,7 +191,7 @@
     }
     .filter-check-selection{
       padding:0;
-      margin: 0;
+      margin: 5px 0 0 0;
       .row.row-condensed {
         padding:0;
         margin: 0;
@@ -204,15 +213,25 @@
         cursor: pointer;
       }
       .filter-check-checkbox {
-        height: 20px;
-        width: 20px;
-        vertical-align: middle;
+        // left:1px;
+        // position: absolute;
+        font-size: 0.85em;
+        // text-align: center;
+        color: $color-airbnb-red;
+        height: 1.25em;
+        width: 1.25em;
+        // margin-bottom: -0.25em;
+        // vertical-align: top;
+        padding: 5px;
+        margin: 0 2px;
+        // line-height: normal;
+        border-radius: 2px;
       }
     }
     .filter-check-button {
       text-align: center;
       background: white;
-      padding: 8px 0;
+      padding: 0;
       border:0;
       &:focus {
         outline:0;
@@ -229,15 +248,15 @@
   // background: $color-dirt-yellow;
   padding: 0;
   // height: 50px;
-  border: 1px solid #ABABAB;
+  border: 1px solid $color-airbnb-buttonbordergrey;
   .filter-result {
     background: white;
-    height: 60px;
+    height: 140px;
     padding: 7px;
     border-bottom: 1px solid black;
     .filter-result-image {
-      width: 45px;
-      height: 45px;
+      width: 125px;
+      height: 125px;
       background: red;
       vertical-align: top;
       display: inline-block;
@@ -253,16 +272,19 @@
       padding: 0 10px 0 10px;
       text-overflow: clip;
       .filter-result-title {
-        display: inline-block;
-        font-size: 12px;
+        display: block;
+        font-size: 20px;
         margin: 0;
         padding: 0;
       }
       .filter-result-author {
-        display: inline;
-        font-size: 10px;
+        display: block;
+        font-size: 14px;
         margin: 0;
         padding: 0;
+      }
+      .fa.fa-heart-o {
+        font-size: 28px;
       }
     }
   }

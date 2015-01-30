@@ -1,8 +1,127 @@
-app.controller('HomeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
+app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'UserServices', function($interval,$scope, $http, $routeParams, UserServices){
 
-  $http.get('/recipes.json').success(function(data, status, xhr){
-    $scope.recipes = data.recipes;
-    console.log(data);
+  // $http.get('/recipes.json').success(function(data, status, xhr){
+  //   $scope.recipes = data.recipes;
+  //   console.log(data);
+  // });
+  $scope.recipeImages = [
+   "http://images.media-allrecipes.com/userphotos/140x140/01/50/14/1501426.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/89/40/1894088.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/07/18/1071810.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/97/05/970558.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/97/23/972396.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/03/67/36779.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/38/30/383089.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/98/05/980559.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/58/29/582918.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/37/17/1371743.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/37/34/373411.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/84/60/1846015.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/42/97/429764.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/65/63/1656307.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/38/69/386972.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/25/29/252939.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/21/16/211614.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/50/14/1501427.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/13/31/133197.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/97/25/972516.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/01/08/1010805.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/03/40/1034039.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/25/37/253795.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/21/65/216589.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/06/80/68073.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/84/33/1843345.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/12/63/1126306.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/32/80/1328084.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/82/29/822990.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/60/06/600655.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/81/56/815636.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/90/52/1905266.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/04/58/45846.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/05/72/57246.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/17/93/179332.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/00/50/5061.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/74/71/747148.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/90/68/906849.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/79/46/794610.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/07/88/78811.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/64/23/642303.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/95/96/959684.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/97/09/970958.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/87/02/870226.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/13/12/131284.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/24/99/249931.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/91/87/918773.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/13/59/135997.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/93/56/935629.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/04/45/1044520.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/36/55/365560.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/79/81/798159.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/09/13/1091315.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/95/90/1959019.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/12/73/1127322.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/74/77/747743.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/04/33/43320.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/62/27/622722.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/06/09/1060995.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/76/10/761098.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/07/02/1070278.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/05/06/50647.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/18/55/185523.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/91/06/1910661.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/67/52/675287.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/98/45/984513.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/90/88/908898.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/00/73/7395.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/62/30/623004.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/42/12/421248.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/84/00/840003.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/84/10/841035.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/29/79/297970.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/00/76/1007634.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/78/51/1785105.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/83/68/836815.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/00/99/9997.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/28/96/289632.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/96/12/961261.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/83/64/1836491.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/08/49/84924.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/00/06/1000669.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/52/23/522354.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/80/71/807159.jpg"
+ ]
+  // $scope.recipeImages = imageArray;
+  // $scope.test = "test";
+
+  var imageShuffle = $interval(function(){
+    changeImages();
+  }, 1000)
+
+  var changeImages = function () {
+    var value1 = Math.floor(Math.random()*($scope.recipeImages.length-40));
+    var value2 = Math.floor(Math.random()*($scope.recipeImages.length-40)+40);
+    if (value1 == value2) {
+      value2++;
+    }
+    console.log ('swapping '+value1+' by '+value2);
+    // console.log($scope.recipeImages);
+    var image1 = $scope.recipeImages[value1];
+    var image2 = $scope.recipeImages[value2];
+
+    // for (var i = 1; i > 0 ; i = i - 0.01) {
+    //   // $scope.recipeImages[value1].css("opacity",i);
+    //   console.log($scope.recipeImages[value1])
+    //   $($('.splash-item')[value1]).css("opacity",i);
+    // }
+    // $($('.splash-item')[value1]).css("opacity",1)
+    // $scope.recipeImages.splice(value1,1);
+    $scope.recipeImages.splice(value1,1,image2);
+    $scope.recipeImages.splice(value2,1,image1);
+  }
+
+  
+  $scope.$on("$destroy", function(){
+      $interval.cancel(imageShuffle);
   });
 
   $scope.user = UserServices;
