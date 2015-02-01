@@ -18,7 +18,7 @@ json.serving_size @recipe.original_servings_amount
 json.serving_type @recipe.original_servings_type
 json.instructions @recipe.instructions
 
-json.recipe @recipe.recipe_ingredient_lists do |ingredient|
+json.ingredients @recipe.recipe_ingredient_lists do |ingredient|
   json.amountUS ingredient.amount_us
   json.unitUS ingredient.unit_us
   json.amountMetric ingredient.amount_metric

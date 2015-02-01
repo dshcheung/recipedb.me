@@ -22,39 +22,43 @@
       <!-- </div> -->
       <div class="recipe-info col-xs-12 col-sm-8">
         <div class="recipe-div1 row">
-          <p class="recipe-title">{{ name }}</p>
-          <p class="recipe-author">By {{ author }}</p>
+          <p class="recipe-title">{{ recipe.name }}</p>
+          <p class="recipe-author">By {{ recipe.author.username }}</p>
         </div>
         <div class="recipe-div2 row">
           <p class="recipe-description-heading">Description:</p>
-          <p class="recipe-description">{{ description }}</p>
-          <p class="recipe-servings">~ {{ serving_size }} {{ serving_type }}</p>
+          <p class="recipe-description">{{ recipe.description }}</p>
+          <p class="recipe-servings">Makes <strong>{{ recipe.serving_size }}</strong> {{ recipe.serving_type }}</p>
         </div>
         <div class="recipe-div3 row">
           <p class="recipe-ingredients">Ingredients
             <ul>
-              <li ng-repeat="ingredient in ingredients" class="recipe-ingredient">{{ ingredient.amountUS }}{{ ingredient.unitUS }}</li>
+              <li ng-repeat="ingredient in recipe.ingredients" class="recipe-ingredient">{{ ingredient.amountUS }} {{ ingredient.unitUS }} {{ ingredient.name }}</li>
             </ul>
           </p>
         </div>
         <div class="recipe-div4 row">
-          <div class="recipe-preptime-heading col-xs-4">Preparation:<br>
-            <p class="recipe-preptime"> {{ prep_time }}</p> mins
+          <div class="recipe-preptime-heading col-xs-3">Preparation:<br>
+            <p class="recipe-preptime"> {{ recipe.prep_time }}</p> mins
           </div>
 
-          <div class="recipe-cooktime-heading col-xs-4">Cooking:<br> 
-            <p class="recipe-cooktime"> {{ cook_time }}</p> mins
+          <div class="recipe-cooktime-heading col-xs-3">Cooking:<br> 
+            <p class="recipe-cooktime"> {{ recipe.cook_time }}</p> mins
           </div>
 
-          <div class="recipe-resttime-heading col-xs-4">Rest:<br>
-            <p class="recipe-resttime">{{ rest_time }}</p> mins
+          <div class="recipe-resttime-heading col-xs-3">Rest:<br>
+            <p class="recipe-resttime">{{ recipe.rest_time }}</p> mins
+          </div>
+
+          <div class="recipe-resttime-heading col-xs-3">Total:<br>
+            <p class="recipe-resttime">{{ recipe.ready_time }}</p> mins
           </div>
         </div>
 
         <div class="recipe-div5 row">
           <p class="recipe-directions">Directions
             <ul>
-              <li ng-repeat="instruction in instructions" class="recipe-step">{{ instruction }}</li>
+              <li ng-repeat="instruction in recipe.instructions" class="recipe-step">{{ instruction }}</li>
             </ul>
           </p>
         </div>
