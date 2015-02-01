@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
 
     if search_params["categories"] != nil
       search_params["categories"].each do |category|
-        search_str = search_str + "sub_category like '%" + category + "%' and "
+        search_str = search_str + "category_id = " + category.to_s + " and "
       end
     end
 
