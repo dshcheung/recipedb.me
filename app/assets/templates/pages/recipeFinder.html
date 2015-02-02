@@ -169,7 +169,7 @@
           </div>
           <div class="filter-result-info col-xs-6 col-md-7 col-lg-8">
             <a href="/#/recipes/{{ recipe.id }}" class="filter-result-title">{{ recipe.title }}</a>
-            <a href="{{recipe.author.profile_url}}"><p class="filter-result-author">By <strong>{{ recipe.author.username }}</strong></p></a>
+            <a href="{{recipe.author.profile_url}}"><p class="filter-result-author">By <strong>{{ recipe.author.username.username }}</strong></p></a>
             <p class="filter-result-description hidden-sm hidden-xs">{{ recipe.description }}</p>
           </div>
           <i ng-click="addCollection($index)" popover-popup-delay="2000" popover-placement="left" popover="Add to Collection" popover-trigger="mouseenter" data-collection="normal" class="fa fa-heart-o pull-right col-xs-1"></i>
