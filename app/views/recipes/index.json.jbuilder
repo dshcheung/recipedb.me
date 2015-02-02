@@ -1,7 +1,6 @@
 json.recipes @recipes do |recipe|
   json.id recipe.id
   json.title recipe.name
-
   json.author do
     json.display_format recipe.outside_profile.display_format
     json.username recipe.outside_profile.username
@@ -9,7 +8,6 @@ json.recipes @recipes do |recipe|
     json.site_name recipe.outside_profile.site_name
     json.profile_url recipe.outside_profile.outside_profile_url
   end
-
   json.description recipe.description
   json.images recipe.img_urls
   json.prep_time recipe.prep_time
