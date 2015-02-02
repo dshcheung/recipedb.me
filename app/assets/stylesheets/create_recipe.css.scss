@@ -28,8 +28,8 @@
 
 .btn.btn-warning {
   background: $color-raisin;
-  &:hover {
-    background: red;
+  &:hover,:focus {
+    background: $color-airbnb-red;
   }
 }
 

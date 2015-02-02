@@ -88,7 +88,7 @@
     // color: $color-raisin;
     // font-size: 14px;
     // display: inline-block;
-
+    color: $color-raisin;
     margin: 0;
     font-weight: bold;
     font-size: 14px;
@@ -170,6 +170,7 @@
     .filter-time-heading {
       // display: inline-block;
       // margin: 5px 0;
+      color: $color-raisin;
       font-weight: bold;
       font-size: 14px;
       text-align: center;
@@ -188,6 +189,7 @@
       font-size: 14px;
       text-align: center;
       margin: 0 0 5px 0;
+      color: $color-raisin;
     }
     .filter-meals-selection {
       padding: 6px 0 0 0;
@@ -213,6 +215,7 @@
       font-weight: bold;
       font-size: 14px;
       text-align: center;
+      color: $color-raisin;
     }
     .filter-check-selection{
       padding:0;
@@ -270,7 +273,7 @@
 }
 
 .row > .filter-results {
-  background: $color-dirt-yellow;
+  // background: $color-dirt-yellow;
   padding: 0;
   // margin: 0;
   // height: 50px;
@@ -278,6 +281,16 @@
   // .filter-results-div {
   //   display: inline-block;
   // }
+  .filter-result-empty {
+    text-align: center;
+    background: $color-airbnb-grey;
+    padding: 100px 0 150px;
+    color: $color-raisin;
+    p {
+      font-size: 24px;
+      margin: 50px 0;
+    }
+  }
   .filter-result {
     background: white;
     height: 140px;
@@ -313,7 +326,7 @@
         font-size: 14px;
         margin: 0;
         padding: 0;
-        highlight {
+        strong {
           color: $color-airbnb-red;
         }
       }

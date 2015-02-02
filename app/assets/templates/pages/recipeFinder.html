@@ -4,19 +4,16 @@
 <div class="main-body">
   <div class="recipe-finder-body container-fluid">
     <div class="row">
-      <button ng-click="checkAll()" data-status="open" class="hide-finder-button btn btn-success col-xs-3">
-        Check All
+      <button ng-click="uncheckAll()" data-status="open" class="hide-finder-button btn btn-primary col-xs-4">
+        Reset
       </button>
-      <button ng-click="uncheckAll()" data-status="open" class="hide-finder-button btn btn-primary col-xs-3">
-        Uncheck All
-      </button>
-      <button ng-click="toggleFinder()" data-status="open" class="hide-finder-button btn btn-default col-xs-3">
+      <button ng-click="toggleFinder()" data-status="open" class="hide-finder-button btn btn-default col-xs-4">
         Toggle Finder
       </button>
       <!-- <button ng-click="showme = !showme" class="hide-finder-button btn btn-default col-xs-3">
         Toggle Finder
       </button> -->
-      <a class="create-recipe-button btn btn-default col-xs-3" href="/#/create">
+      <a class="create-recipe-button btn btn-default col-xs-4" href="/#/create">
         Add a Recipe
       </a>
     </div>
@@ -163,6 +160,8 @@
 
     <!-- search results -->
       <div class="filter-results col-xs-12 col-sm-6">
+        <div ng-hide="recipes.length" class="filter-result-empty col-xs-12"><p>No Results Found...</p> Please try again or use less filters
+        </div>
         <div ng-repeat="recipe in recipes" class="filter-result col-xs-12">
           <div class="col-xs-5 col-md-4 col-lg-3">
             <a href="/#/recipes/{{ recipe.id }}"><img class="filter-result-image" src="{{ recipe.images[0] }}"></a>
