@@ -16,14 +16,14 @@
         </div>
       </div>
       <div class="recipe-profile col-xs-12 col-sm-4">
-        <img ng-repeat="image in images" class="image-responsive recipe-image" ng-src="{{ image }}" alt="Recipe image">
+        <img ng-repeat="image in recipe.images" class="image-responsive recipe-image" ng-src="{{ image }}" alt="Recipe image">
         <!-- assets/recipedb-default-img.png -->
       </div>
       <!-- </div> -->
       <div class="recipe-info col-xs-12 col-sm-8">
         <div class="recipe-div1 row">
-          <p class="recipe-title">{{ recipe.name }}</p>
-          <p class="recipe-author">By <strong class="recipe-author-name">{{ recipe.author }}</strong></p>
+          <p class="recipe-title">{{ recipe.title }}</p>
+          <p class="recipe-author">By <strong class="recipe-author-name">{{ recipe.author.username }}</strong></p>
         </div>
         <div class="recipe-div2 row">
           <p class="recipe-description-heading">Description:</p>
@@ -33,7 +33,7 @@
         <div class="recipe-div3 row">
           <p class="recipe-ingredients">Ingredients
             <div class="recipe-ingredients-all">
-              <p ng-repeat="ingredient in ingredients" class="recipe-ingredient">- {{ ingredient.amountUS }} {{ ingredient.unitUS }} {{ ingredient.name }}</p>
+              <p ng-repeat="ingredient in recipe.ingredients" class="recipe-ingredient">- {{ ingredient.amountUS }} {{ ingredient.unitUS }} {{ ingredient.name }}</p>
             </div>
           </p>
         </div>
