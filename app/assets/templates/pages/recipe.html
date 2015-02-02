@@ -9,7 +9,7 @@
           <button class="col-xs-12 btn btn-danger">Back <i class="fa fa-step-backward"></i></button>
         </div>
         <div class="col-xs-4 recipe-back-button">
-          <button class="col-xs-12 btn btn-warning">Save <i class="fa fa-bookmark-o"></i></button>
+          <button class="col-xs-12 btn btn-warning">Save <i class="fa fa-heart"></i></button>
         </div>
         <div class="col-xs-4 recipe-back-button">
           <button class="col-xs-12 btn btn-success">Shopping <i class="fa fa-shopping-cart"></i></button>
@@ -23,7 +23,7 @@
       <div class="recipe-info col-xs-12 col-sm-8">
         <div class="recipe-div1 row">
           <p class="recipe-title">{{ recipe.name }}</p>
-          <p class="recipe-author">By {{ recipe.author.username }}</p>
+          <p class="recipe-author">By <highlight class="recipe-author-name">{{ recipe.author }}</highlight></p>
         </div>
         <div class="recipe-div2 row">
           <p class="recipe-description-heading">Description:</p>
@@ -32,9 +32,9 @@
         </div>
         <div class="recipe-div3 row">
           <p class="recipe-ingredients">Ingredients
-            <ul>
-              <li ng-repeat="ingredient in recipe.ingredients" class="recipe-ingredient">{{ ingredient.amountUS }} {{ ingredient.unitUS }} {{ ingredient.name }}</li>
-            </ul>
+            <div class="recipe-ingredients-all">
+              <p ng-repeat="ingredient in ingredients" class="recipe-ingredient">- {{ ingredient.amountUS }} {{ ingredient.unitUS }} {{ ingredient.name }}</p>
+            </div>
           </p>
         </div>
         <div class="recipe-div4 row">

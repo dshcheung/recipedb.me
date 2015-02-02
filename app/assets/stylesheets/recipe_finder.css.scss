@@ -29,6 +29,12 @@
   }
 }
 
+.ui-slider-handle.ui-state-default.ui-corner-all {
+  &:focus {
+    outline: 0;
+  }
+}
+
 .my-recipes-body {
   // background: white;
   background: transparent;
@@ -50,7 +56,19 @@
   color: white;
   background: $color-airbnb-red;
   font-family: $font-airbnb;
-  box-shadow: 1px 1px 5px $color-airbnb-font;
+  // box-shadow: 1px 1px 5px $color-airbnb-font;
+  border: 1px solid $color-airbnb-grey;
+}
+
+.hide-finder-button.btn.btn-default {
+  background: $color-airbnb-buttongrey;
+  border: 1px solid $color-airbnb-grey;
+  &:focus {
+    outline: 0;
+  }
+  &:hover {
+    background: $color-airbnb-grey;
+  }
 }
 
 .row .my-recipes-title {
@@ -112,6 +130,9 @@
   padding: 5px 10px;
   border-radius: 2px;
   cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
 }
 
 .filter-meals-select .row {
@@ -136,7 +157,11 @@
       font-size: 14px;
       color: $color-airbnb-font;
       font-family: $font-airbnb;
+      border: 1px solid $color-airbnb-grey;
       // text-align: center;
+      &:focus {
+        outline: 0;
+      }
     }
   }
   .filter-time-wrapper {
@@ -147,12 +172,12 @@
       // margin: 5px 0;
       font-weight: bold;
       font-size: 14px;
-      // text-align: center;
-      #amount.filter-time-range {
-        // text-align: center;
-        color: $color-airbnb-red;
-        font-size: 14px;
-      }
+      text-align: center;
+    }
+    #amount.filter-time-range {
+      text-align: center;
+      color: $color-airbnb-red;
+      font-size: 14px;
     }
   }
   .filter-meals-wrapper {
@@ -244,26 +269,27 @@
   }
 }
 
-.row .filter-results {
-  // background: $color-dirt-yellow;
+.row > .filter-results {
+  background: $color-dirt-yellow;
   padding: 0;
+  // margin: 0;
   // height: 50px;
-  border: 1px solid $color-airbnb-buttonbordergrey;
+  
+  // .filter-results-div {
+  //   display: inline-block;
+  // }
   .filter-result {
     background: white;
     height: 140px;
     padding: 7px;
-    border-bottom: 1px solid black;
+    // border-bottom: 1px solid black;
+    border: 1px solid $color-airbnb-grey;
     .filter-result-image {
       width: 125px;
       height: 125px;
       background: red;
       vertical-align: top;
       display: inline-block;
-    }
-    .fa .fa-bookmark-o {
-      display: inline;
-      float: right;
     }
     .filter-result-info {
       background: white;
@@ -276,15 +302,34 @@
         font-size: 20px;
         margin: 0;
         padding: 0;
+        color: $color-raisin;
+        &:hover {
+          color: $color-airbnb-red;
+          text-decoration: none;
+        }
       }
       .filter-result-author {
         display: block;
         font-size: 14px;
         margin: 0;
         padding: 0;
+        highlight {
+          color: $color-airbnb-red;
+        }
       }
-      .fa.fa-heart-o {
-        font-size: 28px;
+      .filter-result-description {
+        display: block;
+        font-size: 12px;
+        // margin: 5px;
+        padding: 5px 0;
+      }
+    }
+    .fa.fa-heart-o,
+    .fa.fa-heart {
+      font-size: 28px;
+      &:hover {
+        color: $color-airbnb-red;
+        cursor: pointer;
       }
     }
   }

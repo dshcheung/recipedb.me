@@ -62,6 +62,11 @@ div.recipe-profile {
     font-size: 11px;
     display: inline-block;
     // border-bottom: 1px dotted black;
+    .recipe-author-name {
+      color: $color-airbnb-red;
+      font-weight: bold;
+      font-size: 14px;
+    }
   }
 }
 
@@ -91,10 +96,12 @@ div.recipe-profile {
   .recipe-ingredients {
     display: inline-block;
     font-weight: bold;
-    font-size: 16px;
-    .recipe-ingredient {
-      display: inline-block;
-    }
+    font-size: 14px;
+  }
+  .recipe-ingredient {
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 8px 0 0;
   }
 }
 
@@ -131,9 +138,10 @@ div.recipe-profile {
   .recipe-directions {
     font-size: 16px;
     font-weight: bold;
-    .recipe-step {
-      font-size: 12px;
-    }
+  }
+  .recipe-step {
+    font-size: 14px;
+    margin: 3px 0;
   }
 }
 

@@ -1,10 +1,6 @@
 app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'UserServices', function($interval,$scope, $http, $routeParams, UserServices){
 
-  // $http.get('/recipes.json').success(function(data, status, xhr){
-  //   $scope.recipes = data.recipes;
-  //   console.log(data);
-  // });
-  $scope.recipeImages = [
+  $scope.recipeImages1 = [
    "http://images.media-allrecipes.com/userphotos/140x140/01/50/14/1501426.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/01/89/40/1894088.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/01/07/18/1071810.jpg",
@@ -44,8 +40,7 @@ app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'User
    "http://images.media-allrecipes.com/userphotos/140x140/00/74/71/747148.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/00/90/68/906849.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/00/79/46/794610.jpg",
-   "http://images.media-allrecipes.com/userphotos/140x140/00/07/88/78811.jpg",
-   "http://images.media-allrecipes.com/userphotos/140x140/00/64/23/642303.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/07/88/78811.jpg","http://images.media-allrecipes.com/userphotos/140x140/00/64/23/642303.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/00/95/96/959684.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/00/97/09/970958.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/00/87/02/870226.jpg",
@@ -87,36 +82,36 @@ app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'User
    "http://images.media-allrecipes.com/userphotos/140x140/01/83/64/1836491.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/00/08/49/84924.jpg",
    "http://images.media-allrecipes.com/userphotos/140x140/01/00/06/1000669.jpg",
-   "http://images.media-allrecipes.com/userphotos/140x140/00/52/23/522354.jpg",
-   "http://images.media-allrecipes.com/userphotos/140x140/00/80/71/807159.jpg"
+   "http://images.media-allrecipes.com/userphotos/140x140/00/52/23/522354.jpg"]
+
+  var recipeImages2 = [
+   "http://images.media-allrecipes.com/userphotos/140x140/00/80/71/807159.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/55/95/559574.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/01/97/19751.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/97/88/978831.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/24/85/248517.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/99/36/993641.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/95/58/955838.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/01/21/68/1216852.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/65/38/653845.jpg",
+   "http://images.media-allrecipes.com/userphotos/140x140/00/80/50/805077.jpg"
  ]
-  // $scope.recipeImages = imageArray;
-  // $scope.test = "test";
 
   var imageShuffle = $interval(function(){
     changeImages();
-  }, 1000)
+  }, 500)
 
   var changeImages = function () {
-    var value1 = Math.floor(Math.random()*($scope.recipeImages.length-40));
-    var value2 = Math.floor(Math.random()*($scope.recipeImages.length-40)+40);
-    if (value1 == value2) {
-      value2++;
-    }
+    var value1 = Math.floor(Math.random()*($scope.recipeImages1.length));
+    var value2 = Math.floor(Math.random()*(recipeImages2.length));
+    
     console.log ('swapping '+value1+' by '+value2);
-    // console.log($scope.recipeImages);
-    var image1 = $scope.recipeImages[value1];
-    var image2 = $scope.recipeImages[value2];
+    
+    var image1 = $scope.recipeImages1[value1];
+    var image2 = recipeImages2[value2];
 
-    // for (var i = 1; i > 0 ; i = i - 0.01) {
-    //   // $scope.recipeImages[value1].css("opacity",i);
-    //   console.log($scope.recipeImages[value1])
-    //   $($('.splash-item')[value1]).css("opacity",i);
-    // }
-    // $($('.splash-item')[value1]).css("opacity",1)
-    // $scope.recipeImages.splice(value1,1);
-    $scope.recipeImages.splice(value1,1,image2);
-    $scope.recipeImages.splice(value2,1,image1);
+    $scope.recipeImages1.splice(value1,1,image2);
+    recipeImages2.splice(value2,1,image1);
   }
 
   
