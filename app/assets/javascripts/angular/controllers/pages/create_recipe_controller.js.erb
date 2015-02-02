@@ -34,6 +34,39 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', function(
     $('.added-ingredients tbody').prepend("<tr class='added-ingredient'><td class='col-xs-2'></td><td class='col-xs-1'>-</td><td class='col-xs-1'>"+$scope.addIngredNumber+"</td><td class='col-xs-2'>"+$scope.addIngredUnit+"</td><td class='col-xs-6'>"+$scope.addIngredName+"</td></tr>");
   }
 
+  // time slider function
+  {
+    $scope.search_parameters.timeframe = [0,120];
+
+
+    var timeConversion = function(minutes) {
+      if (minutes > 60) {
+        return Math.floor(minutes / 60) + "hr " + minutes % 60 + "min";
+      } else {
+        return minutes + "min";
+      }
+    }
+
+    $(function() {
+      $( "#slider" ).slider({
+        // range: true,
+        min: 0,
+        max: 1440,
+        values: [ 0, 1440 ],
+        slide: function( event, ui ) {
+
+          // $( "#amount" ).val( timeConversion(ui.values[0]) + " to " + timeConversion(ui.values[ 1 ]) );
+
+          $scope.search_parameters.timeframe = ui.values;
+          console.log($scope.search_parameters);
+        }
+      });
+      // initial slider values
+      // $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ) +" mins" );
+      // $( "#amount" ).val( timeConversion(0) + " to " + timeConversion(1440) );
+    });
+  }
+
   // cuisine = "";
   // something.forEach(){
   //   cusine += something.tile + "/"

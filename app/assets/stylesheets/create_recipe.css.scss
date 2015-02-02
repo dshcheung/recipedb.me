@@ -26,6 +26,13 @@
   }
 }
 
+.btn.btn-warning {
+  background: $color-raisin;
+  &:hover {
+    background: red;
+  }
+}
+
 .added-ingredients {
   background: #ccc;
   padding:0;
@@ -41,4 +48,9 @@ table.added-ingredients > tbody > tr.added-ingredient > td {
   margin: 0;
   padding: 0;
   vertical-align: middle;
+}
+
+.submit-create-button.btn.btn-default {
+  background: $color-airbnb-red;
+  color: white;
 }
