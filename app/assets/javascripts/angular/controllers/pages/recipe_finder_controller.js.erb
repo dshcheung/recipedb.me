@@ -4,53 +4,81 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
   $scope.search_parameters.categories = [];
   $scope.search_parameters.keywords = [];
   $scope.search_parameters.timeframe = [0,120];
+  $scope.maxSize = 5;
+  // paginate varibales
+  $scope.bigTotalItems = 1;
+  $scope.bigCurrentPage = 1;
 
-
-  // submit search parameters and return a new list of recipes
-  $scope.submitParams = function(){
-    var data = { 
-      "search_parameters": $scope.search_parameters
+  {// functions for getting recipes and recipe count
+    var getFilteredRecipes = function(params){
+      $http.post('/recipes/search', params).success(function(data, status){
+        $scope.recipes = data.recipes;
+      })
     }
 
-    $http.post('/recipes_search', data).success(function(data, status){
-      console.log(data)
-      $scope.recipes = data.recipes;
-    })
+    var getFilteredRecipesCount = function(params){
+      $http.post('/recipes/search_count', params).success(function(data, status){
+        $scope.bigTotalItems = data.count; 
+      })
+    }
+
+    var getInitialRecipes = function(){
+      var params = { 
+        "search_parameters": $scope.search_parameters
+      }
+      getFilteredRecipesCount(params);
+      getFilteredRecipes(params);
+    }
   }
 
-  $http.get('/recipes.json').success(function(data, status, xhr){
-    $scope.recipes = data.recipes;
-  });
-  
-    // toggle hidden checkboxes
-  {
+  {// on page change get next batch of recipes
+    $scope.pageChanged = function() {
+      var params = { 
+        "search_parameters": $scope.search_parameters,
+        "page": $scope.bigCurrentPage
+      }
+      getFilteredRecipes(params);
+    };
+  }
+
+  {// submit search parameters and return a new list of recipes
+    $scope.submitParams = function(){
+      var params = { 
+        "search_parameters": $scope.search_parameters
+      }
+      getFilteredRecipesCount(params);
+      getFilteredRecipes(params);
+      $scope.bigCurrentPage = 1;
+    }
+  }
+
+  {// get initial recipe informations
+    getInitialRecipes();
+  }
+
+  {// toggle hidden checkboxes
     $scope.cuisineCollapsed = true;
     $scope.courseCollapsed = true;
     $scope.occasionCollapsed = true;
   }
 
-    // data to populate recipe finder
-  {
-$scope.meals = [{name: "Breakfast", category_id: 917},{name: "Lunch", category_id: 954},{name: "Dinner", category_id: 955}]
+  {// data to populate recipe finder
+    $scope.meals = [{name: "Breakfast", category_id: 917},{name: "Lunch", category_id: 954},{name: "Dinner", category_id: 955}]
 
-$scope.cuisines = [{name: "African", category_id: 2353},{name: "Asian", category_id: 2354},{name: "Oceania", category_id: 0},{name: "European", category_id: 2407},{name: "Latin American", category_id: 2468},{name: "Middle Eastern", category_id: 2514}];
+    $scope.cuisines = [{name: "African", category_id: 2353},{name: "Asian", category_id: 2354},{name: "Oceania", category_id: 0},{name: "European", category_id: 2407},{name: "Latin American", category_id: 2468},{name: "Middle Eastern", category_id: 2514}];
 
-$scope.cuisines_hidden = [{name: "North African", category_id: 2350}, {name: "South African", category_id: 2353},{name: "Korean", category_id: 2367}, {name: "Chinese", category_id: 2355}, {name: "Japanese", category_id: 2362}, {name: "Bangladeshi", category_id: 2368}, {name: "Indian", category_id: 2369}, {name: "Iranian", category_id: 2380}, {name: "Pakistani", category_id: 2381}, {name: "Filipino", category_id: 2382}, {name: "Indonesian", category_id: 2386}, {name: "Malaysian", category_id: 2387}, {name: "Thai", category_id: 2388}, {name: "Vietnamese", category_id: 2396},{name: "Canadian", category_id: 2400},{name: "Italian", category_id: 2434}, {name: "Portuguese", category_id: 2449}, {name: "Scandinavian", category_id: 2450}, {name: "Austrian", category_id: 2408}, {name: "Belgian", category_id: 2409}, {name: "Dutch", category_id: 2410}, {name: "Eastern European", category_id: 2411}, {name: "French", category_id: 2416}, {name: "Swiss", category_id: 2456}, {name: "German", category_id: 2424}, {name: "Greek", category_id: 2425}, {name: "UK and Ireland", category_id: 2457}, {name: "Spanish", category_id: 2455},{name: "Caribbean", category_id: 2469}, {name: "Mexican", category_id: 2473},{name: "South American", category_id: 2508},{name: "Lebanese", category_id: 2561}, {name: "Israeli", category_id: 2515}, {name: "Turkish", category_id: 2517}].sort();
+    $scope.cuisines_hidden = [{name: "North African", category_id: 2350}, {name: "South African", category_id: 2353},{name: "Korean", category_id: 2367}, {name: "Chinese", category_id: 2355}, {name: "Japanese", category_id: 2362}, {name: "Bangladeshi", category_id: 2368}, {name: "Indian", category_id: 2369}, {name: "Iranian", category_id: 2380}, {name: "Pakistani", category_id: 2381}, {name: "Filipino", category_id: 2382}, {name: "Indonesian", category_id: 2386}, {name: "Malaysian", category_id: 2387}, {name: "Thai", category_id: 2388}, {name: "Vietnamese", category_id: 2396},{name: "Canadian", category_id: 2400},{name: "Italian", category_id: 2434}, {name: "Portuguese", category_id: 2449}, {name: "Scandinavian", category_id: 2450}, {name: "Austrian", category_id: 2408}, {name: "Belgian", category_id: 2409}, {name: "Dutch", category_id: 2410}, {name: "Eastern European", category_id: 2411}, {name: "French", category_id: 2416}, {name: "Swiss", category_id: 2456}, {name: "German", category_id: 2424}, {name: "Greek", category_id: 2425}, {name: "UK and Ireland", category_id: 2457}, {name: "Spanish", category_id: 2455},{name: "Caribbean", category_id: 2469}, {name: "Mexican", category_id: 2473},{name: "South American", category_id: 2508},{name: "Lebanese", category_id: 2561}, {name: "Israeli", category_id: 2515}, {name: "Turkish", category_id: 2517}].sort();
 
-$scope.courses = [{name: "Appetizers", category_id: 1},{name: "Mains", category_id: 502},{name: "Desserts", category_id: 150},{name: "Drinks", category_id: 453},{name: "Sides", category_id: 710},{name: "Soups", category_id: 842},{name: "Salads", category_id: 627},{name: "Bread", category_id: 92}];
+    $scope.courses = [{name: "Appetizers", category_id: 1},{name: "Mains", category_id: 502},{name: "Desserts", category_id: 150},{name: "Drinks", category_id: 453},{name: "Sides", category_id: 710},{name: "Soups", category_id: 842},{name: "Salads", category_id: 627},{name: "Bread", category_id: 92}];
 
-$scope.courses_hidden = [{name: "Dips and Spreads", category_id: 13}, {name: "Snack", category_id: 44}, {name: "Wraps and Rolls Appetizers", category_id: 58}, {name: "Antipasto", category_id: 2}, {name: "Bread and Pastry Appetizers", category_id: 3}, {name: "Crackers", category_id: 8}, {name: "Deviled Eggs", category_id: 9}, {name: "Pasta Appetizers", category_id: 38}, {name: "Pastry Appetizers", category_id: 39}, {name: "Dill Pickles and Sweet Pickles", category_id: 40}, {name: "Pickled Eggs", category_id: 41}, {name: "Popcorn", category_id: 42}, {name: "Slow Cooker Appetizers", category_id: 43}, {name: "Snacks for Kids", category_id: 56}, {name: "Spicy Appetizers", category_id: 57}, {name: "Bean and Pea Appetizers", category_id: 61}, {name: "Cheese Appetizers", category_id: 62}, {name: "Fruit Appetizers", category_id: 66}, {name: "Meat and Poultry Appetizers", category_id: 67}, {name: "Mushroom Appetizers", category_id: 75}, {name: "Nuts and Seeds Appetizers", category_id: 77}, {name: "Olive Appetizers", category_id: 79}, {name: "Seafood Appetizers", category_id: 80}, {name: "Vegetable Appetizers", category_id: 86},{name: "Yeast Bread", category_id: 136}, {name: "Bread Machine", category_id: 93}, {name: "Holiday Bread", category_id: 99}, {name: "Pastries", category_id: 100}, {name: "Pizza Dough and Crusts", category_id: 107}, {name: "Quick Bread", category_id: 108},{name: "Deep Fried Main", category_id: 524}, {name: "Eggplant Parmesan", category_id: 525}, {name: "Steaks and Chops", category_id: 617}, {name: "Stir-Fry", category_id: 618}, {name: "Stuffed Main", category_id: 623}, {name: "Burgers", category_id: 503}, {name: "Calzones", category_id: 510}, {name: "Casseroles", category_id: 511}, {name: "Roasts", category_id: 570}, {name: "Curry Main", category_id: 519}, {name: "Meatballs", category_id: 528}, {name: "Meatloaf", category_id: 531}, {name: "Pizza", category_id: 557}, {name: "Quiche", category_id: 561}, {name: "Savory Pies", category_id: 587}, {name: "Seafood Main", category_id: 599}, {name: "Main Dish Soups and Stews", category_id: 527}, {name: "Ribs", category_id: 569}, {name: "Sandwiches and Wraps", category_id: 571}, {name: "Main Dish Salads", category_id: 526}, {name: "Pasta Main", category_id: 536},{name: "Candy", category_id: 221}, {name: "Cobbler", category_id: 240}, {name: "Mousse", category_id: 383}, {name: "Pie", category_id: 391}, {name: "Crisps and Crumbles", category_id: 339}, {name: "Custards and Puddings", category_id: 346}, {name: "Cake", category_id: 151}, {name: "Cookies", category_id: 249}, {name: "Chocolate Desserts", category_id: 236}, {name: "Frozen Desserts", category_id: 361}, {name: "Fruit Desserts", category_id: 370}, {name: "Nut Desserts", category_id: 385}, {name: "Specialty Desserts", category_id: 432}, {name: "Frostings and Fillings", category_id: 352},{name: "Smoothies", category_id: 491}, {name: "Coffee Drinks", category_id: 472}, {name: "Eggnog", category_id: 475}, {name: "Hot Chocolate", category_id: 476}, {name: "Juice", category_id: 477}, {name: "Lemonade", category_id: 478}, {name: "Liqueurs", category_id: 479}, {name: "Punch", category_id: 482}, {name: "Shakes and Floats", category_id: 486}, {name: "Shots", category_id: 488}, {name: "Mocktails", category_id: 480}, {name: "Mulled Wine", category_id: 481}, {name: "Sangria", category_id: 485}, {name: "Slushies", category_id: 490}, {name: "Tea Drinks", category_id: 499}, {name: "Beer Drinks", category_id: 454}, {name: "Cider", category_id: 455}, {name: "Cocktails", category_id: 456},{name: "Beef and Pork Salads", category_id: 628}, {name: "Coleslaw", category_id: 637}, {name: "Curry Salad", category_id: 646}, {name: "Egg Salad", category_id: 647}, {name: "Fruit Salads", category_id: 648}, {name: "Green Salads", category_id: 658}, {name: "Grain Salads", category_id: 654}, {name: "Pasta Salad", category_id: 665}, {name: "Potato Salad", category_id: 684}, {name: "Seafood Salads", category_id: 690}, {name: "Taco Salad", category_id: 695}, {name: "Vegetable Salads", category_id: 696}, {name: "Bean and Pea Salads", category_id: 628}, {name: "Waldorf Salad", category_id: 709},{name: "Potato Side", category_id: 733}, {name: "Applesauce", category_id: 711}, {name: "Bean and Pea Side", category_id: 712}, {name: "Curry Side", category_id: 723}, {name: "Dumplings", category_id: 724}, {name: "Fries", category_id: 725}, {name: "Grain Side", category_id: 730}, {name: "Rice Side", category_id: 742}, {name: "Sauces and Condiments", category_id: 748}, {name: "Side Dish Casseroles", category_id: 798}, {name: "Stuffing and Dressing", category_id: 806}, {name: "Vegetable Side", category_id: 816}, {name: "Grits", category_id: 731}, {name: "Polenta", category_id: 732},{name: "Bisque", category_id: 843}, {name: "Broth and Stock", category_id: 844}, {name: "Chili", category_id: 846}, {name: "Chowder", category_id: 854}, {name: "Soup", category_id: 858}, {name: "Stew", category_id: 906}].sort();
+    $scope.courses_hidden = [{name: "Dips and Spreads", category_id: 13}, {name: "Snack", category_id: 44}, {name: "Wraps and Rolls Appetizers", category_id: 58}, {name: "Antipasto", category_id: 2}, {name: "Bread and Pastry Appetizers", category_id: 3}, {name: "Crackers", category_id: 8}, {name: "Deviled Eggs", category_id: 9}, {name: "Pasta Appetizers", category_id: 38}, {name: "Pastry Appetizers", category_id: 39}, {name: "Dill Pickles and Sweet Pickles", category_id: 40}, {name: "Pickled Eggs", category_id: 41}, {name: "Popcorn", category_id: 42}, {name: "Slow Cooker Appetizers", category_id: 43}, {name: "Snacks for Kids", category_id: 56}, {name: "Spicy Appetizers", category_id: 57}, {name: "Bean and Pea Appetizers", category_id: 61}, {name: "Cheese Appetizers", category_id: 62}, {name: "Fruit Appetizers", category_id: 66}, {name: "Meat and Poultry Appetizers", category_id: 67}, {name: "Mushroom Appetizers", category_id: 75}, {name: "Nuts and Seeds Appetizers", category_id: 77}, {name: "Olive Appetizers", category_id: 79}, {name: "Seafood Appetizers", category_id: 80}, {name: "Vegetable Appetizers", category_id: 86},{name: "Yeast Bread", category_id: 136}, {name: "Bread Machine", category_id: 93}, {name: "Holiday Bread", category_id: 99}, {name: "Pastries", category_id: 100}, {name: "Pizza Dough and Crusts", category_id: 107}, {name: "Quick Bread", category_id: 108},{name: "Deep Fried Main", category_id: 524}, {name: "Eggplant Parmesan", category_id: 525}, {name: "Steaks and Chops", category_id: 617}, {name: "Stir-Fry", category_id: 618}, {name: "Stuffed Main", category_id: 623}, {name: "Burgers", category_id: 503}, {name: "Calzones", category_id: 510}, {name: "Casseroles", category_id: 511}, {name: "Roasts", category_id: 570}, {name: "Curry Main", category_id: 519}, {name: "Meatballs", category_id: 528}, {name: "Meatloaf", category_id: 531}, {name: "Pizza", category_id: 557}, {name: "Quiche", category_id: 561}, {name: "Savory Pies", category_id: 587}, {name: "Seafood Main", category_id: 599}, {name: "Main Dish Soups and Stews", category_id: 527}, {name: "Ribs", category_id: 569}, {name: "Sandwiches and Wraps", category_id: 571}, {name: "Main Dish Salads", category_id: 526}, {name: "Pasta Main", category_id: 536},{name: "Candy", category_id: 221}, {name: "Cobbler", category_id: 240}, {name: "Mousse", category_id: 383}, {name: "Pie", category_id: 391}, {name: "Crisps and Crumbles", category_id: 339}, {name: "Custards and Puddings", category_id: 346}, {name: "Cake", category_id: 151}, {name: "Cookies", category_id: 249}, {name: "Chocolate Desserts", category_id: 236}, {name: "Frozen Desserts", category_id: 361}, {name: "Fruit Desserts", category_id: 370}, {name: "Nut Desserts", category_id: 385}, {name: "Specialty Desserts", category_id: 432}, {name: "Frostings and Fillings", category_id: 352},{name: "Smoothies", category_id: 491}, {name: "Coffee Drinks", category_id: 472}, {name: "Eggnog", category_id: 475}, {name: "Hot Chocolate", category_id: 476}, {name: "Juice", category_id: 477}, {name: "Lemonade", category_id: 478}, {name: "Liqueurs", category_id: 479}, {name: "Punch", category_id: 482}, {name: "Shakes and Floats", category_id: 486}, {name: "Shots", category_id: 488}, {name: "Mocktails", category_id: 480}, {name: "Mulled Wine", category_id: 481}, {name: "Sangria", category_id: 485}, {name: "Slushies", category_id: 490}, {name: "Tea Drinks", category_id: 499}, {name: "Beer Drinks", category_id: 454}, {name: "Cider", category_id: 455}, {name: "Cocktails", category_id: 456},{name: "Beef and Pork Salads", category_id: 628}, {name: "Coleslaw", category_id: 637}, {name: "Curry Salad", category_id: 646}, {name: "Egg Salad", category_id: 647}, {name: "Fruit Salads", category_id: 648}, {name: "Green Salads", category_id: 658}, {name: "Grain Salads", category_id: 654}, {name: "Pasta Salad", category_id: 665}, {name: "Potato Salad", category_id: 684}, {name: "Seafood Salads", category_id: 690}, {name: "Taco Salad", category_id: 695}, {name: "Vegetable Salads", category_id: 696}, {name: "Bean and Pea Salads", category_id: 628}, {name: "Waldorf Salad", category_id: 709},{name: "Potato Side", category_id: 733}, {name: "Applesauce", category_id: 711}, {name: "Bean and Pea Side", category_id: 712}, {name: "Curry Side", category_id: 723}, {name: "Dumplings", category_id: 724}, {name: "Fries", category_id: 725}, {name: "Grain Side", category_id: 730}, {name: "Rice Side", category_id: 742}, {name: "Sauces and Condiments", category_id: 748}, {name: "Side Dish Casseroles", category_id: 798}, {name: "Stuffing and Dressing", category_id: 806}, {name: "Vegetable Side", category_id: 816}, {name: "Grits", category_id: 731}, {name: "Polenta", category_id: 732},{name: "Bisque", category_id: 843}, {name: "Broth and Stock", category_id: 844}, {name: "Chili", category_id: 846}, {name: "Chowder", category_id: 854}, {name: "Soup", category_id: 858}, {name: "Stew", category_id: 906}].sort();
 
-$scope.occasions = [{name: "Events and Gatherings", category_id: 1184}, {name: "BBQ and Grilling", category_id: 1305}, {name: "Everyday", category_id: 1343}];
+    $scope.occasions = [{name: "Events and Gatherings", category_id: 1184}, {name: "BBQ and Grilling", category_id: 1305}, {name: "Everyday", category_id: 1343}];
 
-$scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thanksgiving", category_id: 2006}, {name: "Easter", category_id: 1867}, {name: "Super Bowl®", category_id: 1994}, {name: "Labor Day", category_id: 1936}, {name: "Valentine's Day", category_id: 2035}, {name: "4th of July", category_id: 1830}, {name: "New Year's", category_id: 1968}, {name: "Halloween", category_id: 1917}, {name: "Mother's Day", category_id: 1964}, {name: "Mardi Gras", category_id: 1948}, {name: "Memorial Day", category_id: 1954}, {name: "Father's Day", category_id: 1916}, {name: "Hanukkah", category_id: 1928}, {name: "St. Patrick's Day", category_id: 1988}, {name: "Cinco de Mayo", category_id: 1966}, {name: "Passover", category_id: 1978}, {name: "Rosh Hashanah", category_id: 1987}, {name: "Ramadan", category_id: 1986}, {name: "Purim", category_id: 1985}, {name: "Lunar New Year", category_id: 1947}, {name: "Kwanzaa", category_id: 1935}, {name: "Veteran's Day", category_id: 2047}].sort();
-
+    $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thanksgiving", category_id: 2006}, {name: "Easter", category_id: 1867}, {name: "Super Bowl®", category_id: 1994}, {name: "Labor Day", category_id: 1936}, {name: "Valentine's Day", category_id: 2035}, {name: "4th of July", category_id: 1830}, {name: "New Year's", category_id: 1968}, {name: "Halloween", category_id: 1917}, {name: "Mother's Day", category_id: 1964}, {name: "Mardi Gras", category_id: 1948}, {name: "Memorial Day", category_id: 1954}, {name: "Father's Day", category_id: 1916}, {name: "Hanukkah", category_id: 1928}, {name: "St. Patrick's Day", category_id: 1988}, {name: "Cinco de Mayo", category_id: 1966}, {name: "Passover", category_id: 1978}, {name: "Rosh Hashanah", category_id: 1987}, {name: "Ramadan", category_id: 1986}, {name: "Purim", category_id: 1985}, {name: "Lunar New Year", category_id: 1947}, {name: "Kwanzaa", category_id: 1935}, {name: "Veteran's Day", category_id: 2047}].sort();
   }
 
-    // $scope.showme = true;
-
-
-    // add to collection button
+  {// add to collection button
     $scope.addCollection = function() {
       if ($(this).attr("data-collection") == "normal") {
         $(this).removeClass("fa-heart-o");
@@ -63,9 +91,9 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
         // $(this).attr("data-collection","normal");
       }
     };
+  }
 
-
-    // toggle finder button
+  {// toggle finder button
     $scope.toggleFinder = function() {
       if ($(".hide-finder-button").attr('data-status')=="open"){
         $("div.filter").hide();
@@ -81,9 +109,9 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
         $(".filter-result").addClass("col-sm-12");
       }
     }
+  }
 
-    // keyword search
-  { 
+  {// keyword search
     var checkDuplicates = function (keyword,array) {
       for (var i= 0 ; i < array.length ; i++) {
         if (keyword == array[i]) {
@@ -115,8 +143,7 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
     }
   }
 
-    // meals search
-  {
+  {// meals search
     // toggle selection for a given fruit by name
     $scope.toggleMeals = function toggleMeals(meal) {
       var idx = $scope.search_parameters.categories.indexOf(meal);
@@ -134,8 +161,7 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
     };
   }
 
-    // time slider function
-  {
+  {// time slider function
     $scope.search_parameters.timeframe = [0,1440];
 
 
@@ -167,9 +193,7 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
     });
   }
 
-    // cuisine search
-  {
-
+  {// cuisine search
     // toggle selection for a given fruit by name
     $scope.toggleCuisines = function toggleCuisines(cuisine) {
       var idx = $scope.search_parameters.categories.indexOf(cuisine);
@@ -185,9 +209,7 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
     };
   }
 
-    // course search
-  {
-
+  {// course search
     // toggle selection for a given fruit by name
     $scope.toggleCourses = function toggleCourses(course) {
       var idx = $scope.search_parameters.categories.indexOf(course);
@@ -203,8 +225,7 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
     };
   }
 
-    // occasions search
-  {
+  {// occasions search
 
     // toggle selection for a given fruit by name
     $scope.toggleOccasions = function toggleOccasions(occasion) {
@@ -220,6 +241,4 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
       console.log($scope.search_parameters.categories);
     };
   }
-
-
 }]);
