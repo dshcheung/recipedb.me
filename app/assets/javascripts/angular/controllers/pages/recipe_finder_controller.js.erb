@@ -54,6 +54,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
       getFilteredRecipesCount(params);
       getFilteredRecipes(params);
       $scope.bigCurrentPage = 1;
+      console.log($scope.search_parameters);
     }
   }
 
@@ -95,7 +96,6 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
       // $(this).attr("data-collection","normal");
     }
   };
-  
 
   // toggle finder button
   $scope.toggleFinder = function() {
@@ -104,11 +104,21 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
       $(".filter-results").removeClass("col-sm-6");
       $(".filter-result").removeClass("col-sm-12");
       $(".filter-result").addClass("col-sm-6");
+      $(".reset-button").hide();
+      $(".submit-button").hide();
+      $('.hide-finder-button').text("Show Finder");
+      $(".hide-finder-button").addClass("col-xs-6");
+      $(".create-recipe-button").addClass("col-xs-6");
       $(".hide-finder-button").attr('data-status',"closed");
     } else {
       $("div.filter").show();
       $(".hide-finder-button").attr('data-status',"open");
       $(".filter-results").addClass("col-sm-6");
+      $(".reset-button").show();
+      $(".submit-button").show();
+      $(".hide-finder-button").removeClass("col-xs-6");
+      $(".create-recipe-button").removeClass("col-xs-6");
+      $('.hide-finder-button').text("Hide Finder");
       $(".filter-result").removeClass("col-sm-6");
       $(".filter-result").addClass("col-sm-12");
     }
@@ -136,9 +146,12 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
       $scope.newKeyword = '';
       // needs notification of empty string
     }
+    $scope.submitParams();
   }
+
   $scope.removeKeyword = function(index) {
     $scope.search_parameters.keywords.splice(index,1);
+    $scope.submitParams();
   }
 
   // meals search
@@ -155,7 +168,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     else {
       $scope.search_parameters.categories.push(meal);
     }
-    console.log($scope.search_parameters.categories);
+    $scope.submitParams();
   };
 
   // time slider function
@@ -181,7 +194,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
         $("#amount").val(timeConversion(ui.values[0]) + " to " + timeConversion(ui.values[1]));
 
         $scope.search_parameters.timeframe = ui.values;
-        console.log($scope.search_parameters);
+        $scope.submitParams();
       }
     });
     // initial slider values
@@ -201,7 +214,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     else {
       $scope.search_parameters.categories.push(cuisine);
     }
-    console.log($scope.search_parameters.categories);
+    $scope.submitParams();
   };
 
   // course search
@@ -216,7 +229,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     else {
       $scope.search_parameters.categories.push(course);
     }
-    console.log($scope.search_parameters.categories);
+    $scope.submitParams();
   };
 
   // occasions search
@@ -231,7 +244,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     else {
       $scope.search_parameters.categories.push(occasion);
     }
-    console.log($scope.search_parameters.categories);
+    $scope.submitParams();
   };
 
 }]);
