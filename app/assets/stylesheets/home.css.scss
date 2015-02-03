@@ -17,7 +17,7 @@
       margin: 0;
       display: inline-block;
       overflow: hidden;
-      opacity: 0.9;
+      // opacity: 0.9;
     }
     .splash-item.ng-move {
       -webkit-transition:5s linear all;
@@ -38,10 +38,11 @@
 }
 
 .search-wrapper.col-xs-12 {
-  margin: -260px 0;
+  // margin: -260px 0;
   background: transparent;
   padding: 0 7%;
   .recipe-search {
+    box-shadow: 1px 2px 2px #000;
     // font-size: 17px;
     text-align: center;
     color: $color-raisin;
@@ -53,10 +54,52 @@
     // z-index: 1;
     // padding: 10px 15px;
     height: 46px;
+    box-shadow: 1px 2px 2px #000;
     .fa.fa-search {
       font-size: 24px;
       z-index: 1;
       color: $color-raisin;
+      &:focus {
+        color: $color-airbnb-red;
+      }
+    }
+  }
+}
+
+
+.home-links {
+  // background: $color-airbnb-red;
+  padding: 175px 0;
+  margin: -470px 0;
+  .other-links-separator {
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 24px;
+    // margin: 5px;
+    font-style: italic;
+    p {
+      text-shadow: 1px 2px 2px #000;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .home-other-links {
+    // margin: -100px;
+    .other-links-buttons {
+      // padding: 0 60px;
+    }
+    .home-recipe-finder,
+    .home-myrecipes {
+      color: $color-raisin;
+      z-index: 1;
+      font-size: 18px;
+      border: 1px solid $color-airbnb-buttonbordergrey;
+      box-shadow: 1px 2px 2px #000;
+      &:focus {
+        outline: none;
+        color: $color-airbnb-red;
+      }
     }
   }
 }
@@ -71,7 +114,15 @@
 }
 
 @media (max-width: 768px) {
-  
+  .home-links .home-other-links .home-recipe-finder,
+  .home-links .home-other-links .home-myrecipes {
+    font-size: 14px;
+  }
+  .fa.fa-search {
+    font-size: 14px;
+    z-index: 1;
+    color: $color-raisin;
+  }
 }
 
 @media (min-width: 768px) {

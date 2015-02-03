@@ -23,5 +23,5 @@ json.ingredients @recipe.recipe_ingredient_lists do |ingredient|
   json.unitUS ingredient.unit_us
   json.amountMetric ingredient.amount_metric
   json.unitMetric ingredient.unit_metric
-  # json.name ingredient.display_name
+  json.name ingredient.display_name
 end
