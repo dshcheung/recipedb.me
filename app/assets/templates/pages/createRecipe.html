@@ -12,14 +12,14 @@
     <form class="form-group">
       <div class="create-title">
         <label for="recipeTitleName">Recipe Name:</label>
-        <input ng-model="createTitle" type="text" class="form-control create-title-input" placeholder="What is your dish called?">
+        <input ng-model="create_parameters.title" type="text" class="form-control create-title-input" placeholder="What is your dish called?">
       </div>
     </form>
 
     <form class="form-group">
       <div class="create-description">
         <label for="recipeDescription">Description:</label>
-        <input ng-model="createDescription" type="text" class="form-control create-description-input" placeholder="Describe your dish...">
+        <input ng-model="create_parameters.description" type="text" class="form-control create-description-input" placeholder="Describe your dish...">
       </div>
     </form>
 
@@ -112,7 +112,7 @@
       </div>
     </form>
 
-    <button type="submit" class="submit-create-button btn btn-default form-control">Submit</button>
+    <button ng-click="submitCreation()" type="submit" class="submit-create-button btn btn-default form-control">Submit</button>
 
   </div>
   <!-- </div> -->

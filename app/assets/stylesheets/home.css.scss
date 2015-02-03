@@ -29,6 +29,14 @@
   }
 }
 
+.login-modal-title.modal-header.row,
+.login-modal-inputs.modal-body.row,
+.registration-modal-title.modal-header.row,
+.registration-modal-inputs.modal-body.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .search-wrapper.col-xs-12 {
   margin: -260px 0;
   background: transparent;
