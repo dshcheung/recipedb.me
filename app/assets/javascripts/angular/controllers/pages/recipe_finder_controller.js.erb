@@ -9,11 +9,14 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
   // paginate varibales
   $scope.bigTotalItems = 1;
   $scope.bigCurrentPage = 1;
+  $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>"
 
   {// functions for getting recipes and recipe count
     var getFilteredRecipes = function(params){
+      $scope.loading = true;
       $http.post('/recipes/search', params).success(function(data, status){
         $scope.recipes = data.recipes;
+        $scope.loading = false;
       })
     }
 
@@ -25,10 +28,11 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
 
     var getInitialRecipes = function(){
       var params = { 
-        "search_parameters": $scope.search_parameters
+        "search_parameters": $scope.search_parameters,
+        "page": 1
       }
-      getFilteredRecipesCount(params);
       getFilteredRecipes(params);
+      getFilteredRecipesCount(params);
     }
   }
 
