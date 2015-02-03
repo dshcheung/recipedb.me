@@ -1,6 +1,6 @@
 json.title @recipe.name
 
-if @recipe.outside_profile_id == nil
+if @recipe.outside_profile_id.nil?
   json.author do 
     json.display_format 0
     json.username @recipe.user.username
