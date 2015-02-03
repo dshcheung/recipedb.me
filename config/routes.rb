@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   get '/recipes', to: 'recipes#index'
+  get '/recipes_count', to: 'recipes#index_count'
   get '/recipes/:id', to: 'recipes#show'
-  post '/recipes_search', to: 'recipes#search'
+  post '/recipes/search', to: 'recipes#search'
+  post '/recipes/search_count', to: 'recipes#search_count'
   
 end
