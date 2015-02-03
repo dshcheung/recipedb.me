@@ -145,6 +145,8 @@
   // background: #CCC;
   // padding: 0;
   border: 1px solid $color-airbnb-grey;
+  height: 500px;
+  overflow-y: scroll;
   .filter-keyword-wrapper {
     // font-weight: bold;
     padding: 10px 0;
@@ -281,6 +283,8 @@
   // .filter-results-div {
   //   display: inline-block;
   // }
+  height: 500px;
+  overflow: scroll;
   .filter-result-empty {
     text-align: center;
     background: $color-airbnb-grey;
