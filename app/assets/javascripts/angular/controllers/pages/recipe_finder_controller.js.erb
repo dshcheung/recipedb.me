@@ -130,9 +130,10 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     };
 
     $scope.moreKeyword = function() {
-      if ($scope.addKeyword != undefined && $scope.addKeyword != "") {
+      if ($scope.addKeyword != undefined && $scope.addKeyword != "" && $scope.addKeyword.length > 2) {
         if (checkDuplicates($scope.addKeyword,$scope.search_parameters.keywords) == true) {
           $scope.addKeyword = '';
+          // need noty
         } else {
           $scope.search_parameters.keywords.push($scope.addKeyword);
           $scope.addKeyword = '';
@@ -142,7 +143,8 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
         }
       } else {
         $scope.addKeyword = '';
-        // needs notification of empty string
+        // need notification of empty string
+        // need noty for 2 or less characters
       }
       // console.log($scope.search_parameters.keywords);
       // console.log($scope.search_parameters);
