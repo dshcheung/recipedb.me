@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
   end
 
   private
-  def getQueryStr(params, offset)
+  def getQueryStr(params, orderQuery)
     search_params = params[:search_parameters]
     search_count = 1
 
@@ -56,7 +56,7 @@ class RecipesController < ApplicationController
     time2 = search_params["timeframe"][1]
     query += "#{timeframe_default} #{timeframe_condition(time1,time2)})"
 
-    if offset == true
+    if orderQuery == true
       query += ending_query(search_count, offset)
     else
       query += ending_query2(search_count)
