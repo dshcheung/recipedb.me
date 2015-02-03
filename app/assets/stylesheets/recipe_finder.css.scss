@@ -57,12 +57,12 @@
   background: $color-airbnb-red;
   font-family: $font-airbnb;
   // box-shadow: 1px 1px 5px $color-airbnb-font;
-  border: 1px solid $color-airbnb-grey;
+  border: 1px solid $color-airbnb-red;
 }
 
 .hide-finder-button.btn.btn-default {
-  background: $color-airbnb-buttongrey;
-  border: 1px solid $color-airbnb-grey;
+  background: $color-airbnb-grey;
+  border: 1px solid $color-airbnb-buttonbordergrey;
   &:focus {
     outline: 0;
   }
@@ -326,7 +326,7 @@
         font-size: 14px;
         margin: 0;
         padding: 0;
-        strong {
+        .author-name {
           color: $color-airbnb-red;
         }
       }

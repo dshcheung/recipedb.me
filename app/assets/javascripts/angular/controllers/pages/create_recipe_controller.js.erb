@@ -5,39 +5,17 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', function(
   //   console.log(data);
   // });
 
-  var measures = ["dash(s)","pod(s)","container(s)","packet(s)", "ounce(s)", "sheet(s)", "basket(s)", "slab(s)","dash(es)","milliliter(s)","x","shell(s)","rack(s)","quart(s)","bunch(es)","serving(s)","chunk(s)","clove(s)","liter(s)","twist(s)","gallon(s)","grind(s)","stalk(s)","tub(s)","piece(s)","pint(s)","feet","prune(s)","fluid","shot(s)","envelope(s)","gram(s)","bottle(s)","slice(s)","inch(es)","pound(s)","oz","count(s)","tray(s)","kilogram(s)","jar(s)","leaf(s)","head(s)","round(s)","whole","squeeze(s)","wedge(s)","pat(s)","spash(es)","bone(s)","pounch(es)","hank(s)","loaf(s)","large","bag(s)","spear(s)","pinch(es)","strip(s)","thin","roll(s)","medium","jumbo","bite","square(s)","cube(s)","rib(s)","sprig(s)","drop(s)","crown(s)","cup(s)","leg(s)","stick(s)","tablespoon(s)","scoop(s)","link(s)","package(s)","mini","sleeve(s)","ear(s)","bulb(s)","box(es)"]
+  $scope.measurements = ["pod(s)","container(s)","packet(s)", "ounce(s)", "sheet(s)", "basket(s)", "slab(s)","dash(es)","milliliter(s)","x","shell(s)","rack(s)","quart(s)","bunch(es)","serving(s)","chunk(s)","clove(s)","liter(s)","twist(s)","gallon(s)","grind(s)","stalk(s)","tub(s)","piece(s)","pint(s)","feet","prune(s)","fluid","shot(s)","envelope(s)","gram(s)","bottle(s)","slice(s)","inch(es)","pound(s)","oz","count(s)","tray(s)","kilogram(s)","jar(s)","leaf(s)","head(s)","round(s)","whole","squeeze(s)","wedge(s)","pat(s)","spash(es)","bone(s)","pounch(es)","hank(s)","loaf(s)","large","bag(s)","spear(s)","pinch(es)","strip(s)","thin","roll(s)","medium","jumbo","bite","square(s)","cube(s)","rib(s)","sprig(s)","drop(s)","crown(s)","cup(s)","leg(s)","stick(s)","tablespoon(s)","scoop(s)","link(s)","package(s)","mini","sleeve(s)","ear(s)","bulb(s)","box(es)"].sort();
 
-  var hourArray = [];
-  for (var i = 0; i < 24 ; i++) {
-    hourArray.push(i);
-  }
-
-  var minuteArray = [];
-  for (var i = 0; i < 60 ; i++) {
-    minuteArray.push(i);
-  }
-
-  $scope.hours = hourArray;
-  $scope.minutes = minuteArray;
-
-  $scope.measurements = measures.sort()
-  // console.log($scope.measurements);
-
-  var ingredients = [];
-  $scope.addIngredient = function() {
-    console.log($scope.addIngredNumber,$scope.addIngredUnit,$scope.addIngredName);
-
-    ingredient["number"] = $scope.addIngredNumber;
-    ingredient["unit"] = $scope.addIngredUnit;
-    ingredient["ingredient"] = $scope.addIngredName;
-    ingredients.push(ingredient);
-    $('.added-ingredients tbody').prepend("<tr class='added-ingredient'><td class='col-xs-2'></td><td class='col-xs-1'>-</td><td class='col-xs-1'>"+$scope.addIngredNumber+"</td><td class='col-xs-2'>"+$scope.addIngredUnit+"</td><td class='col-xs-6'>"+$scope.addIngredName+"</td></tr>");
-  }
+  $scope.create_parameters = [];
 
   // time slider function
   {
-    $scope.search_parameters.timeframe = [0,120];
-
+    $scope.create_parameters.timeframe = {
+      "prepTime": 0,
+      "cookTime": 0,
+      "restTime": 0
+    };
 
     var timeConversion = function(minutes) {
       if (minutes > 60) {
@@ -48,36 +26,119 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', function(
     }
 
     $(function() {
-      $( "#slider" ).slider({
-        // range: true,
+      $( "#prep-time-slider" ).slider({
         min: 0,
         max: 1440,
-        values: [ 0, 1440 ],
+        values: [0],
         slide: function( event, ui ) {
-
-          // $( "#amount" ).val( timeConversion(ui.values[0]) + " to " + timeConversion(ui.values[ 1 ]) );
-
-          $scope.search_parameters.timeframe = ui.values;
-          console.log($scope.search_parameters);
+          $( "#prep-time-amount" ).val( timeConversion(ui.values));
+          $scope.create_parameters.timeframe.prepTime = ui.values;
+          console.log($scope.create_parameters);
         }
       });
       // initial slider values
-      // $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ) +" mins" );
-      // $( "#amount" ).val( timeConversion(0) + " to " + timeConversion(1440) );
+      $( "#prep-time-amount" ).val( timeConversion(0));
     });
+
+    $(function() {
+      $( "#cook-time-slider" ).slider({
+        min: 0,
+        max: 1440,
+        values: [0],
+        slide: function( event, ui ) {
+          $( "#cook-time-amount" ).val( timeConversion(ui.values));
+          $scope.create_parameters.timeframe.cookTime = ui.values;
+          console.log($scope.create_parameters);
+        }
+      });
+      // initial slider values
+      $( "#cook-time-amount" ).val( timeConversion(0));
+    });
+
+    $(function() {
+      $( "#rest-time-slider" ).slider({
+        min: 0,
+        max: 1440,
+        values: [0],
+        slide: function( event, ui ) {
+          $( "#rest-time-amount" ).val( timeConversion(ui.values));
+          $scope.create_parameters.timeframe.restTime = ui.values;
+          console.log($scope.create_parameters);
+        }
+      });
+      // initial slider values
+      $( "#rest-time-amount" ).val( timeConversion(0));
+    });
+    
   }
+  {
+    // add ingredients function
+    $scope.create_parameters.all_ingredients = [];
 
-  // cuisine = "";
-  // something.forEach(){
-  //   cusine += something.tile + "/"
-  // }
+    var checkDuplicates = function (keyword,array) {
+      for (var i= 0 ; i < array.length ; i++) {
+        if (keyword == array[i]) {
+          return true;
+        }
+      }
+    };
 
-  // $http.get.....
+    $scope.newIngredient = function() {
+      if ($scope.addIngredName != undefined && $scope.addIngredName != "") {
+        if (checkDuplicates($scope.addIngredName,$scope.create_parameters.all_ingredients) == true) {
+          $scope.addIngredName = '';
+        } else {
+          $scope.create_parameters.all_ingredients.push({
+            "amount": $scope.addIngredNumber,
+            "unit": $scope.addIngredUnit,
+            "name": $scope.addIngredName
+          });
+          $scope.addIngredNumber = '';
+          $scope.addIngredUnit = '';
+          $scope.addIngredName = '';
+          // console.log($scope.addIngredName);
+          // console.log(checkDuplicates($scope.addIngredName,$scope.create_parameters.keywords));
+          console.log($scope.create_parameters);
+        }
+      } else {
+        $scope.addIngredName = '';
+        // needs notification of empty string
+      }
+      // console.log($scope.create_parameters.keywords);
+      // console.log($scope.create_parameters);
+    };
 
-  //   var data = {
-  //     cusine: cuisuine
-  //   }
+    $scope.removeIngredient = function(index) {
+      $scope.create_parameters.all_ingredients.splice(index,1);
+    };
+  }
+  {
+    // add instruction functions
+    $scope.create_parameters.all_instructions =[];
 
+    $scope.newInstruction = function() {
+      if ($scope.addInstruction != undefined && $scope.addInstruction != "") {
+        if (checkDuplicates($scope.addInstruction,$scope.create_parameters.all_ingredients) == true) {
+          $scope.addInstruction = '';
+        } else {
+          $scope.create_parameters.all_instructions.push($scope.addInstruction);
+          $scope.addInstruction = '';
+          // console.log($scope.addIngredName);
+          // console.log(checkDuplicates($scope.addIngredName,$scope.create_parameters.keywords));
+          console.log($scope.create_parameters);
+        }
+      } else {
+        $scope.addInstruction = '';
+        // needs notification of empty string
+      }
+      // console.log($scope.create_parameters.keywords);
+      // console.log($scope.create_parameters);
+    };
+
+    $scope.removeInstruction = function(index) {
+      $scope.create_parameters.all_instructions.splice(index,1);
+    };
+  }
 
 
 }]);

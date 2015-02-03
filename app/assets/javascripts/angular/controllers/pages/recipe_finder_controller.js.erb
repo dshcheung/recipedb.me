@@ -70,19 +70,15 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
       if ($(".hide-finder-button").attr('data-status')=="open"){
         $("div.filter").hide();
         $(".filter-results").removeClass("col-sm-6");
-        // $('.filter').addClass("col-xs-0");
         $(".filter-result").removeClass("col-sm-12");
         $(".filter-result").addClass("col-sm-6");
         $(".hide-finder-button").attr('data-status',"closed");
-        // console.log($(".hide-finder-button").attr('data-status'));
       } else {
         $("div.filter").show();
         $(".hide-finder-button").attr('data-status',"open");
-        // $('.filter').removeClass("col-xs-0");
         $(".filter-results").addClass("col-sm-6");
         $(".filter-result").removeClass("col-sm-6");
         $(".filter-result").addClass("col-sm-12");
-        // console.log($(".hide-finder-button").attr('data-status'));
       }
     }
 
@@ -96,7 +92,7 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
       }
     };
 
-    $scope.moreKeyword = function() {
+    $scope.newKeyword = function() {
       if ($scope.addKeyword != undefined && $scope.addKeyword != "") {
         if (checkDuplicates($scope.addKeyword,$scope.search_parameters.keywords) == true) {
           $scope.addKeyword = '';
@@ -114,7 +110,7 @@ $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thank
       // console.log($scope.search_parameters.keywords);
       // console.log($scope.search_parameters);
     }
-    $scope.lessKeyword = function(index) {
+    $scope.removeKeyword = function(index) {
       $scope.search_parameters.keywords.splice(index,1);
     }
   }
