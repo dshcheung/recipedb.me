@@ -99,4 +99,80 @@ class RecipesController < ApplicationController
   def ending_query2(search_count)
     return " AS new GROUP BY recipes_id HAVING COUNT(*) = #{search_count};"
   end
+
+  def count
+    search_params = params[:search_parameters]
+    search_count = 1
+
+    if search_params["page"] != nil  
+      offset = 20 * search_params["page"].to_i
+    else
+      offset = 0
+    end
+
+    query = starting_query
+
+    if search_params["keywords"] != nil
+      search_params["keywords"].each do |keyword|
+        search_count += 1
+        query += "#{keyword_default} #{keyword_condition} '%#{keyword}%' UNION ALL "
+      end
+    end
+
+    if search_params["categories"] != nil
+      search_params["categories"].each do |category|
+        search_count += 1
+        query += "#{category_default} #{category_condition}#{category.to_s} UNION ALL "
+      end
+    end
+
+    time1 = search_params["timeframe"][0]
+    time2 = search_params["timeframe"][1]
+
+    query += "#{timeframe_default} #{timeframe_condition(time1,time2)})"
+    query += ending_query2(search_count)
+
+    puts query
+
+    count = ActiveRecord::Base.connection.execute(query).count
+    puts count
+
+    render json: {count: count}
+  end
+
+  private
+  def keyword_default
+    return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN recipe_ingredient_lists ON recipes.id=recipe_ingredient_lists.recipe_id"
+  end
+
+  def keyword_condition
+    return "WHERE recipe_ingredient_lists.display_name like"
+  end
+
+  def category_default
+    return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN recipe_category_lists ON recipe_category_lists.recipe_id = recipes.id INNER JOIN categories ON categories.id = recipe_category_lists.category_id"
+  end
+
+  def category_condition
+    return "WHERE recipe_category_lists.category_id="
+  end
+
+  def timeframe_default
+    return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes"
+  end
+
+  def timeframe_condition(time1, time2)
+    return "WHERE recipes.ready_time >= #{time1.to_i} AND recipes.ready_time <= #{time2.to_i}"
+  end
+
+  def starting_query
+    return "SELECT COUNT(recipes_id) as count_all, new.recipes_id as recipes_id FROM ("
+  end
+
+  def ending_query(search_count, offset)
+    return " AS new GROUP BY recipes_id HAVING COUNT(*) = #{search_count} ORDER BY recipes_id ASC LIMIT 20 OFFSET #{offset};"
+  end
+  def ending_query2(search_count)
+    return " AS new GROUP BY recipes_id HAVING COUNT(*) = #{search_count};"
+  end
 end
