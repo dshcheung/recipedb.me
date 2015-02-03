@@ -23,7 +23,7 @@
       <!-- the whole filter section -->
       <div class="filter col-xs-12 col-sm-6">
         <!-- keyword search -->
-        <form ng-submit="newKeyword()" class="filter-keyword-wrapper row">
+        <form ng-submit="addKeyword()" class="filter-keyword-wrapper row">
           <div class="filter-tags col-xs-12">
             <div class="filter-tags-heading">Search for:</div>
             <div class="keyword-collection">
@@ -36,7 +36,7 @@
             </div>
           </div>
           <!-- keyword input -->
-          <input type="text" class="input-sm filter-keyword-search col-xs-10" placeholder="Search by Keyword / Ingredient(s)" ng-model="addKeyword">
+          <input type="text" class="input-sm filter-keyword-search col-xs-10" placeholder="Search by Keyword / Ingredient(s)" ng-model="newKeyword">
           <button type="submit" class="add-keyword-button btn btn-default col-xs-2">Add</button>
         </form>
 

@@ -27,19 +27,19 @@
       <label for="Ingredients">Add Ingredients:</label>
       <div class="row">
         <div class="col-xs-2">
-          <input ng-model="addIngredNumber" type="text" class="form-control input-sm" placeholder="#">
+          <input ng-model="newIngredNumber" type="text" class="form-control input-sm" placeholder="#">
         </div>
         <div class="col-xs-3">
-          <select ng-model="addIngredUnit" class="form-control input-sm">
+          <select ng-model="newIngredUnit" class="form-control input-sm">
             <option val="0"></option>
             <option ng-repeat="measurment in measurements">  {{ measurment }}
             </option>
           </select>
         </div>
         <div class="col-xs-5">
-          <input ng-model="addIngredName" type="text" class="form-control input-sm" placeholder="Ingredient">
+          <input ng-model="newIngredName" type="text" class="form-control input-sm" placeholder="Ingredient">
         </div>
-        <button ng-click="newIngredient()" type="submit" class="create-add-to-list btn btn-warning col-xs-1">+
+        <button ng-click="addIngredient()" type="submit" class="create-add-to-list btn btn-warning col-xs-1">+
         </button>
       </div>
       <table class="added-ingredients table">
@@ -88,9 +88,9 @@
       <label for="Instructions">Add Instructions:</label>
       <div class="row">
         <div class="col-xs-10">
-          <input ng-model="addInstruction" type="text" class="form-control input-sm create-instruction-input" placeholder="Next Step....">
+          <input ng-model="newInstruction" type="text" class="form-control input-sm create-instruction-input" placeholder="Next Step....">
         </div>
-        <button ng-click="newInstruction()" type="submit" class="create-add-to-list btn btn-warning col-xs-1">+
+        <button ng-click="addInstruction()" type="submit" class="create-add-to-list btn btn-warning col-xs-1">+
         </button>
       </div>
       <ul class="added-instructions">
@@ -111,9 +111,7 @@
         <p class="help-block">Upload a photo of your dish</p>
       </div>
     </form>
-
     <button ng-click="submitCreation()" type="submit" class="submit-create-button btn btn-default form-control">Submit</button>
-
   </div>
   <!-- </div> -->
 </div>
