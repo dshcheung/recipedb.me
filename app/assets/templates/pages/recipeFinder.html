@@ -4,8 +4,11 @@
 <div class="main-body">
   <div class="recipe-finder-body container-fluid">
     <div class="row">
+      <button class="btn btn-warning col-xs-12" ng-click="submitParams()">Recipe Finder</button>
+    </div>
+    <div class="row">
       <button ng-click="uncheckAll()" data-status="open" class="hide-finder-button btn btn-primary col-xs-4">
-        Reset
+        Reset Filters
       </button>
       <button ng-click="toggleFinder()" data-status="open" class="hide-finder-button btn btn-default col-xs-4">
         Toggle Finder
@@ -18,21 +21,18 @@
       </a>
     </div>
 
-    <div class="row">
-      <button class="btn btn-primary col-xs-12" ng-click="submitParams()">Submit</button>
-    </div>
 
     <div class="row">
       <!-- the whole filter section -->
       <div class="filter col-xs-12 col-sm-6">
 
         <!-- keyword search -->
-        <form ng-submit="moreKeyword()" class="filter-keyword-wrapper row">
+        <form ng-submit="newKeyword()" class="filter-keyword-wrapper row">
           <div class="filter-tags col-xs-12">
             <div class="filter-tags-heading">Search for:</div>
             <div class="keyword-collection">
               <!-- list of keywords -->
-              <div ng-click="lessKeyword($index)" ng-repeat='keyword in search_parameters.keywords track by $index' class='filter-tag'>
+              <div ng-click="removeKeyword($index)" ng-repeat='keyword in search_parameters.keywords track by $index' class='filter-tag'>
                 {{ keyword }}
                 <!-- <i class='fa fa-times'></i> -->
                 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -168,7 +168,7 @@
           </div>
           <div class="filter-result-info col-xs-6 col-md-7 col-lg-8">
             <a href="/#/recipes/{{ recipe.id }}" class="filter-result-title">{{ recipe.title }}</a>
-            <a href="{{recipe.author.profile_url}}"><p class="filter-result-author">By <strong>{{ recipe.author.username }}</strong></p></a>
+            <p class="filter-result-author">By <a class="author-name" href="{{recipe.author.profile_url}}">{{ recipe.author.username }}</a></p>
             <p class="filter-result-description hidden-sm hidden-xs">{{ recipe.description }}</p>
           </div>
           <i ng-click="addCollection($index)" popover-popup-delay="2000" popover-placement="left" popover="Add to Collection" popover-trigger="mouseenter" data-collection="normal" class="fa fa-heart-o pull-right col-xs-1"></i>

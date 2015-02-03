@@ -1,5 +1,4 @@
 app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
-  // $scope.recipes = @recipes.
 
   // get recipe information to display
   $http.get('/recipes/'+$routeParams.id+'.json').success(function(data, status, xhr){

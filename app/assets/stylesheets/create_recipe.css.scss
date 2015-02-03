@@ -16,20 +16,39 @@
 }
 
 .form-group.create-timeframe {
-  .col-xs-4 {
-    .row {
-      // padding: 0;
-      p {
-        margin: 0;
+  padding: 10px 0;
+  height: 65px;
+  .create-prep-time.col-xs-4 .row,
+  .create-cook-time.col-xs-4 .row,
+  .create-rest-time.col-xs-4 .row {
+    .col-xs-12 {
+      div #prep-time-slider,
+      div #cook-time-slider,
+      div #rest-time-slider {
+        background: $color-airbnb-grey;
+        margin: 2px 0;
+        height: 5px;
+        .ui-slider-handle.ui-state-default{
+          background: $color-airbnb-buttonbordergrey;
+          margin: -3px -8px;
+        }
       }
     }
   }
 }
 
-.btn.btn-warning {
+.form-group.create-ingredients .row .form-control.input-sm {
+  height: 34px;
+  font-size: 14px;
+}
+
+.create-add-to-list.btn.btn-warning {
   background: $color-raisin;
+  border: 1px solid $color-airbnb-grey;
   &:hover,:focus {
     background: $color-airbnb-red;
+    // margin: 10px 0;
+    // height: 5px;
   }
 }
 
@@ -43,11 +62,37 @@ table.added-ingredients > tbody > tr.added-ingredient {
   padding:0;
   font-size: 11px;
   margin: 0;
+  // border: 1px solid black;
 }
 table.added-ingredients > tbody > tr.added-ingredient > td {
   margin: 0;
   padding: 0;
   vertical-align: middle;
+  text-align: center;
+  // border: 1px solid black;
+}
+
+.form-control.input-sm.create-instruction-input {
+  height: 34px;
+  font-size: 14px;
+}
+
+.added-instructions {
+  // padding:0;
+  font-size: 11px;
+  // text-align: center;
+  // margin: 0;
+  .added-instruction {
+    background: #ccc;
+    margin: 1px 0;
+  }
+}
+
+.create-image-div {
+  text-align: center;
+  input#recipeImageFile {
+    padding: 0 40%;
+  }
 }
 
 .submit-create-button.btn.btn-default {
