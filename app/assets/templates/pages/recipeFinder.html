@@ -167,7 +167,10 @@
           </div>
           <div class="filter-result-info col-xs-6 col-md-7 col-lg-8">
             <a href="/#/recipes/{{ recipe.id }}" class="filter-result-title">{{ recipe.title }}</a>
-            <p class="filter-result-author">By <a class="author-name" href="{{recipe.author.profile_url}}">{{ recipe.author.username }}</a></p>
+            <p ng-if="recipe.author.display_format == 0" class="filter-result-author">By <a class="author-name" href="/user/{{recipe.author.profile_url}}">{{ recipe.author.username }}</a></p>
+            <p ng-if="recipe.author.display_format == 1" class="filter-result-author">By <a class="author-name" href="{{recipe.author.profile_url}}">{{ recipe.author.username }}</a></p>
+            <p ng-if="recipe.author.display_format == 2" class="filter-result-author">By <a class="author-name" href="{{recipe.author.profile_url}}">{{ recipe.author.full_name }}</a></p>
+            <p ng-if="recipe.author.display_format == 3" class="filter-result-author">By <a class="author-name" href="{{recipe.author.profile_url}}">{{ recipe.author.site_name }}</a></p>
             <p class="filter-result-description hidden-sm hidden-xs">{{ recipe.description }}</p>
           </div>
           <i ng-click="addCollection($index)" popover-popup-delay="2000" popover-placement="left" popover="Add to Collection" popover-trigger="mouseenter" data-collection="normal" class="fa fa-heart-o pull-right col-xs-1"></i>
