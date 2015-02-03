@@ -42,7 +42,7 @@
   background: transparent;
   padding: 0 7%;
   .recipe-search {
-    box-shadow: 2px 3px 4px #000;
+    box-shadow: 1px 2px 2px #000;
     // font-size: 17px;
     text-align: center;
     color: $color-raisin;
@@ -54,7 +54,7 @@
     // z-index: 1;
     // padding: 10px 15px;
     height: 46px;
-    box-shadow: 2px 3px 4px #000;
+    box-shadow: 1px 2px 2px #000;
     .fa.fa-search {
       font-size: 24px;
       z-index: 1;
@@ -79,7 +79,7 @@
     // margin: 5px;
     font-style: italic;
     p {
-      text-shadow: 2px 3px 4px #000;
+      text-shadow: 1px 2px 2px #000;
       margin: 0;
       padding: 0;
     }
@@ -95,7 +95,7 @@
       z-index: 1;
       font-size: 18px;
       border: 1px solid $color-airbnb-buttonbordergrey;
-      box-shadow: 2px 3px 4px #000;
+      box-shadow: 1px 2px 2px #000;
       &:focus {
         outline: none;
         color: $color-airbnb-red;
