@@ -1,11 +1,19 @@
 json.title @recipe.name
 
-json.author do
-  json.display_format @recipe.outside_profile.display_format
-  json.username @recipe.outside_profile.username
-  json.full_name @recipe.outside_profile.full_name
-  json.site_name @recipe.outside_profile.site_name
-  json.profile_url @recipe.outside_profile.outside_profile_url
+if @recipe.outside_profile_id == nil
+  json.author do 
+    json.display_format 0
+    json.username @recipe.user.username
+    json.profile_url @recipe.user.id
+  end
+else
+  json.author do
+    json.display_format @recipe.outside_profile.display_format
+    json.username @recipe.outside_profile.username
+    json.full_name @recipe.outside_profile.full_name
+    json.site_name @recipe.outside_profile.site_name
+    json.profile_url @recipe.outside_profile.outside_profile_url
+  end
 end
 
 json.description @recipe.description
