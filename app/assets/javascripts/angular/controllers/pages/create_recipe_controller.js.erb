@@ -1,18 +1,8 @@
 app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
 
-
-  
-  // $http.post('/create.json').success(function(data, status, xhr){
-  //   $scope.recipes = data.recipes;
-  //   console.log(data);
-  // });
-
   $scope.measurements = ["pod(s)","container(s)","packet(s)", "ounce(s)", "sheet(s)", "basket(s)", "slab(s)","dash(es)","milliliter(s)","x","shell(s)","rack(s)","quart(s)","bunch(es)","serving(s)","chunk(s)","clove(s)","liter(s)","twist(s)","gallon(s)","grind(s)","stalk(s)","tub(s)","piece(s)","pint(s)","feet","prune(s)","fluid","shot(s)","envelope(s)","gram(s)","bottle(s)","slice(s)","inch(es)","pound(s)","oz","count(s)","tray(s)","kilogram(s)","jar(s)","leaf(s)","head(s)","round(s)","whole","squeeze(s)","wedge(s)","pat(s)","spash(es)","bone(s)","pounch(es)","hank(s)","loaf(s)","large","bag(s)","spear(s)","pinch(es)","strip(s)","thin","roll(s)","medium","jumbo","bite","square(s)","cube(s)","rib(s)","sprig(s)","drop(s)","crown(s)","cup(s)","leg(s)","stick(s)","tablespoon(s)","scoop(s)","link(s)","package(s)","mini","sleeve(s)","ear(s)","bulb(s)","box(es)"].sort();
 
   $scope.create_parameters = {};
-
-  // var user = UserServices;
-  // $scope.create_parameters.author = UserServices.username;
 
   $scope.create_parameters.title = '';
 
@@ -76,7 +66,8 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServ
       values: [0],
       slide: function(event,ui) {
         $("#prep-time-amount").val(timeConversion(ui.values));
-        $scope.create_parameters.timeframe.prepTime = ui.values;
+        $scope.create_parameters.timeFrame.prepTime = ui.values[0];
+        console.log(ui.values);
         console.log($scope.create_parameters);
       }
     });
@@ -91,7 +82,7 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServ
       values: [0],
       slide: function(event,ui) {
         $("#cook-time-amount").val(timeConversion(ui.values));
-        $scope.create_parameters.timeframe.cookTime = ui.values;
+        $scope.create_parameters.timeFrame.cookTime = ui.values[0];
         console.log($scope.create_parameters);
       }
     });
@@ -106,7 +97,7 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServ
       values: [0],
       slide: function(event,ui) {
         $("#rest-time-amount").val(timeConversion(ui.values));
-        $scope.create_parameters.timeframe.restTime = ui.values;
+        $scope.create_parameters.timeFrame.restTime = ui.values[0];
         console.log($scope.create_parameters);
       }
     });
@@ -129,10 +120,6 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServ
       }
     } else {
       $scope.newInstruction = '';
-      // needs notification of empty string
-      }
-    } else {
-      $scope.addInstruction = '';
       // needs notification of empty string
     }
   };
