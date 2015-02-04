@@ -1,7 +1,8 @@
-app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
 
   $scope.search_parameters = {};
   $scope.search_parameters.categories = [];
+  $scope.search_parameters.ingredients = [];
   $scope.search_parameters.keywords = [];
   $scope.search_parameters.timeframe = [0,120];
   $scope.maxSize = 5;
@@ -19,9 +20,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
         $scope.recipes = data.recipes;
         $scope.loading = false;
         if ($(".hide-finder-button").attr('data-status') == 'closed'){
-          console.log("hihi");
-          $(".filter-result").removeClass("col-sm-12");
-          $(".filter-result").addClass("col-sm-6");
+          // console.log("hihi");
         }
       })
     }
@@ -92,17 +91,12 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
   $scope.occasions_hidden = [{name: "Christmas", category_id: 1840}, {name: "Thanksgiving", category_id: 2006}, {name: "Easter", category_id: 1867}, {name: "Super Bowl®", category_id: 1994}, {name: "Labor Day", category_id: 1936}, {name: "Valentine's Day", category_id: 2035}, {name: "4th of July", category_id: 1830}, {name: "New Year's", category_id: 1968}, {name: "Halloween", category_id: 1917}, {name: "Mother's Day", category_id: 1964}, {name: "Mardi Gras", category_id: 1948}, {name: "Memorial Day", category_id: 1954}, {name: "Father's Day", category_id: 1916}, {name: "Hanukkah", category_id: 1928}, {name: "St. Patrick's Day", category_id: 1988}, {name: "Cinco de Mayo", category_id: 1966}, {name: "Passover", category_id: 1978}, {name: "Rosh Hashanah", category_id: 1987}, {name: "Ramadan", category_id: 1986}, {name: "Purim", category_id: 1985}, {name: "Lunar New Year", category_id: 1947}, {name: "Kwanzaa", category_id: 1935}, {name: "Veteran's Day", category_id: 2047}].sort();
 
   // add to collection button
-  $scope.addCollection = function() {
-    if ($(this).attr("data-collection") == "normal") {
-      $(this).removeClass("fa-heart-o");
-      $(this).addClass("fa-heart");
-      // $(this).attr("data-collection","liked");
-      // console.log($(".hide-finder-button").attr('data-status'));
-    } else {
-      $(this).removeClass("fa-heart");
-      $(this).addClass("fa-heart-o");
-      // $(this).attr("data-collection","normal");
-    }
+  $scope.addCollection = function(recipeID) {
+    console.log(recipeID);
+    $http.post('/user/' + UserServices.userID + '/bookmarks/', recipeID).success(function(data, status){
+      // console.log('data');
+
+    });
   };
 
   // reset finder button
@@ -110,6 +104,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     $('.checkbox').prop('checked',false);
     $scope.search_parameters.categories = [];
     $scope.search_parameters.keywords = [];
+    $scope.search_parameters.ingredients = [];
     $scope.search_parameters.timeframe = [0,1440];
     $(".ui-slider-range.ui-widget-header.ui-corner-all").attr("style","left: 0%;width: 100%;");
     $($(".ui-slider-handle.ui-state-default.ui-corner-all")[0]).attr("style","left: 0%;");
@@ -119,32 +114,10 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     $scope.submitParams();
   }
 
-  // toggle finder button
-  $scope.toggleFinder = function() {
-    if ($(".hide-finder-button").attr('data-status')=="open"){
-      $("div.filter").hide();
-      $(".filter-results").removeClass("col-sm-6");
-      $(".filter-result").removeClass("col-sm-12");
-      $(".filter-result").addClass("col-sm-6");
-      $(".reset-button").hide();
-      // $(".submit-button").hide();
-      $('.hide-finder-button').text("Show Finder");
-      // $(".hide-finder-button").addClass("col-xs-6");
-      // $(".create-recipe-button").addClass("col-xs-6");
-      $(".hide-finder-button").attr('data-status',"closed");
-    } else {
-      $("div.filter").show();
-      $(".hide-finder-button").attr('data-status',"open");
-      $(".filter-results").addClass("col-sm-6");
-      $(".reset-button").show();
-      // $(".submit-button").show();
-      // $(".hide-finder-button").removeClass("col-xs-6");
-      // $(".create-recipe-button").removeClass("col-xs-6");
-      $('.hide-finder-button').text("Hide Finder");
-      $(".filter-result").removeClass("col-sm-6");
-      $(".filter-result").addClass("col-sm-12");
-    }
-  }
+  $scope.hidden = false;
+  // $scope.togglehider = function() {
+  //     $scope.hider = $scope.hider === false ? true: false;
+  // };
 
   // keyword search
   var checkDuplicates = function(keyword,array) {
@@ -155,14 +128,21 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     }
   };
 
+  $scope.searchWord = "Ingredient";
+
   $scope.addKeyword = function() {
     if ($scope.newKeyword != undefined && $scope.newKeyword != "" && $scope.newKeyword.length > 2) {
       if (checkDuplicates($scope.newKeyword,$scope.search_parameters.keywords) == true) {
         $scope.newKeyword = '';
         // need noty
       } else {
-        $scope.search_parameters.keywords.push($scope.newKeyword);
-        $scope.newKeyword = '';
+        if ($scope.searchWord == "Ingredient") {
+          $scope.search_parameters.ingredients.push($scope.newKeyword);
+          $scope.newKeyword = '';
+        } else {
+          $scope.search_parameters.keywords.push($scope.newKeyword);
+          $scope.newKeyword = '';
+        } 
       }
     } else {
       $scope.newKeyword = '';
@@ -175,7 +155,10 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     $scope.search_parameters.keywords.splice(index,1);
     $scope.submitParams();
   }
-
+  $scope.removeIngredient = function(index) {
+    $scope.search_parameters.ingredient.splice(index,1);
+    $scope.submitParams();
+  }
   // meals search
   // toggle selection for a given food by name
   $scope.toggleMeals = function toggleMeals(meal) {
