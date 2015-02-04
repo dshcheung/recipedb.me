@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'UserServices', function($interval,$scope, $http, $routeParams, UserServices){
+app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'UserServices', '$location', function($interval,$scope, $http, $routeParams, UserServices, $location){
 
   $scope.recipeImages1 = [
    "http://images.media-allrecipes.com/userphotos/140x140/01/50/14/1501426.jpg",
@@ -121,4 +121,12 @@ app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'User
   });
 
   $scope.user = UserServices;
+
+  $scope.submitSearch = function (){
+    UserServices.resetMain();
+    UserServices.main.search_parameters.keywords.push($scope.keyword);
+    UserServices.activateSearch = true;
+    UserServices.freshSearch = true;
+    $location.path("/search");
+  };
 }]);
