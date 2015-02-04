@@ -45,10 +45,17 @@
 }
 
 .row .recipe-finder-title {
-  font-size: 28px;
-  // font-family: Helvetica;
+  font-size: 30px;
+  font-family: $font-title;
+  color: $color-raisin;
+  text-align: center;
   // text-shadow: 1px 1px 2px #666;
   display: inline-block;
+}
+
+.reset-button.btn.btn-default {
+  background: $color-airbnb-buttongrey;
+  border-radius: 0;
 }
 
 .create-recipe-button.btn.btn-default {
@@ -71,10 +78,13 @@
   }
 }
 
-.row .my-recipes-title {
-  font-size: 28px;
-  font-family: Helvetica;
-  text-shadow: 1px 1px 2px $color-airbnb-buttongrey;
+.row .myrecipes-title {
+  font-size: 30px;
+  font-family: $font-title;
+  color: $color-raisin;
+  text-align: center;
+  // text-shadow: 1px 1px 2px #666;
+  display: inline-block;
 }
 
 .row .filter-tags {
@@ -145,7 +155,7 @@
   // background: #CCC;
   // padding: 0;
   border: 1px solid $color-airbnb-grey;
-  height: 500px;
+  height: 550px;
   overflow-y: scroll;
   overflow-x: hidden;
   .filter-keyword-wrapper {
@@ -282,11 +292,39 @@
   margin: 0 25%;
 }
 
+.row > .filter-results > .paginate-div {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  // background: $color-airbnb-grey;
+  height: 33px;
+  ul.pagination-sm.pagination {
+    margin: 0;
+    .active a {
+      background: $color-airbnb-red;
+      border: 1px solid $color-airbnb-grey;
+    }
+    li {
+      .ng-scope.active {
+        background: $color-airbnb-red;
+      }
+      a {
+        padding: 5px 25px;
+        font-size: 15px;
+        font-weight: bold;
+        color: $color-raisin;
+      }
+    }
+  }
+}
+
+
 .row > .filter-results {
   padding: 0;
-  height: 500px;
+  height: 550px;
   overflow-y: scroll;
   overflow-x: hidden;
+  border: 1px solid $color-airbnb-buttonbordergrey;
   .filter-result-empty {
     text-align: center;
     background: $color-airbnb-grey;

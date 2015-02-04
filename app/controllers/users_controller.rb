@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def any
-    render json: {signedIn: user_signed_in?, username: get_username}
+    render json: {signedIn: user_signed_in?, username: get_username, user_id: current_user.id}
   end
 
   def get_username

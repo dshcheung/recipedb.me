@@ -6,6 +6,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', f
     console.log(response);
     UserServices.status = response.signedIn;
     UserServices.username = response.username;
+    UserServices.userID = response.user_id;
   });
 
   $scope.userSignUp = function(){

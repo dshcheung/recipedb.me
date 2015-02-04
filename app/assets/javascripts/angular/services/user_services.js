@@ -3,6 +3,7 @@ app.factory('UserServices', ["$http", function($http){
 
   user.status = false;
   user.username = "";
+  user.userID = null;
 
   return user;
 }])
