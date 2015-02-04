@@ -54,7 +54,7 @@
         <ul class="dropdown-menu" role="menu">
           <li ng-if="!user.status"><a href="" ng-controller="RegModalCtrl" ng-click="open('sm')">Sign Up</a></li>
           <li ng-if="!user.status"><a href="" ng-controller="LoginModalCtrl" ng-click="open('sm')">Login</a></li>
-          <li ng-if="user.status"><a href="">Edit Profile</a></li>
+          <!-- <li ng-if="user.status"><a href="">Edit Profile</a></li> -->
           <li ng-if="user.status"><a ng-controller="UserCtrl" ng-click="userSignOut()"href="">Logout</a></li>
         </ul>
 
