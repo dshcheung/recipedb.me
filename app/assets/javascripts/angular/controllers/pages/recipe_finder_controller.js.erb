@@ -127,19 +127,19 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
       $(".filter-result").removeClass("col-sm-12");
       $(".filter-result").addClass("col-sm-6");
       $(".reset-button").hide();
-      $(".submit-button").hide();
+      // $(".submit-button").hide();
       $('.hide-finder-button').text("Show Finder");
-      $(".hide-finder-button").addClass("col-xs-6");
-      $(".create-recipe-button").addClass("col-xs-6");
+      // $(".hide-finder-button").addClass("col-xs-6");
+      // $(".create-recipe-button").addClass("col-xs-6");
       $(".hide-finder-button").attr('data-status',"closed");
     } else {
       $("div.filter").show();
       $(".hide-finder-button").attr('data-status',"open");
       $(".filter-results").addClass("col-sm-6");
       $(".reset-button").show();
-      $(".submit-button").show();
-      $(".hide-finder-button").removeClass("col-xs-6");
-      $(".create-recipe-button").removeClass("col-xs-6");
+      // $(".submit-button").show();
+      // $(".hide-finder-button").removeClass("col-xs-6");
+      // $(".create-recipe-button").removeClass("col-xs-6");
       $('.hide-finder-button').text("Hide Finder");
       $(".filter-result").removeClass("col-sm-6");
       $(".filter-result").addClass("col-sm-12");

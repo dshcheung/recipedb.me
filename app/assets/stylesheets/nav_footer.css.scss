@@ -12,7 +12,7 @@
 }
 
 .main-body {
-  padding: 90px 0 90px 0;
+  padding: 65px 0 40px 0;
   width: 100%;
   min-height:640px;
 }
@@ -114,8 +114,8 @@
 
 .nav-icons {
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 15px;
+  top: 17px;
   .dropdown-menu {
     background: $color-airbnb-buttongrey;
     float: right;
@@ -137,7 +137,7 @@
     //   text-decoration: none;
     // }
     .fa.fa-heart,
-    .fa.fa-sliders,
+    .fa.fa-search,
     .fa.fa-shopping-cart,
     .fa.fa-user {
       color: $color-raisin;
