@@ -130,6 +130,7 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServ
 
   $scope.submitCreation = function() {
     $scope.create_parameters.author = UserServices.username;
+    $scope.create_parameters.author_id = UserServices.userID;
     console.log($scope.create_parameters);
   }
 

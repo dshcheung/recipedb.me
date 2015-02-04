@@ -3,18 +3,9 @@
 
 <div class="main-body">
   <div class="recipe-finder-body container-fluid">
-    <!-- <div class="row">
-      <button class="btn btn-warning col-xs-12" ng-click="submitParams()">Submit</button>
-    </div> -->
     <div class="row">
-      <!-- <button ng-click="resetFinder()" data-status="open" class="reset-button btn btn-default col-xs-6">
-        Reset Filters
-      </button> -->
-      <!-- <button ng-click="submitParams()" data-status="open" class="submit-button btn btn-warning col-xs-3">
-        Submit
-      </button> -->
-      <button ng-click="toggleFinder()" data-status="closed" class="hide-finder-button btn btn-default col-xs-3">
-        Show Finder
+      <button ng-click="hidden=!hidden" class="hide-finder-button btn btn-default col-xs-3">
+        Show/Hide Finder
       </button>
       <div class="col-xs-6 myrecipes-title">My Recipes</div>
       <a class="create-recipe-button btn btn-default col-xs-3" href="/#/create">
@@ -25,7 +16,7 @@
 
     <div class="row">
       <!-- the whole filter section -->
-      <div class="filter col-xs-12 col-sm-6 hide">
+      <div class="filter col-xs-12 col-sm-6" ng-hide="hidden">
         <!-- keyword search -->
         <div class="row">
           <button ng-click="resetFinder()" data-status="open" class="reset-button btn btn-default col-xs-12">
@@ -167,14 +158,14 @@
       </div>
 
     <!-- search results -->
-      <div class="filter-results col-xs-12">
+      <div class="filter-results col-xs-12" ng-class="hidden ? 'col-sm-12' : 'col-sm-6'" ng-model="hidden">
         <div class="paginate-div col-xs-12"><!-- pagination -->
           <pagination total-items="bigTotalItems" items-per-page="8" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ng-change="pageChanged()"></pagination>
         </div>
         <div class="col-xs-12" ng-if="loading"><img class="chef-loading" src="{{chefLoadingImg}}" alt=""></div>
         <div ng-if="!loading" ng-hide="recipes.length" class="filter-result-empty col-xs-12"><p>No Results Found...</p> Please try again or use less filters
         </div>
-        <div ng-if="!loading" ng-repeat="recipe in recipes" class="filter-result col-xs-6">
+        <div ng-if="!loading" ng-repeat="recipe in recipes" class="filter-result col-xs-12 col-sm-6" ng-model="hidden" ng-class="hidden ? 'col-sm-6' : 'col-sm-12'">
           <div class="col-xs-5 col-md-4 col-lg-3">
             <a href="/#/recipes/{{ recipe.id }}">
               <img ng-if="recipe.images[0] != undefined" class="filter-result-image" src="{{ recipe.images[0] }}">
