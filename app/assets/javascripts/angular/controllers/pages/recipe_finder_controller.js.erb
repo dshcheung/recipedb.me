@@ -156,7 +156,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'UserServ
     $scope.submitParams();
   }
   $scope.removeIngredient = function(index) {
-    $scope.search_parameters.ingredient.splice(index,1);
+    $scope.search_parameters.ingredients.splice(index,1);
     $scope.submitParams();
   }
   // meals search

@@ -19,10 +19,6 @@ app.controller('MyRecipesCtrl', ['$scope', '$http', '$routeParams', function($sc
         $scope.recipes = data.recipes;
         $scope.loading = false;
         if ($(".hide-finder-button").attr('data-status') == 'closed'){
-          console.log("hihi");
-          $(".filter-result").addClass("col-sm-12");
-          $(".filter-result").removeClass("col-sm-6");
-        }
       })
     }
 

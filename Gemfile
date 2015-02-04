@@ -69,3 +69,6 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'angular-ui-bootstrap-rails'
 
 gem 'jquery-ui-rails'
+
+# noty-fications
+gem 'noty-rails'

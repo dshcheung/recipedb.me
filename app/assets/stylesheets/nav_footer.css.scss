@@ -30,6 +30,7 @@
   color: $color-raisin;
   display: inline-block;
   text-decoration: none;
+  font-size: 32px;
   &:hover{
     color: $color-airbnb-red;
   }
@@ -80,7 +81,7 @@
 }
 
 .fa.fa-home {
-  font-size: 28px;
+  font-size: 40px;
 }
 
 .nav-form .form-group .form-control{
@@ -230,8 +231,8 @@
 
 @media (max-width: 768px) {
   .nav-header .navbar-logo {
-    font-size: 25px;
-    margin: 10px 0 0 0;
+    // font-size: 25px;
+    margin: 10px 10px 0 0;
     padding: 0;
   }
   .nav-tabs-text {
@@ -250,7 +251,7 @@
 
 @media (min-width: 768px) {
   .nav-header .navbar-logo {
-    font-size: 30px;
+    // font-size: 30px;
     margin: 10px 10px 0 0;
     padding: 0;
   }
@@ -270,8 +271,8 @@
 
 @media (min-width: 992px) {
   .nav-header .navbar-logo {
-    font-size: 35px;
-    margin: 5px 10px 0 0;
+    // font-size: 35px;
+    // margin: 5px 10px 0 0;
     padding: 0;
   }
   .nav-tabs-text {
