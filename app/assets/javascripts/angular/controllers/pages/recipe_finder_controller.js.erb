@@ -116,6 +116,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
     $($(".ui-slider-handle.ui-state-default.ui-corner-all")[1]).attr("style","left: 100%;");
     $("#amount").val(timeConversion(0) + " to " + timeConversion(1440) );
     collapseAll();
+    $scope.submitParams();
   }
 
   // toggle finder button
