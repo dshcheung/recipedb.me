@@ -116,34 +116,64 @@
   position: absolute;
   right: 20px;
   top: 20px;
-  .dropdown-toggle {
-    color: $color-raisin;
-    display: inline-block;
-    float: right;
-    font-family: $font-title;
-    font-size: 18px;
-    text-decoration: none;
-    &:hover {
-      color: $color-red;
-    }
-  }
   .dropdown-menu {
     background: $color-airbnb-buttongrey;
     float: right;
+    position: fixed;
+    top: 8%;
+    right: 0;
+    left: inherit;
   }
-  .fa.fa-heart,
-  .fa.fa-sliders,
-  .fa.fa-shopping-cart {
-    color: $color-raisin;
-    font-size: 22px;
+  .nav-icon-text {
+    // font-size: 18px;
     float: right;
-    margin:0 15px 0 0;
-    z-index: -1;
-    &:hover {
-      color: $color-airbnb-red;
-      text-decoration: none;
+    // color: $color-raisin;
+    display: inline-block;
+    // font-family: $font-title;
+    margin:0 0 0 15px;
+    // z-index: -1;
+    // &:hover {
+    //   color: $color-airbnb-red;
+    //   text-decoration: none;
+    // }
+    .fa.fa-heart,
+    .fa.fa-sliders,
+    .fa.fa-shopping-cart,
+    .fa.fa-user {
+      color: $color-raisin;
+      font-size: 20px;
+      // float: right;
+      margin:0 2px;
+      z-index: -1;
+      &:hover {
+        color: $color-airbnb-red;
+        text-decoration: none;
+      }
+      p {
+        font-family: $font-title;
+        display: inline-block;
+      }
+    }
+    .caret {
+      color: $color-raisin;
+      font-size: 20px;
+      padding: 10px 0;
     }
   }
+  // .fa.fa-heart,
+  // .fa.fa-sliders,
+  // .fa.fa-shopping-cart,
+  // .fa.fa-user {
+  //   color: $color-raisin;
+  //   font-size: 24px;
+  //   // float: right;
+  //   // margin:0 0 0 10px;
+  //   z-index: -1;
+  //   &:hover {
+  //     color: $color-airbnb-red;
+  //     text-decoration: none;
+  //   }
+  // }
 }
 
 .registration-modal-title {

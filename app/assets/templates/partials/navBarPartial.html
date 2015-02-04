@@ -16,9 +16,36 @@
 
       <div class="nav-icons">
         
-        <a ng-if="!user.status" href="" popover-popup-delay="1000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button">Account<span class="caret"></span></a>
-        <a ng-if="user.status" href="" popover-popup-delay="1000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button">{{ user.username }}<span class="caret"></span></a>
-        <a href="" popover-popup-delay="1000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter" class="visible-xs dropdown-toggle" data-toggle="dropdown" role="button"><i class="fa fa-user"></i><span class="caret"></span></a>
+        <a ng-if="!user.status" data-toggle="dropdown" href="" role="button">
+          <div class="nav-icon-text hidden-xs dropdown-toggle" popover-popup-delay="1000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter">
+            <i class="fa fa-user">
+              <p>
+               Account
+              </p>
+            </i>
+            <span class="caret pull-right">
+            </span>
+          </div>
+        </a>
+        <a ng-if="user.status" href="" data-toggle="dropdown" role="button">
+          <div class="nav-icon-text hidden-xs dropdown-toggle" popover-popup-delay="1000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter">
+            <i class="fa fa-user">
+              <p>
+              {{ user.username }}
+              </p>
+            </i>
+            <span class="caret">
+            </span>
+          </div>
+        </a>
+        <a href="" data-toggle="dropdown" role="button">
+          <div class="nav-icon-text visible-xs dropdown-toggle" popover-popup-delay="1000" popover-placement="bottom" popover="Profile" popover-trigger="mouseenter">
+            <i class="fa fa-user" style="font-size: 28px;">
+            </i>
+            <span class="caret">
+            </span>
+          </div>
+        </a>
         <ul class="dropdown-menu" role="menu">
           <li ng-if="!user.status"><a href="" ng-controller="RegModalCtrl" ng-click="open('sm')">Sign Up</a></li>
           <li ng-if="!user.status"><a href="" ng-controller="LoginModalCtrl" ng-click="open('sm')">Login</a></li>
@@ -31,11 +58,30 @@
         </a> -->
 
         <a href="/#/myrecipes">
-          <i popover-popup-delay="1000" popover-placement="bottom" popover="My Recipes" popover-trigger="mouseenter" class="fa fa-heart"></i>
+          <div class="nav-icon-text hidden-sm hidden-md hidden-lg hidden-xl">
+            <i popover-popup-delay="1000" popover-placement="bottom" popover="My Recipes" popover-trigger="mouseenter" class="fa fa-heart" style="font-size: 28px;">
+            </i>
+          </div>
+          <div class="nav-icon-text hidden-xs">
+            <i popover-popup-delay="1000" popover-placement="bottom" popover="My Recipes" popover-trigger="mouseenter" class="fa fa-heart">  <p>
+                MyRecipes
+              </p>
+            </i>
+          </div>
         </a>
 
         <a href="/#/search">
-          <i popover-popup-delay="1000" popover-placement="bottom" popover="Recipe Finder" popover-trigger="mouseenter" class="fa fa-sliders"></i>
+          <div class="nav-icon-text hidden-sm hidden-md hidden-lg hidden-xl">
+            <i popover-popup-delay="1000" popover-placement="bottom" popover="Recipe Finder" popover-trigger="mouseenter" class="fa fa-sliders" style="font-size: 28px;">
+            </i>
+          </div>
+          <div class="nav-icon-text hidden-xs">
+            <i popover-popup-delay="1000" popover-placement="bottom" popover="Recipe Finder" popover-trigger="mouseenter" class="fa fa-sliders">
+              <p>
+               Recipe Finder
+              </p>
+            </i>
+          </div>
         </a>
 
       </div>
