@@ -1,5 +1,6 @@
-app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServices', 'UserServices',function($scope, $http, $routeParams, TagServices, UserServices){
+app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServices', 'UserServices', function($scope, $http, $routeParams, TagServices, UserServices){
 
+  // search_parameters
   $scope.search_parameters = {};
   $scope.search_parameters.categories = [];
   $scope.search_parameters.ingredients = [];
@@ -26,6 +27,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     $scope.loading = true;
     $http.post('/recipes/search', params).success(function(data, status){
       $scope.recipes = data.recipes;
+      UserServices.main.recipes = data.recipes;
       $scope.loading = false;
       if ($(".hide-finder-button").attr('data-status') == 'closed'){
         // console.log("hihi");
@@ -35,32 +37,37 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   var getFilteredRecipesCount = function(params){
     $http.post('/recipes/search_count', params).success(function(data, status){
-      $scope.bigTotalItems = data.count; 
+      $scope.bigTotalItems = data.count;
+      UserServices.main.totalItems = data.count;
     })
   };
 
   $scope.pageChanged = function() {
     UserServices.main.search_parameters = $scope.search_parameters;
     UserServices.main.page = $scope.bigCurrentPage;
+    UserServices.activateSearch = true;
     getFilteredRecipes(UserServices.main);
   };
 
   $scope.submitParams = function(){
     UserServices.main.search_parameters = $scope.search_parameters;
-    UserServices.main.page = 1
+    UserServices.main.page = 1;
+    UserServices.activateSearch = true;
     getFilteredRecipesCount(UserServices.main);
     getFilteredRecipes(UserServices.main);
-    $scope.bigCurrentPage = 1;
+    console.log("from submitParams",UserServices.main, UserServices.activateSearch)
   }
 
-  $scope.initalSearch = function(){
+  $scope.memorySearch = function(){
+    $scope.search_parameters = UserServices.main.search_parameters;
     $scope.bigCurrentPage = UserServices.main.page;
-    getFilteredRecipesCount(UserServices.main);
-    getFilteredRecipes(UserServices.main);
+    $scope.recipes = UserServices.main.recipes;
+    $scope.bigTotalItems = UserServices.main.totalItems
+    $scope.bigCurrentPage = UserServices.main.page
+    console.log("from memorySearch",UserServices.main, UserServices.activateSearch)
   }
-
-  if (UserServices.activateSearch == true){
-    $scope.initalSearch();
+  if (UserServices.activateSearch){
+    $scope.memorySearch();    
   } else {
     $scope.submitParams();
   }
@@ -104,7 +111,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   // keyword search
   var checkDuplicates = function(keyword,array) {
-    for (var i= 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
       if (keyword == array[i]) {
         return true;
       }
@@ -126,12 +133,12 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
           $scope.search_parameters.keywords.push($scope.newKeyword);
           $scope.newKeyword = '';
         } 
+        $scope.submitParams();
       }
     } else {
       $scope.newKeyword = '';
       // needs notification of empty string
     }
-    $scope.submitParams();
   }
   $scope.removeKeyword = function(index) {
     $scope.search_parameters.keywords.splice(index,1);

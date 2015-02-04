@@ -121,4 +121,11 @@ app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'User
   });
 
   $scope.user = UserServices;
+
+  $scope.submitSearch = function (){
+    UserServices.resetMain();
+    UserServices.main.search_parameters.keywords.push($scope.keyword);
+    UserServices.activateSearch = true;
+    window.location.href = "/#/search";
+  };
 }]);

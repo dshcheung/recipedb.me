@@ -12,8 +12,8 @@
   </div>
   <div class="home-links">
     <div class="row">
-      <form class="search-wrapper col-xs-12">
-        <input class="input-lg recipe-search col-xs-10 col-sm-11 col-md-offset-1 col-md-9 col-lg-offset-2 col-lg-7" placeholder="What do you want to cook?">
+      <form class="search-wrapper col-xs-12" ng-submit="submitSearch()">
+        <input class="input-lg recipe-search col-xs-10 col-sm-11 col-md-offset-1 col-md-9 col-lg-offset-2 col-lg-7" placeholder="Enter Name of Recipe Here" ng-model="keyword">
         <button class="btn btn-default col-xs-2 col-sm-1"><i class="fa fa-search"></i></button>
       </form>
     </div>
