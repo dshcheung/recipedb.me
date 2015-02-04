@@ -46,11 +46,20 @@ class RecipesController < ApplicationController
     end
 
     if search_params["categories"] != nil
+      query += "#{category_default} "
+      search_count += 1
       search_params["categories"].each do |category|
-        search_count += 1
-        query += "#{category_default} #{category_condition}#{category.to_s} UNION ALL "
+        query += "#{category_condition}#{category.to_s} OR "
       end
+      query = query[0..-4] + "UNION ALL "
     end
+
+    # if search_params["categories"] != nil
+    #   search_params["categories"].each do |category|
+    #     search_count += 1
+    #     query += "#{category_default} #{category_condition}#{category.to_s} UNION ALL "
+    #   end
+    # end
 
     time1 = search_params["timeframe"][0]
     time2 = search_params["timeframe"][1]
@@ -74,12 +83,20 @@ class RecipesController < ApplicationController
   end
 
   def category_default
-    return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN recipe_category_lists ON recipe_category_lists.recipe_id = recipes.id INNER JOIN categories ON categories.id = recipe_category_lists.category_id"
+    return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN recipe_category_lists ON recipe_category_lists.recipe_id = recipes.id INNER JOIN categories ON categories.id = recipe_category_lists.category_id WHERE "
   end
 
   def category_condition
-    return "WHERE recipe_category_lists.category_id="
+    return "recipe_category_lists.category_id="
   end
+
+  # def category_default
+  #   return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN recipe_category_lists ON recipe_category_lists.recipe_id = recipes.id INNER JOIN categories ON categories.id = recipe_category_lists.category_id"
+  # end
+
+  # def category_condition
+  #   return "WHERE recipe_category_lists.category_id="
+  # end
 
   def timeframe_default
     return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes"
