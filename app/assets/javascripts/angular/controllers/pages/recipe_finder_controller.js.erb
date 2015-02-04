@@ -10,6 +10,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
   $scope.bigTotalItems = 1;
   $scope.bigCurrentPage = 1;
   $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>"
+  $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>"
 
   {// functions for getting recipes and recipe count
     var getFilteredRecipes = function(params){
@@ -17,6 +18,11 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
       $http.post('/recipes/search', params).success(function(data, status){
         $scope.recipes = data.recipes;
         $scope.loading = false;
+        if ($(".hide-finder-button").attr('data-status') == 'closed'){
+          console.log("hihi");
+          $(".filter-result").removeClass("col-sm-12");
+          $(".filter-result").addClass("col-sm-6");
+        }
       })
     }
 
@@ -63,10 +69,12 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
   }
 
   // toggle hidden checkboxes
-  $scope.cuisineCollapsed = true;
-  $scope.courseCollapsed = true;
-  $scope.occasionCollapsed = true;
-  
+  var collapseAll = function() {
+    $scope.cuisineCollapsed = true;
+    $scope.courseCollapsed = true;
+    $scope.occasionCollapsed = true;
+  }
+  collapseAll();
 
   // data to populate recipe finder
   $scope.meals = [{name: "Breakfast", category_id: 917},{name: "Lunch", category_id: 954},{name: "Dinner", category_id: 955}];
@@ -96,6 +104,19 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', function(
       // $(this).attr("data-collection","normal");
     }
   };
+
+  // reset finder button
+  $scope.resetFinder = function() {
+    $('.checkbox').prop('checked',false);
+    $scope.search_parameters.categories = [];
+    $scope.search_parameters.keywords = [];
+    $scope.search_parameters.timeframe = [0,1440];
+    $(".ui-slider-range.ui-widget-header.ui-corner-all").attr("style","left: 0%;width: 100%;");
+    $($(".ui-slider-handle.ui-state-default.ui-corner-all")[0]).attr("style","left: 0%;");
+    $($(".ui-slider-handle.ui-state-default.ui-corner-all")[1]).attr("style","left: 100%;");
+    $("#amount").val(timeConversion(0) + " to " + timeConversion(1440) );
+    collapseAll();
+  }
 
   // toggle finder button
   $scope.toggleFinder = function() {

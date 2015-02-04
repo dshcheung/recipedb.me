@@ -247,6 +247,7 @@
         // left:1px;
         // position: absolute;
         font-size: 0.85em;
+        display: inline-block;
         // text-align: center;
         color: $color-airbnb-red;
         height: 1.25em;
@@ -305,7 +306,7 @@
     .filter-result-image {
       width: 125px;
       height: 125px;
-      background: red;
+      background: white;
       vertical-align: top;
       display: inline-block;
     }
