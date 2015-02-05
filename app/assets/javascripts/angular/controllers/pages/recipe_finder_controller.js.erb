@@ -159,6 +159,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
           $scope.newKeyword = '';
         } else {
           $scope.search_parameters.ingredients.push($scope.newKeyword);
+          $scope.submitParams();
           $scope.newKeyword = '';
         }
       } else if ($scope.searchWord == "Keyword"){
@@ -166,6 +167,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
           $scope.newKeyword = '';
         } else {
           $scope.search_parameters.keywords.push($scope.newKeyword);
+          $scope.submitParams();
           $scope.newKeyword = '';
         }
       }
