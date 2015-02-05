@@ -2,7 +2,9 @@
 
 .jumbo.row{
   background: white;
-  height: 470px;
+  position: absolute;
+  width: calc(100vw - 30px);
+  height: calc(100vh - 200px);
   // border-radius: 10px;
   // border-right: 2px solid $color-raisin;
   // border-left: 2px solid $color-raisin;
@@ -69,8 +71,8 @@
 
 .home-links {
   // background: $color-airbnb-red;
-  padding: 175px 0;
-  margin: -470px 0;
+  // padding: 175px 0;
+  margin: calc(((100vh - 400px)/2) + 100px) 0;
   .other-links-separator {
     text-align: center;
     color: white;
