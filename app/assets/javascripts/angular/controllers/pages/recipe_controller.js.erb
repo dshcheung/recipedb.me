@@ -1,4 +1,6 @@
-app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
+
+  $scope.fromPage = UserServices.fromPage;
 
   $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>"
 

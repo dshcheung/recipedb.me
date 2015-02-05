@@ -80,11 +80,13 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     $scope.hidden = false;
     $scope.search_parameters.user = false;
     $scope.htmlTitle = "Recipe Search"
+    UserServices.fromPage = $location.path();
   } else {
     $scope.pageLocation = "sub";
     $scope.hidden = true;
     $scope.search_parameters.user = true;
     $scope.htmlTitle = "My Recipes"
+    UserServices.fromPage = $location.path();
   }
 
   if (UserServices[$scope.pageLocation].activateSearch){
