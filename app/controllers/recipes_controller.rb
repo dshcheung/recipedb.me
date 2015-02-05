@@ -47,6 +47,11 @@ class RecipesController < ApplicationController
 
     query = starting_query
 
+    if params["user"]
+      search_count += 1
+      query += "#{user_default} #{user_condition}#{current_user.id} UNION ALL "
+    end
+
     if params["keywords"] != nil
       params["keywords"].each do |keyword|
         search_count += 1
@@ -81,6 +86,14 @@ class RecipesController < ApplicationController
     end
 
     return query
+  end
+
+  def user_default
+    return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN user_bookmarks on recipes.id = user_bookmarks.recipe_id"
+  end
+
+  def user_condition
+    "WHERE user_bookmarks.user_id="
   end
 
   def keyword_default

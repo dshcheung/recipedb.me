@@ -409,8 +409,8 @@ app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'User
   $scope.submitSearch = function (){
     UserServices.resetMain();
     UserServices.main.search_parameters.keywords.push($scope.keyword);
-    UserServices.activateSearch = true;
-    UserServices.freshSearch = true;
+    UserServices.main.activateSearch = true;
+    UserServices.main.freshSearch = true;
     $location.path("/search");
   };
 }]);
