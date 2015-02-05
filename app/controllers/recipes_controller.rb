@@ -55,6 +55,13 @@ class RecipesController < ApplicationController
       end
     end
 
+    if search_params["ingredients"] != nil
+      search_params["ingredients"].each do |ingredient|
+        search_count += 1
+        query += "#{ingredient_default} #{ingredient_condition} '%#{ingredient.downcase}%' UNION ALL "
+      end
+    end
+
     if search_params["categories"] != nil
       query += "#{category_default} "
       search_count += 1
@@ -89,6 +96,14 @@ class RecipesController < ApplicationController
   end
 
   def keyword_condition
+    return "WHERE lower(recipes.name) like"
+  end
+
+  def ingredient_default
+    return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN recipe_ingredient_lists ON recipes.id=recipe_ingredient_lists.recipe_id"
+  end
+
+  def ingredient_condition
     return "WHERE recipe_ingredient_lists.display_name like"
   end
 
