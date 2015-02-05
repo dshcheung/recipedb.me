@@ -1,12 +1,17 @@
-app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items', function ($scope, $modalInstance, items) {
+app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items', 'UserServices', '$rootScope', function ($scope, $modalInstance, items, UserServices, $rootScope) {
 
   $scope.items = items;
   $scope.selected = {
     item: $scope.items[0]
   };
+  $rootScope.$on('controlStatus', function(event, args){
+    $scope.UserStatus = args;
+  })
 
   $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
+    if ($scope.UserStatus){
+      $modalInstance.close($scope.selected.item);
+    }
   };
 
   $scope.cancel = function () {
