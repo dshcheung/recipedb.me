@@ -29,6 +29,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
       $scope.recipes = data.recipes;
       UserServices.main.recipes = data.recipes;
       $scope.loading = false;
+      console.log('data received from the search:', data);
       if ($(".hide-finder-button").attr('data-status') == 'closed'){
         // console.log("hihi");
       }
@@ -93,9 +94,18 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   // add to collection button
   $scope.addCollection = function(recipeID) {
     console.log(recipeID);
-    $http.post('/user/' + UserServices.userID + '/bookmarks/', recipeID).success(function(data, status){
-      // console.log('data');
+    // $scope.liked = !$scope.liked;
+    $http.post('/bookmarks/'+recipeID).success(function(data, status){
+      console.log('hihi');
+    });
+  };
 
+  // remove from collection button
+  $scope.removeCollection = function(recipeID) {
+    console.log(recipeID);
+    // $scope.liked = !$scope.liked;
+    $http.delete('/bookmarks/'+recipeID).success(function(data, status){
+      console.log('hihi');
     });
   };
 
@@ -115,9 +125,6 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   }
 
   $scope.hidden = false;
-  // $scope.togglehider = function() {
-  //     $scope.hider = $scope.hider === false ? true: false;
-  // };
 
   // keyword search
   var checkDuplicates = function(keyword,array) {
@@ -173,7 +180,6 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   // time slider function
   $scope.search_parameters.timeframe = [0,1440];
-
 
   var timeConversion = function(minutes) {
     if (minutes > 60) {

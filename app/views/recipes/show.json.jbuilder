@@ -16,6 +16,12 @@ else
   end
 end
 
+if @bookmarks.where(recipe_id: @recipe.id).any?
+  json.is_liked true
+else
+  json.is_liked false
+end
+
 json.description @recipe.description
 json.images @recipe.img_urls
 json.prep_time @recipe.prep_time

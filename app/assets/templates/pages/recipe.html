@@ -16,10 +16,10 @@
         </div> -->
       </div>
       <div class="recipe-profile col-xs-12 col-sm-4">
-        <img ng-repeat="image in recipe.images" class="image-responsive recipe-image" ng-src="{{ image }}" alt="Recipe image">
-        <!-- assets/recipedb-default-img.png -->
+        <img ng-if="recipe.images.length == 0" class="image-responsive recipe-default-image" ng-src="{{ defaultImg }}" alt="Recipe image">
+        <img ng-if="recipe.images.length < 6" ng-repeat="image in recipe.images" class="image-responsive recipe-less-image" ng-src="{{ image }}" alt="Recipe image">
+        <img ng-if="recipe.images.length > 5" ng-repeat="image in recipe.images" class="image-responsive recipe-more-image" ng-src="{{ image }}" alt="Recipe image">
       </div>
-      <!-- </div> -->
       <div class="recipe-info col-xs-12 col-sm-8">
         <div class="recipe-div1 row">
           <p class="recipe-title">{{ recipe.title }}</p>
@@ -64,6 +64,7 @@
               <li ng-repeat="instruction in recipe.instructions" class="recipe-step">{{ instruction }}</li>
             </ul>
           </p>
+          <button ng-model="notyTest()">M</button>
         </div>
       </div>
     </div>

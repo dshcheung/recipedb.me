@@ -1,6 +1,12 @@
 json.recipes @recipes do |recipe|
   json.id recipe.id
   json.title recipe.name
+
+  if @bookmarks.where(recipe_id: recipe.id).any?
+    json.is_liked true
+  else
+    json.is_liked false
+  end
   
   if recipe.outside_profile_id.nil?
     json.author do 
