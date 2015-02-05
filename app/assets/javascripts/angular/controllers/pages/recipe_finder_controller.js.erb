@@ -20,8 +20,8 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   $scope.maxSize = 5;
   $scope.bigTotalItems = 1;
   $scope.bigCurrentPage = 1;
-  $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>"
-  $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>"
+  $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>";
+  $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>";
 
   var getFilteredRecipes = function(params){
     $scope.loading = true;

@@ -16,10 +16,12 @@ else
   end
 end
 
-if @bookmarks.where(recipe_id: @recipe.id).any?
-  json.is_liked true
-else
-  json.is_liked false
+if @bookmarks.any?
+  if @bookmarks.where(recipe_id: @recipe.id).any?
+    json.is_liked true
+  else
+    json.is_liked false
+  end
 end
 
 json.description @recipe.description
