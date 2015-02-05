@@ -1,4 +1,4 @@
-app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServices', 'UserServices', '$location', function($scope, $http, $routeParams, TagServices, UserServices, $location){
+app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServices', 'UserServices', '$location', '$timeout', function($scope, $http, $routeParams, TagServices, UserServices, $location, $timeout){
 
   // search_parameters
   $scope.search_parameters = {};
@@ -205,6 +205,8 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
       return minutes + "min";
     }
   }
+  
+  var timer;
 
   $(function() {
     $( "#slider-range" ).slider({
@@ -215,9 +217,12 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
       slide: function(event,ui) {
 
         $("#amount").val(timeConversion(ui.values[0]) + " to " + timeConversion(ui.values[1]));
-
         $scope.search_parameters.timeframe = ui.values;
-        $scope.submitParams();
+
+        $timeout.cancel(timer);
+        timer = $timeout(function(){
+          $scope.submitParams();
+        }, 1000);
       }
     });
     // initial slider values
