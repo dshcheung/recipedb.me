@@ -8,6 +8,8 @@ json.recipes @recipes do |recipe|
     else
       json.is_liked false
     end
+  else
+    json.is_liked false
   end
   
   if recipe.outside_profile_id.nil?

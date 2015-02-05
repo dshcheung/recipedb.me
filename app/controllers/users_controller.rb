@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   end
 
   def remove_bookmark
-    bookmark = current_user.user_bookmarks.where(recipe_id: params[:recipe_id])
-    bookmark.destroy_all
+    bookmark = current_user.user_bookmarks.find_by(recipe_id: params[:recipe_id].to_i)
+    bookmark.destroy
     render json: {success: true}
   end
 

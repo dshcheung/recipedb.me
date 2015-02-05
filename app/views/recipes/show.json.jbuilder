@@ -22,6 +22,8 @@ if @bookmarks.any?
   else
     json.is_liked false
   end
+else
+  json.is_liked false
 end
 
 json.description @recipe.description
