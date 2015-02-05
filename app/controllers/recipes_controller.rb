@@ -37,7 +37,6 @@ class RecipesController < ApplicationController
 
   private
   def getQueryStr(params, orderQuery)
-    search_params = params[:search_parameters]
     search_count = 1
 
     if params["page"] != nil  
@@ -48,38 +47,31 @@ class RecipesController < ApplicationController
 
     query = starting_query
 
-    if search_params["keywords"] != nil
-      search_params["keywords"].each do |keyword|
+    if params["keywords"] != nil
+      params["keywords"].each do |keyword|
         search_count += 1
         query += "#{keyword_default} #{keyword_condition} '%#{keyword.downcase}%' UNION ALL "
       end
     end
 
-    if search_params["ingredients"] != nil
-      search_params["ingredients"].each do |ingredient|
+    if params["ingredients"] != nil
+      params["ingredients"].each do |ingredient|
         search_count += 1
         query += "#{ingredient_default} #{ingredient_condition} '%#{ingredient.downcase}%' UNION ALL "
       end
     end
 
-    if search_params["categories"] != nil
+    if params["categories"] != nil
       query += "#{category_default} "
       search_count += 1
-      search_params["categories"].each do |category|
+      params["categories"].each do |category|
         query += "#{category_condition}#{category.to_s} OR "
       end
       query = query[0..-4] + "UNION ALL "
     end
 
-    # if search_params["categories"] != nil
-    #   search_params["categories"].each do |category|
-    #     search_count += 1
-    #     query += "#{category_default} #{category_condition}#{category.to_s} UNION ALL "
-    #   end
-    # end
-
-    time1 = search_params["timeframe"][0]
-    time2 = search_params["timeframe"][1]
+    time1 = params["timeframe"][0]
+    time2 = params["timeframe"][1]
     query += "#{timeframe_default} #{timeframe_condition(time1,time2)})"
 
     if orderQuery == true
@@ -114,14 +106,6 @@ class RecipesController < ApplicationController
   def category_condition
     return "recipe_category_lists.category_id="
   end
-
-  # def category_default
-  #   return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes INNER JOIN recipe_category_lists ON recipe_category_lists.recipe_id = recipes.id INNER JOIN categories ON categories.id = recipe_category_lists.category_id"
-  # end
-
-  # def category_condition
-  #   return "WHERE recipe_category_lists.category_id="
-  # end
 
   def timeframe_default
     return "SELECT DISTINCT recipes.id AS recipes_id FROM recipes"

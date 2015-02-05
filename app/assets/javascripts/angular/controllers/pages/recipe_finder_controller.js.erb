@@ -6,6 +6,8 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   $scope.search_parameters.ingredients = [];
   $scope.search_parameters.keywords = [];
   $scope.search_parameters.timeframe = [0,1440];
+  $scope.search_parameters.page = 1;
+  $scope.recipes = [];
 
   // data to populate recipe finder
   $scope.meals = TagServices.meals
@@ -18,10 +20,10 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   // paginate varibales
   $scope.maxSize = 5;
-  $scope.bigTotalItems = 1;
-  $scope.bigCurrentPage = 1;
-  $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>";
-  $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>";
+  $scope.totalRecipeItems = 1;
+
+  $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>"
+  $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>"
 
   var getFilteredRecipes = function(params){
     $scope.loading = true;
@@ -38,38 +40,38 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   var getFilteredRecipesCount = function(params){
     $http.post('/recipes/search_count', params).success(function(data, status){
-      $scope.bigTotalItems = data.count;
+      $scope.totalRecipeItems = data.count;
       UserServices.main.totalItems = data.count;
     })
   };
 
   $scope.pageChanged = function() {
     UserServices.main.search_parameters = $scope.search_parameters;
-    UserServices.main.page = $scope.bigCurrentPage;
+    UserServices.main.search_parameters.page = $scope.search_parameters.page;
     UserServices.activateSearch = true;
-    getFilteredRecipes(UserServices.main);
+    getFilteredRecipes(UserServices.main.search_parameters);
   };
 
   $scope.submitParams = function(){
     UserServices.main.search_parameters = $scope.search_parameters;
-    UserServices.main.page = 1;
+    UserServices.main.search_parameters.page = 1;
     UserServices.activateSearch = true;
-    getFilteredRecipesCount(UserServices.main);
-    getFilteredRecipes(UserServices.main);
+    getFilteredRecipesCount(UserServices.main.search_parameters);
+    getFilteredRecipes(UserServices.main.search_parameters);
   }
 
   $scope.memorySearch = function(){
     $scope.search_parameters = UserServices.main.search_parameters;
-    $scope.bigCurrentPage = UserServices.main.page;
+    $scope.search_parameters.page = UserServices.main.search_parameters.page;
     $scope.recipes = UserServices.main.recipes;
-    $scope.bigTotalItems = UserServices.main.totalItems;
-    $scope.bigCurrentPage = UserServices.main.page;
+    $scope.totalRecipeItems = UserServices.main.totalItems;
+    $scope.search_parameters.page = UserServices.main.search_parameters.page;
   }
 
   $scope.freshSearch = function(){
     $scope.memorySearch();
-    getFilteredRecipesCount(UserServices.main);
-    getFilteredRecipes(UserServices.main);
+    getFilteredRecipesCount(UserServices.main.search_parameters);
+    getFilteredRecipes(UserServices.main.search_parameters);
   }
 
   if (UserServices.activateSearch){
