@@ -165,12 +165,22 @@ def get_recipe_indepth_info(url, new_recipe)
       end
       ar_ingredient_code_existence.ingredient_names.create(sub_name: ingredient_name)
 
+      puts ingredient_name
+      
       #extract amount_metric
       amount_metric = element.attr("data-grams")
 
       #extract amount_us & unit_us
       #check if there is brackets, if true, then get information from bracket instead
-      elements_has_brackets = element.css('#lblIngAmount').text[/(\((.*)\))/]
+      semi_clean_element = element.css('#lblIngAmount').text.split(element.css('#lblIngName').text)[0]
+
+      if not semi_clean_element.nil?
+        semi_clean_element = semi_clean_element.gsub('  ', ' ').squish
+      else
+        semi_clean_element = ""
+      end
+
+      elements_has_brackets = semi_clean_element[/(\((.*)\))/]
       if elements_has_brackets == nil
         amount_us = element.css('#lblIngAmount').text[/(\d+)/].to_i
         unit_us = get_clean_unit_us(element.css('#lblIngAmount').text[/(?!\d+)\w+/])
