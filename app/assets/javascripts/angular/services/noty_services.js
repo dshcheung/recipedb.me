@@ -7,7 +7,7 @@ app.factory('Message', ["$http", function($http){
       layout: 'center',
       text: notyMessage,
       type: notyType,
-      timeout: 5000,
+      timeout: 3000,
       closeWith: ['click']
     })
   }

@@ -1,4 +1,4 @@
-app.factory('UserServices', ["$http", "$q", function($http, $q){
+app.factory('UserServices', ["$http", "$q", "$rootScope", function($http, $q, $rootScope){
   var user = {};
 
   user.status = false;

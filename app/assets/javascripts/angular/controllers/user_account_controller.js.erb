@@ -1,6 +1,18 @@
-app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', 'Message', '$location', function($scope, $http, $routeParams, $location, UserServices, Message){
+app.controller('UserCtrl', ['$scope', '$http', '$routeParams', '$rootScope', '$location', 'UserServices', 'Message', function($scope, $http, $routeParams, $rootScope, $location, UserServices, Message){
+  
+  $scope.test = function(){
+    $rootScope.$emit('denis');
+    // console.log(this.status);
+  };
 
-  console.log('we are in the UserCtrl');
+  $scope.myRecipesLink = function () {
+    if (UserServices.status) {
+      $location.path("/myrecipes/"+UserServices.userID)
+    } else {
+      Message.sendNoty("error","Please log in to access");
+    }
+  }
+
   $scope.user = UserServices;
 
 // TODO: PUT ALL THAT IN THE USER SERVICE!
@@ -26,6 +38,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
       UserServices.status = true;
       console.log(response);
       Message.sendNoty("success","Successfully Registered");
+      $scope.test();
     }).error(function(response,status){
       Message.sendNoty("error","Registration Error, please try again");
     });
@@ -36,9 +49,10 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
       console.log(response);
       UserServices.resetMain();
       UserServices.resetSub();
-      Message.sendNoty("success","Logged Out");
-      UserServices.status = false;
       $location.path("/");
+      Message.sendNoty("information","Logged Out");
+      UserServices.status = false;
+      $scope.test();
     }).error(function(response,status){
       Message.sendNoty("error","Problem with logging, please try again");
     });
@@ -56,6 +70,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
     $http.post("/users/sign_in/", data).success(function(response, status){
       Message.sendNoty("success","Logged In");
       UserServices.status = true;
+      $scope.test();
     }).error(function(response,status){
       Message.sendNoty("error","Login Error, please try again");
     });
