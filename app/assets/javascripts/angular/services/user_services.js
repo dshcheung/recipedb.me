@@ -5,6 +5,8 @@ app.factory('UserServices', ["$http", function($http){
   user.username = "";
   user.userID = null;
 
+  user.fromPage = "/search";
+
   user.main = {};
   user.main.activateSearch = false;
   user.main.freshSearch = false;
