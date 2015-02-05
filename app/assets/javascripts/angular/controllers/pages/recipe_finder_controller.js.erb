@@ -61,11 +61,12 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     $scope.search_parameters = UserServices.main.search_parameters;
     $scope.bigCurrentPage = UserServices.main.page;
     $scope.recipes = UserServices.main.recipes;
-    $scope.bigTotalItems = UserServices.main.totalItems
-    $scope.bigCurrentPage = UserServices.main.page
+    $scope.bigTotalItems = UserServices.main.totalItems;
+    $scope.bigCurrentPage = UserServices.main.page;
   }
 
   $scope.freshSearch = function(){
+    $scope.memorySearch();
     getFilteredRecipesCount(UserServices.main);
     getFilteredRecipes(UserServices.main);
   }
