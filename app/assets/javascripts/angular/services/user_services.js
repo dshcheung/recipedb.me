@@ -15,9 +15,9 @@ app.factory('UserServices', ["$http", function($http){
     user.main.search_parameters.ingredients = [];
     user.main.search_parameters.keywords = [];
     user.main.search_parameters.timeframe = [0, 1440];
-    user.main.recipes = [];
+    user.main.search_parameters.page = 1;
     user.main.totalItems = 1;
-    user.main.page = 1;
+    user.main.recipes = [];
   };
   user.resetMain();
 
