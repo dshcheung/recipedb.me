@@ -14,8 +14,8 @@ app.config(['$routeProvider', function($routeProvider){
     controller: 'RecipeCtrl'
   })
   .when('/myrecipes/:id', {
-    templateUrl: "<%= asset_path('pages/myRecipes.html') %>",
-    controller: 'MyRecipesCtrl'
+    templateUrl: "<%= asset_path('pages/recipeFinder.html') %>",
+    controller: 'RecipeFinderCtrl'
   })
   .when('/create', {
     templateUrl: "<%= asset_path('pages/createRecipe.html') %>",
