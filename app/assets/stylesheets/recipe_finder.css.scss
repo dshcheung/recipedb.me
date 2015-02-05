@@ -7,7 +7,7 @@
   font-family: $font-airbnb;
   // height: 580px;
   // border-radius: 10px;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   // box-shadow: 8px 8px 25px #111;
 }
 
@@ -155,7 +155,7 @@
   // background: #CCC;
   // padding: 0;
   border: 1px solid $color-airbnb-grey;
-  height: 550px;
+  height: calc(100vh - 166px);
   overflow-y: scroll;
   overflow-x: hidden;
   .filter-keyword-wrapper {
@@ -321,7 +321,7 @@
 
 .row > .filter-results {
   padding: 0;
-  height: 550px;
+  height: calc(100vh - 166px);
   overflow-y: scroll;
   overflow-x: hidden;
   border: 1px solid $color-airbnb-buttonbordergrey;
