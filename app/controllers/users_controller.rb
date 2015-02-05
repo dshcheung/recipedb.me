@@ -1,17 +1,14 @@
 class UsersController < ApplicationController
   def any
-    render json: {signedIn: user_signed_in?, username: get_username, user_id: current_user.id}
+    if user_signed_in?
+      render json: {signedIn: user_signed_in?, username: current_user.username, user_id: current_user.id}
+    else
+      render json: {signedIn: user_signed_in?, username: nil, user_id: nil}
+    end
   end
 
   def bookmarks
     render json: {success: true}
   end
 
-  def get_username
-    if user_signed_in?
-      return current_user.username
-    else
-      return nil
-    end
-  end
 end
