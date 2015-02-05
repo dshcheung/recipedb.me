@@ -153,19 +153,21 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   $scope.searchWord = "Ingredient";
 
   $scope.addKeyword = function() {
-    if ($scope.newKeyword != undefined && $scope.newKeyword != "" && $scope.newKeyword.length > 2) {
-      if (checkDuplicates($scope.newKeyword,$scope.search_parameters.keywords) == true || checkDuplicates($scope.newKeyword, $scope.search_parameters.ingredients) == true) {
-        $scope.newKeyword = '';
-        // need noty
-      } else {
-        if ($scope.searchWord == "Ingredient") {
+    if ($scope.newKeyword != undefined && $scope.newKeyword != "" && $scope.newKeyword.length > 2){
+      if ($scope.searchWord == "Ingredient"){
+        if (checkDuplicates($scope.newKeyword,$scope.search_parameters.ingredients)){
+          $scope.newKeyword = '';
+        } else {
           $scope.search_parameters.ingredients.push($scope.newKeyword);
           $scope.newKeyword = '';
-        } else if ($scope.searchWord == "Keyword") {
+        }
+      } else if ($scope.searchWord == "Keyword"){
+        if (checkDuplicates($scope.newKeyword, $scope.search_parameters.keywords)){
+          $scope.newKeyword = '';
+        } else {
           $scope.search_parameters.keywords.push($scope.newKeyword);
           $scope.newKeyword = '';
-        } 
-        $scope.submitParams();
+        }
       }
     } else {
       $scope.newKeyword = '';
