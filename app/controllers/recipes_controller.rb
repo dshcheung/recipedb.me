@@ -10,6 +10,34 @@ class RecipesController < ApplicationController
     render 'show.json.jbuilder'
   end
 
+  def create
+    recipe = current_user.recipes.new
+    recipe.name = params["title"]
+    recipe.description = params["description"]
+    recipe.prep_time = params["timeFrame"]["prepTime"]
+    recipe.cook_time = params["timeFrame"]["cookTime"]
+    recipe.rest_time = params["timeFrame"]["restTime"]
+    recipe.ready_time =  params["timeFrame"]["prepTime"] + params["timeFrame"]["cookTime"] + params["timeFrame"]["restTime"]
+    recipe.original_servings_amount = params["servings"]["amount"]
+    recipe.original_servings_type = params["servings"]["type"]
+    recipe.instructions = params["all_instructions"]
+    if not params["all_ingredients"].nil?
+      params["all_ingredients"].each do |ingredient|
+        name = ingredient["unit"]
+        if not ingredient["unit"].nil? 
+          name = ingredient["unit"].squish 
+        end
+        recipe.recipe_ingredient_lists.new(display_name: ingredient["name"], amount_us: ingredient["amount"], unit_us: name)
+      end
+    end
+
+    if recipe.save
+      render json: {success: true, recipe_id: recipe.id, recipe: recipe}, status: 200
+    else
+      render json: {success: false, message: recipe.errors, recipe: recipe}, status: 400
+    end
+  end
+
   def search
     query = getQueryStr(params, true)
 

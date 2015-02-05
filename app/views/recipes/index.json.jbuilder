@@ -15,8 +15,8 @@ json.recipes @recipes do |recipe|
   if recipe.outside_profile_id.nil?
     json.author do 
       json.display_format 0
-      json.username @recipe.user.username
-      json.profile_url @recipe.user.id
+      json.username recipe.user.username
+      json.profile_url recipe.user.id
     end
   else
     json.author do

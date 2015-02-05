@@ -13,4 +13,6 @@ class Recipe < ActiveRecord::Base
   has_many :user_recipe_images
 
   validates_uniqueness_of :url_code, scope: :domain_name_id
+  
+  validates :name, :description, :original_servings_amount, :original_servings_type, :instructions, presence: true
 end
