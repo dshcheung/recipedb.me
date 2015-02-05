@@ -77,12 +77,14 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   if ($location.path() == "/search") {
     $scope.pageLocation = "main";
+    $scope.oppositePageLocation = "sub"
     $scope.hidden = false;
     $scope.search_parameters.user = false;
     $scope.htmlTitle = "Recipe Search"
     UserServices.fromPage = $location.path();
   } else {
     $scope.pageLocation = "sub";
+    $scope.oppositePageLocation = "main"
     $scope.hidden = true;
     $scope.search_parameters.user = true;
     $scope.htmlTitle = "My Recipes"
@@ -114,6 +116,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     // $scope.liked = !$scope.liked;
     $http.post('/bookmarks/'+recipeID).success(function(data, status){
       console.log('hihi');
+      UserServices[$scope.oppositePageLocation].activateSearch = false;
     });
   };
 
@@ -123,6 +126,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     // $scope.liked = !$scope.liked;
     $http.delete('/bookmarks/'+recipeID).success(function(data, status){
       console.log('hihi');
+      UserServices[$scope.oppositePageLocation].activateSearch = false;
     });
   };
 
