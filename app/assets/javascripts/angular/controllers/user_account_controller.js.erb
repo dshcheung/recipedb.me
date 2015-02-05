@@ -1,4 +1,4 @@
-app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
+app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '$location',function($scope, $http, $routeParams, UserServices, $location){
 
   $scope.user = UserServices;
 
@@ -31,7 +31,10 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', f
   $scope.userSignOut = function(){
     $http.delete("/users/sign_out/").success(function(response,status){
       console.log(response);
+      UserServices.resetMain();
+      UserServices.resetSub();
       UserServices.status = false;
+      $location.path("/");
     }).error(function(response,status){
       cnsole.log(response);
     });

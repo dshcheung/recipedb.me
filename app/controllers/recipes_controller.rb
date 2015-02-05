@@ -47,9 +47,11 @@ class RecipesController < ApplicationController
 
     query = starting_query
 
-    if params["user"]
-      search_count += 1
-      query += "#{user_default} #{user_condition}#{current_user.id} UNION ALL "
+    if user_signed_in?
+      if params["user"]
+        search_count += 1
+        query += "#{user_default} #{user_condition}#{current_user.id} UNION ALL "
+      end
     end
 
     if params["keywords"] != nil
