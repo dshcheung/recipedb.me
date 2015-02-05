@@ -1,5 +1,12 @@
 app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServices', 'UserServices', '$location', '$timeout', function($scope, $http, $routeParams, TagServices, UserServices, $location, $timeout){
 
+  // UserServices.getCurrentUser().then(function(data) {
+  //     console.log('data',data);
+  //     $scope.user = data;
+  //   }, function(error){
+  //     console.log('error',error);
+  //   });
+
   // search_parameters
   $scope.search_parameters = {};
   $scope.search_parameters.categories = [];
@@ -13,7 +20,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   // data to populate recipe finder
   $scope.meals = TagServices.meals
   $scope.cuisines = TagServices.cuisines
-  $scope.cuisines_hidden = TagServices.cuisines_hidden
+  $scope.cuisine_hidden = TagServices.cuisine_hidden
   $scope.courses = TagServices.courses
   $scope.courses_hidden = TagServices.courses_hidden
   $scope.occasions = TagServices.occasions
@@ -21,8 +28,8 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   // paginate varibales
   $scope.maxSize = 5;
-  $scope.totalRecipeItems = 1;
-
+  $scope.bigTotalItems = 1;
+  $scope.bigCurrentPage = 1;
   $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>"
   $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>"
 
@@ -114,6 +121,8 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   $scope.addCollection = function(recipeID) {
     console.log(recipeID);
     // $scope.liked = !$scope.liked;
+    
+
     $http.post('/bookmarks/'+recipeID).success(function(data, status){
       console.log('hihi');
       UserServices[$scope.oppositePageLocation].activateSearch = false;

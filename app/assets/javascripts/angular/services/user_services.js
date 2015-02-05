@@ -1,4 +1,4 @@
-app.factory('UserServices', ["$http", function($http){
+app.factory('UserServices', ["$http", "$q", function($http, $q){
   var user = {};
 
   user.status = false;
@@ -38,6 +38,15 @@ app.factory('UserServices', ["$http", function($http){
     user.sub.recipes = [];
   };
   user.resetSub();
+
+  // user.getCurrentUser = function() {
+  //   return $q(function(resolve,reject){
+  //     $http.get("/user/any").success(function(response,status){
+  //        console.log('response from service', response);
+  //       resolve(response);
+  //     });
+  //   });
+  // };
 
   return user;
 }])

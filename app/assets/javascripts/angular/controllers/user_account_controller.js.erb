@@ -3,6 +3,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
   console.log('we are in the UserCtrl');
   $scope.user = UserServices;
 
+// TODO: PUT ALL THAT IN THE USER SERVICE!
   $http.get("/user/any").success(function(response,status){
     console.log(response);
     UserServices.status = response.signedIn;
@@ -26,7 +27,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
       console.log(response);
       Message.sendNoty("success","Successfully Registered");
     }).error(function(response,status){
-      console.log(response);
+      Message.sendNoty("error","Registration Error, please try again");
     });
   };
 
@@ -35,10 +36,11 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
       console.log(response);
       UserServices.resetMain();
       UserServices.resetSub();
+      Message.sendNoty("success","Logged Out");
       UserServices.status = false;
       $location.path("/");
     }).error(function(response,status){
-      cnsole.log(response);
+      Message.sendNoty("error","Problem with logging, please try again");
     });
   };
 
@@ -52,10 +54,10 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
     };
 
     $http.post("/users/sign_in/", data).success(function(response, status){
-      console.log(response);
+      Message.sendNoty("success","Logged In");
       UserServices.status = true;
     }).error(function(response,status){
-      console.log(response);
+      Message.sendNoty("error","Login Error, please try again");
     });
   };
 }]);
