@@ -20,4 +20,5 @@
 //= require angular-ui-bootstrap-tpls
 //= require jquery-ui
 //= require jquery-ui/slider
+//= require noty/packaged/jquery.noty.packaged.min
 //= require_tree .

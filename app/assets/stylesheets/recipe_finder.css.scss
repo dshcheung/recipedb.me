@@ -381,12 +381,19 @@
         padding: 5px 0;
       }
     }
-    .fa.fa-heart-o,
-    .fa.fa-heart {
+    .fa.fa-heart-o {
       font-size: 28px;
       &:hover {
-        color: $color-airbnb-red;
+        // color: $color-airbnb-red;
         cursor: pointer;
+      }
+    }
+    .fa.fa-heart {
+      font-size: 28px;
+      color: $color-airbnb-red;
+      &:hover {
+        cursor: pointer;
+        // color: $color-airbnb-font;
       }
     }
   }

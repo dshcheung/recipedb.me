@@ -41,7 +41,7 @@
           <!-- keyword input -->
           <input type="text" class="input-sm filter-keyword-search col-xs-8" placeholder="Search by..." ng-model="newKeyword">
           <select class="col-xs-2 input-sm" ng-model="searchWord" >
-            <option value="" selected>Pick 1!</option>
+            <!-- <option value="" selected>Pick 1!</option> -->
             <option>Ingredient</option>
             <option>Keyword</option>
           </select>
@@ -184,8 +184,8 @@
             <p ng-if="recipe.author.display_format == 3" class="filter-result-author">By <a class="author-name" href="{{recipe.author.profile_url}}">{{ recipe.author.site_name }}</a></p>
             <p class="filter-result-description hidden-sm hidden-xs">{{ recipe.description }}</p>
           </div>
-          <i ng-click="addCollection(recipe.id)" popover-popup-delay="2000" popover-placement="left" popover="Add/Remove" popover-trigger="mouseenter" data-collection="normal" class="fa fa-heart-o pull-right col-xs-1"></i>
-          <!-- <i ng-if="" ng-click="addCollection()" popover-popup-delay="2000" popover-placement="left" popover="Add to Collection" popover-trigger="mouseenter" data-collection="liked" class="fa fa-heart pull-right col-xs-1"></i> -->
+          <i ng-if="!recipe.is_liked" ng-click="addCollection(recipe.id) ; recipe.is_liked = true" popover-popup-delay="2000" popover-placement="left" popover="Bookmark" popover-trigger="mouseenter" class="fa fa-heart-o pull-right col-xs-1"></i>
+          <i ng-if="recipe.is_liked" ng-click="removeCollection(recipe.id) ; recipe.is_liked = false" popover-popup-delay="2000" popover-placement="left" popover="Bookmark" popover-trigger="mouseenter" class="fa fa-heart pull-right col-xs-1"></i>
         </div>
       </div>
     </div>

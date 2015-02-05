@@ -7,7 +7,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def bookmarks
+  def add_bookmark
+    bookmark = current_user.user_bookmarks.new
+    bookmark.recipe_id = params[:recipe_id]
+    if bookmark.save
+      render json: {success: true}
+    else
+      render json: {success: false}
+    end
+  end
+
+  def remove_bookmark
+    bookmark = current_user.user_bookmarks.find_by(recipe_id: params[:recipe_id].to_i)
+    bookmark.destroy
     render json: {success: true}
   end
 

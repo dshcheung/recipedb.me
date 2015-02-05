@@ -2,6 +2,11 @@ class RecipesController < ApplicationController
   
   def show
     @recipe = Recipe.find(params[:id])
+    if user_signed_in?
+      @bookmarks = current_user.user_bookmarks
+    else
+      @bookmarks = []
+    end
     render 'show.json.jbuilder'
   end
 
@@ -13,6 +18,11 @@ class RecipesController < ApplicationController
       array << row['recipes_id'].to_i
     end
     @recipes = Recipe.where(id: array)
+    if user_signed_in?
+      @bookmarks = current_user.user_bookmarks
+    else
+      @bookmarks = []
+    end
 
     render 'index.json.jbuilder'
   end
