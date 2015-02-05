@@ -1,5 +1,6 @@
-app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '$location',function($scope, $http, $routeParams, UserServices, $location){
+app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', 'Message', '$location', function($scope, $http, $routeParams, $location, UserServices, Message){
 
+  console.log('we are in the UserCtrl');
   $scope.user = UserServices;
 
   $http.get("/user/any").success(function(response,status){
@@ -23,6 +24,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
     $http.post("/users/",data).success(function(response,status){
       UserServices.status = true;
       console.log(response);
+      Message.sendNoty("success","Successfully Registered");
     }).error(function(response,status){
       console.log(response);
     });

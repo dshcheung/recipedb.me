@@ -4,17 +4,9 @@ app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices',
 
   $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>"
 
-  $scope.sendNoty = function (notyType, notyMessage) {
-    noty({
-      text: notyMessage,
-      type: notyType
-    })
-  }
-
   // get recipe information to display
   $http.get('/recipes/'+$routeParams.id+'.json').success(function(data, status, xhr){
     $scope.recipe = data;
     console.log(data);
-    $scope.sendNoty('success','it works');
   });
 }]);
