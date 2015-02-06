@@ -1,6 +1,6 @@
-app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
+app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '$location', 'Message', function($scope, $http, $routeParams, UserServices, $location, Message){
 
-  $scope.measurements = ["pod(s)","container(s)","packet(s)", "ounce(s)", "sheet(s)", "basket(s)", "slab(s)","dash(es)","milliliter(s)","x","shell(s)","rack(s)","quart(s)","bunch(es)","serving(s)","chunk(s)","clove(s)","liter(s)","twist(s)","gallon(s)","grind(s)","stalk(s)","tub(s)","piece(s)","pint(s)","feet","prune(s)","fluid","shot(s)","envelope(s)","gram(s)","bottle(s)","slice(s)","inch(es)","pound(s)","oz","count(s)","tray(s)","kilogram(s)","jar(s)","leaf(s)","head(s)","round(s)","whole","squeeze(s)","wedge(s)","pat(s)","spash(es)","bone(s)","pounch(es)","hank(s)","loaf(s)","large","bag(s)","spear(s)","pinch(es)","strip(s)","thin","roll(s)","medium","jumbo","bite","square(s)","cube(s)","rib(s)","sprig(s)","drop(s)","crown(s)","cup(s)","leg(s)","stick(s)","tablespoon(s)","scoop(s)","link(s)","package(s)","mini","sleeve(s)","ear(s)","bulb(s)","box(es)"].sort();
+  $scope.measurements = ["pod","container","packet", "ounce", "sheet", "basket", "slab","dash","milliliter","shell","rack","quart","bunch","serving","chunk","clove","liter","twist","gallon","grind","stalk","tub","piece","pint","feet","prune","fluid","shot","envelope","gram","bottle","slice","inch","pound","tray","kilogram","jar","leaf","head","round","whole","squeeze","wedge","pat","spash","pounch","hank","loaf","large","bag","spear","pinch","strip","thin","roll","medium","jumbo","square","cube","rib","sprig","drop","crown","cup","stick","tablespoon","scoop","link","package","mini","sleeve","ear","bulb"].sort();
 
   $scope.create_parameters = {};
 
@@ -137,6 +137,19 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServ
     $scope.create_parameters.author = UserServices.username;
     $scope.create_parameters.author_id = UserServices.userID;
     console.log($scope.create_parameters);
+    $http.post('/recipes', $scope.create_parameters).success(function(response){
+      console.log(response);
+      $location.path(/recipes/ + response.recipe_id)
+    }).error(function(response){
+      console.log(response);
+      for (var key in response.message){
+        for (var array in response.message[key]){
+          message = key + " " + response.message[key][array]
+          console.log(message);
+          Message.sendNoty("error", message);
+        }
+      }
+    })
   }
 
 
