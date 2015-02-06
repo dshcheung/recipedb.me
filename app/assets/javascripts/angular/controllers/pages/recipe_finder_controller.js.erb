@@ -1,10 +1,5 @@
 app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootScope', 'TagServices', 'UserServices', '$location', '$timeout', 'Message', function($scope, $http, $routeParams, $rootScope, TagServices, UserServices, $location, $timeout, Message) {
 
-  $rootScope.$on('denis', function (event) {
-    console.log('its wathcing');
-    $scope.submitParams();
-  });
-
   // search_parameters
   $scope.search_parameters = {};
   $scope.search_parameters.categories = [];
@@ -106,6 +101,10 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootSco
   } else {
     $scope.submitParams();
   }
+
+  $rootScope.$on('controlStatus', function (event, args) {
+    $scope.submitParams();
+  });
 
   // toggle hidden checkboxes
   var collapseAll = function() {
