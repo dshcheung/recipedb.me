@@ -23,6 +23,15 @@
       </div>
     </form>
 
+    <form class="form-group">
+      <div class="create-servings form-control">
+        <label class="col-xs-6 col-sm-3" for="recipeServingsAmount">Serving Amount:</label>
+        <input ng-model="create_parameters.servings.amount" type="text" class="col-xs-6 col-sm-3 create-servings-amount-input" placeholder="#">
+        <label class="col-xs-6 col-sm-3" for="recipeServingsType">Serving Type:</label>
+        <input ng-model="create_parameters.servings.type" type="text" class="col-xs-6 col-sm-3 create-servings-type-input" placeholder="e.g. Cups, pieces...">
+      </div>
+    </form>
+
     <form class="form-group create-ingredients">
       <label for="Ingredients">Add Ingredients:</label>
       <div class="row">

@@ -1,11 +1,5 @@
 app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootScope', 'TagServices', 'UserServices', '$location', '$timeout', 'Message', function($scope, $http, $routeParams, $rootScope, TagServices, UserServices, $location, $timeout, Message) {
 
-  $scope.visitMe = function () {
-    if (UserService.status) {
-
-    }
-  };
-
   $rootScope.$on('denis', function (event) {
     console.log('its wathcing');
     $scope.submitParams();

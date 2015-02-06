@@ -9,7 +9,8 @@
           <a href="#{{fromPage}}"><button class="col-xs-12 btn btn-danger">Back <i class="fa fa-step-backward"></i></button></a>
         </div>
         <div class="col-xs-6 recipe-back-button">
-          <button class="col-xs-12 btn btn-warning">Save <i class="fa fa-heart"></i></button>
+          <button ng-if="recipe.is_liked" ng-click="removeCollection()"class="col-xs-12 btn btn-default">Remove <i class="fa fa-heart"></i></button>
+          <button ng-if="!recipe.is_liked" ng-click="addCollection()" class="col-xs-12 btn btn-default">Bookmark <i class="fa fa-heart-o"></i></button>
         </div>
         <!-- <div class="col-xs-4 recipe-back-button">
           <button class="col-xs-12 btn btn-success">Shopping <i class="fa fa-shopping-cart"></i></button>

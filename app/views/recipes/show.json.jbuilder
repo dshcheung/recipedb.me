@@ -1,4 +1,5 @@
 json.title @recipe.name
+json.id @recipe.id
 
 if @recipe.outside_profile_id.nil?
   json.author do 

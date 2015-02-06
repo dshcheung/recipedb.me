@@ -1,4 +1,4 @@
-app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', function($scope, $http, $routeParams, UserServices){
+app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices', 'Message', function($scope, $http, $routeParams, UserServices, Message){
 
   $scope.fromPage = UserServices.fromPage;
 
@@ -9,4 +9,35 @@ app.controller('RecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServices',
     $scope.recipe = data;
     console.log(data);
   });
+
+
+  $scope.addCollection = function() {
+    // var recipeID = $scope.recipe[index].id;
+    if (UserServices.status) {
+      $http.post('/bookmarks/'+$scope.recipe.id).success(function(data, status){
+        console.log($scope.recipe.id);
+        $scope.recipe.is_liked = true;
+        // console.log($scope.recipes[recipeID]);
+      });
+    } else {
+      console.log(Message.sendNoty);
+      Message.sendNoty("error","Please log in to bookmark");
+    }
+  };
+
+  // remove from collection button
+  $scope.removeCollection = function(index) {
+    if (UserServices.status) {
+      $http.delete('/bookmarks/'+$scope.recipe.id).success(function(data, status){
+        console.log($scope.recipe.id);
+        $scope.recipe.is_liked = false;
+        // console.log($scope.recipes[recipeID]);
+      });
+    } else {
+      console.log(Message.sendNoty);
+      Message.sendNoty("error","Please log in to bookmark");
+    }
+  };
+
+
 }]);

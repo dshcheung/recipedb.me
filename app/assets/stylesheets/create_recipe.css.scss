@@ -37,6 +37,14 @@
   }
 }
 
+.form-group div.create-servings.form-control {
+  border: 0;
+  box-shadow: 0 0 0 transparent;
+  // webkit box-shadow: 0;
+  transition: 0;
+  // webkit transition: 0;
+}
+
 .form-group.create-ingredients .row .form-control.input-sm {
   height: 34px;
   font-size: 14px;

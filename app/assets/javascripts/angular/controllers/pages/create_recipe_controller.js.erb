@@ -8,6 +8,11 @@ app.controller('createRecipeCtrl', ['$scope', '$http', '$routeParams', 'UserServ
 
   $scope.create_parameters.description = '';
 
+  $scope.create_parameters.servings = {
+    "amount": '',
+    "type": ''
+  };
+
   // add ingredients function
   $scope.create_parameters.all_ingredients = [];
 
