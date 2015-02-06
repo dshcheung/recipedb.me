@@ -295,7 +295,13 @@
 }
 
 .chef-loading {
-  margin: 0 25%;
+  text-align: center;
+
+  img{
+    max-height: calc(100vh - 200px);
+    max-width: calc((467/650) * (100vh - 200px));
+    width: 100%;
+  }
 }
 
 .row > .filter-results > .paginate-div {
