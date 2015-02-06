@@ -239,12 +239,10 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootSco
       range: true,
       min: 0,
       max: 1440,
-      values: [ 0, 1440 ],
+      values: $scope.search_parameters.timeframe,
       slide: function(event,ui) {
-
         $("#amount").val(timeConversion(ui.values[0]) + " to " + timeConversion(ui.values[1]));
         $scope.search_parameters.timeframe = ui.values;
-
         $timeout.cancel(timer);
         timer = $timeout(function(){
           $scope.submitParams();
@@ -252,7 +250,6 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootSco
       }
     });
     // initial slider values
-    // $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ) +" mins" );
     $("#amount").val(timeConversion(0) + " to " + timeConversion(1440) );
   };
 }]);
