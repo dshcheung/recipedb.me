@@ -125,6 +125,12 @@
       padding: 0 0 0 5px;
     }
   }
+  .filter-tag.keyword-tag {
+    background: $color-keyword-tag;
+  }
+  .filter-tag.ingredient-tag {
+    background: $color-ingredient-tag;
+  }
 }
 .add-keyword-button.btn.btn-default {
   height: 30px;
