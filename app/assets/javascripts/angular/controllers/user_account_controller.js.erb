@@ -1,8 +1,7 @@
 app.controller('UserCtrl', ['$scope', '$http', '$routeParams', '$rootScope', '$location', 'UserServices', 'Message', function($scope, $http, $routeParams, $rootScope, $location, UserServices, Message){
   
-  $scope.test = function(){
-    $rootScope.$emit('denis');
-    // console.log(this.status);
+  $scope.emitStatus = function(){
+    $rootScope.$emit('controlStatus', UserServices.status);
   };
 
   $scope.myRecipesLink = function () {
@@ -35,12 +34,19 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', '$rootScope', '$l
     };
 
     $http.post("/users/",data).success(function(response,status){
-      UserServices.status = true;
       console.log(response);
+      UserServices.status = true;
       Message.sendNoty("success","Successfully Registered");
-      $scope.test();
+      $scope.emitStatus();
     }).error(function(response,status){
-      Message.sendNoty("error","Registration Error, please try again");
+      console.log(response);
+      for (var key in response.message){
+        for (var array in response.message[key]){
+          message = key + " " + response.message[key][array]
+          console.log(message);
+          Message.sendNoty("error", message);
+        }
+      }
     });
   };
 
@@ -52,7 +58,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', '$rootScope', '$l
       $location.path("/");
       Message.sendNoty("information","Logged Out");
       UserServices.status = false;
-      $scope.test();
+      $scope.emitStatus();
     }).error(function(response,status){
       Message.sendNoty("error","Problem with logging, please try again");
     });
@@ -70,7 +76,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', '$rootScope', '$l
     $http.post("/users/sign_in/", data).success(function(response, status){
       Message.sendNoty("success","Logged In");
       UserServices.status = true;
-      $scope.test();
+      $scope.emitStatus();
     }).error(function(response,status){
       Message.sendNoty("error","Login Error, please try again");
     });

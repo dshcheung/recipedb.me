@@ -5,6 +5,7 @@
   <form ng-controller="UserCtrl" ng-submit="userSignIn()">
     <input class="col-xs-offset-1 col-xs-10 input-fields" type="text" placeholder="Email" ng-model="loginEmail">
     <input class="col-xs-offset-1 col-xs-10 input-fields" type="password" placeholder="Password" ng-model="loginPassword">
-    <button class="login-modal-button col-xs-offset-1 col-xs-10 btn btn-warning" ng-click="ok()">OK</button>
+    <button class="login-modal-button col-xs-offset-1 col-xs-10 btn btn-warning">OK</button>
+    <div class="hide">{{ok()}}</div>
   </form>
 </div>

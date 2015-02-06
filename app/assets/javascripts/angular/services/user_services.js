@@ -8,9 +8,9 @@ app.factory('UserServices', ["$http", "$q", "$rootScope", function($http, $q, $r
   user.fromPage = "/search";
 
   user.main = {};
-  user.main.activateSearch = false;
-  user.main.freshSearch = false;
   user.resetMain = function(){
+    user.main.activateSearch = false;
+    user.main.freshSearch = false;
     user.main.search_parameters = {};
     user.main.search_parameters.categories = [];
     user.main.search_parameters.ingredients = [];
@@ -24,9 +24,9 @@ app.factory('UserServices', ["$http", "$q", "$rootScope", function($http, $q, $r
   user.resetMain();
 
   user.sub = {};
-  user.sub.activateSearch = false;
-  user.sub.freshSearch = false;
   user.resetSub = function(){
+    user.sub.activateSearch = false;
+    user.sub.freshSearch = false;
     user.sub.search_parameters = {};
     user.sub.search_parameters.categories = [];
     user.sub.search_parameters.ingredients = [];
