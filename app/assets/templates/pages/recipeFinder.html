@@ -166,7 +166,7 @@
         <div class="paginate-div col-xs-12"><!-- pagination -->
           <pagination total-items="totalRecipeItems" items-per-page="8" ng-model="search_parameters.page" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ng-change="pageChanged()"></pagination>
         </div>
-        <div class="col-xs-12" ng-if="loading"><img class="chef-loading" src="{{chefLoadingImg}}" alt=""></div>
+        <div class="col-xs-12 chef-loading" ng-if="loading"><img src="{{chefLoadingImg}}" alt=""></div>
         <div ng-if="!loading" ng-hide="recipes.length" class="filter-result-empty col-xs-12"><p>No Results Found...</p> Please try again or use less filters
         </div>
         <div ng-if="!loading" ng-repeat="recipe in recipes" class="filter-result col-xs-12" ng-model="hidden" ng-class="hidden ? 'col-sm-6' : 'col-sm-12'">
