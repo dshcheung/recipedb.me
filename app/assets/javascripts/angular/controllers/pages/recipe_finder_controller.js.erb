@@ -31,7 +31,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     $http.post('/recipes/search', params).success(function(data, status){
       $scope.recipes = data.recipes;
       UserServices[$scope.pageLocation].recipes = data.recipes;
-      $scope.loading = true;
+      $scope.loading = false;
       console.log('data received from the search:', data);
       if ($(".hide-finder-button").attr('data-status') == 'closed'){
         // console.log("hihi");
