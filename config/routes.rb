@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   get '/recipes/:id', to: 'recipes#show'
+  post '/recipes', to: 'recipes#create'
   post '/recipes/search', to: 'recipes#search'
   post '/recipes/search_count', to: 'recipes#search_count'
   
