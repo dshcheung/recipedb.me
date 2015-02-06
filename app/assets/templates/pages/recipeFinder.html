@@ -1,6 +1,5 @@
 <main-nav-bar></main-nav-bar>
 
-
 <div class="main-body">
   <div class="recipe-finder-body container-fluid">
     <div class="row">
@@ -169,7 +168,7 @@
         <div class="col-xs-12 chef-loading" ng-if="loading"><img src="{{chefLoadingImg}}" alt=""></div>
         <div ng-if="!loading" ng-hide="recipes.length" class="filter-result-empty col-xs-12"><p>No Results Found...</p> Please try again or use less filters
         </div>
-        <div ng-if="!loading" ng-repeat="recipe in recipes" class="filter-result col-xs-12" ng-model="hidden" ng-class="hidden ? 'col-sm-6' : 'col-sm-12'">
+        <div ng-if="!loading" ng-repeat="recipe in recipes track by $index" class="filter-result col-xs-12" ng-model="hidden" ng-class="hidden ? 'col-sm-6' : 'col-sm-12'">
           <div class="col-xs-5 col-md-4 col-lg-3">
             <a href="/#/recipes/{{ recipe.id }}">
               <img ng-if="recipe.images[0] != undefined" class="filter-result-image" src="{{ recipe.images[0] }}">
@@ -184,8 +183,11 @@
             <p ng-if="recipe.author.display_format == 3" class="filter-result-author">By <a class="author-name" href="{{recipe.author.profile_url}}">{{ recipe.author.site_name }}</a></p>
             <p class="filter-result-description hidden-sm hidden-xs">{{ recipe.description }}</p>
           </div>
-          <i ng-if="!recipe.is_liked" ng-click="addCollection(recipe.id) ; recipe.is_liked = true" popover-popup-delay="2000" popover-placement="left" popover="Bookmark" popover-trigger="mouseenter" class="fa fa-heart-o pull-right col-xs-1"></i>
-          <i ng-if="recipe.is_liked" ng-click="removeCollection(recipe.id) ; recipe.is_liked = false" popover-popup-delay="2000" popover-placement="left" popover="Bookmark" popover-trigger="mouseenter" class="fa fa-heart pull-right col-xs-1"></i>
+          <i ng-if="!recipes[$index].is_liked" ng-click="addCollection($index)" popover-popup-delay="2000" popover-placement="left" popover="Bookmark" popover-trigger="mouseenter" class="fa fa-heart-o pull-right col-xs-1"></i>
+          <i ng-if="recipes[$index].is_liked" ng-click="removeCollection($index)" popover-popup-delay="2000" popover-placement="left" popover="Bookmark" popover-trigger="mouseenter" class="fa fa-heart pull-right col-xs-1"></i>
+        </div>
+        <div class="paginate-div col-xs-12"><!-- pagination -->
+          <pagination total-items="totalRecipeItems" items-per-page="8" ng-model="search_parameters.page" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ng-change="pageChanged()"></pagination>
         </div>
       </div>
     </div>

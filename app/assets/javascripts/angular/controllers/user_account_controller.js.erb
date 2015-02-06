@@ -1,7 +1,21 @@
-app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '$location',function($scope, $http, $routeParams, UserServices, $location){
+app.controller('UserCtrl', ['$scope', '$http', '$routeParams', '$rootScope', '$location', 'UserServices', 'Message', function($scope, $http, $routeParams, $rootScope, $location, UserServices, Message){
+  
+  $scope.test = function(){
+    $rootScope.$emit('denis');
+    // console.log(this.status);
+  };
+
+  $scope.myRecipesLink = function () {
+    if (UserServices.status) {
+      $location.path("/myrecipes/"+UserServices.userID)
+    } else {
+      Message.sendNoty("error","Please log in to access");
+    }
+  }
 
   $scope.user = UserServices;
 
+// TODO: PUT ALL THAT IN THE USER SERVICE!
   $http.get("/user/any").success(function(response,status){
     console.log(response);
     UserServices.status = response.signedIn;
@@ -23,8 +37,10 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
     $http.post("/users/",data).success(function(response,status){
       UserServices.status = true;
       console.log(response);
+      Message.sendNoty("success","Successfully Registered");
+      $scope.test();
     }).error(function(response,status){
-      console.log(response);
+      Message.sendNoty("error","Registration Error, please try again");
     });
   };
 
@@ -33,10 +49,12 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
       console.log(response);
       UserServices.resetMain();
       UserServices.resetSub();
-      UserServices.status = false;
       $location.path("/");
+      Message.sendNoty("information","Logged Out");
+      UserServices.status = false;
+      $scope.test();
     }).error(function(response,status){
-      cnsole.log(response);
+      Message.sendNoty("error","Problem with logging, please try again");
     });
   };
 
@@ -50,10 +68,11 @@ app.controller('UserCtrl', ['$scope', '$http', '$routeParams', 'UserServices', '
     };
 
     $http.post("/users/sign_in/", data).success(function(response, status){
-      console.log(response);
+      Message.sendNoty("success","Logged In");
       UserServices.status = true;
+      $scope.test();
     }).error(function(response,status){
-      console.log(response);
+      Message.sendNoty("error","Login Error, please try again");
     });
   };
 }]);

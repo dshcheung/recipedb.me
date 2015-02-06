@@ -1,4 +1,9 @@
-app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServices', 'UserServices', '$location', '$timeout', function($scope, $http, $routeParams, TagServices, UserServices, $location, $timeout){
+app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootScope', 'TagServices', 'UserServices', '$location', '$timeout', 'Message', function($scope, $http, $routeParams, $rootScope, TagServices, UserServices, $location, $timeout, Message) {
+
+  $rootScope.$on('denis', function (event) {
+    console.log('its wathcing');
+    $scope.submitParams();
+  });
 
   // search_parameters
   $scope.search_parameters = {};
@@ -13,7 +18,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   // data to populate recipe finder
   $scope.meals = TagServices.meals
   $scope.cuisines = TagServices.cuisines
-  $scope.cuisines_hidden = TagServices.cuisines_hidden
+  $scope.cuisine_hidden = TagServices.cuisine_hidden
   $scope.courses = TagServices.courses
   $scope.courses_hidden = TagServices.courses_hidden
   $scope.occasions = TagServices.occasions
@@ -21,8 +26,8 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
 
   // paginate varibales
   $scope.maxSize = 5;
-  $scope.totalRecipeItems = 1;
-
+  $scope.bigTotalItems = 1;
+  $scope.bigCurrentPage = 1;
   $scope.chefLoadingImg = "<%= asset_path('chef-loading.gif') %>"
   $scope.defaultImg = "<%= asset_path('recipedb-default-img.png') %>"
 
@@ -32,7 +37,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
       $scope.recipes = data.recipes;
       UserServices[$scope.pageLocation].recipes = data.recipes;
       $scope.loading = false;
-      console.log('data received from the search:', data);
+      // console.log('data received from the search:', data);
       if ($(".hide-finder-button").attr('data-status') == 'closed'){
         // console.log("hihi");
       }
@@ -111,23 +116,34 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
   collapseAll();
 
   // add to collection button
-  $scope.addCollection = function(recipeID) {
-    console.log(recipeID);
-    // $scope.liked = !$scope.liked;
-    $http.post('/bookmarks/'+recipeID).success(function(data, status){
-      console.log('hihi');
-      UserServices[$scope.oppositePageLocation].activateSearch = false;
-    });
+  $scope.addCollection = function(index) {
+    var recipeID = $scope.recipes[index].id;
+    if (UserServices.status) {
+      $http.post('/bookmarks/'+recipeID).success(function(data, status){
+        console.log(recipeID);
+        $scope.recipes[index].is_liked = true;
+        UserServices[$scope.oppositePageLocation].activateSearch = false;
+        // console.log($scope.recipes[recipeID]);
+      });
+    } else {
+      console.log(Message.sendNoty);
+      Message.sendNoty("error","Please log in to bookmark");
+    }
   };
 
   // remove from collection button
-  $scope.removeCollection = function(recipeID) {
-    console.log(recipeID);
-    // $scope.liked = !$scope.liked;
-    $http.delete('/bookmarks/'+recipeID).success(function(data, status){
-      console.log('hihi');
-      UserServices[$scope.oppositePageLocation].activateSearch = false;
-    });
+  $scope.removeCollection = function(index) {
+    var recipeID = $scope.recipes[index].id;
+    if (UserServices.status) {
+      $http.delete('/bookmarks/'+recipeID).success(function(data, status){
+        console.log(recipeID);
+        $scope.recipes[index].is_liked = false;
+        UserServices[$scope.oppositePageLocation].activateSearch = false;
+        // console.log($scope.recipes[recipeID]);
+      });
+    } else {
+      Message.sendNoty("error","Please log in to bookmark");
+    }
   };
 
   // reset finder button
@@ -143,6 +159,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     $("#amount").val(timeConversion(0) + " to " + timeConversion(1440) );
     collapseAll();
     $scope.submitParams();
+    Message.sendNoty("information","Filters Cleared");
   }
 
   // keyword search
@@ -161,6 +178,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
       if ($scope.searchWord == "Ingredient"){
         if (checkDuplicates($scope.newKeyword,$scope.search_parameters.ingredients)){
           $scope.newKeyword = '';
+          Message.sendNoty("warning","Please type something new");
         } else {
           $scope.search_parameters.ingredients.push($scope.newKeyword);
           $scope.submitParams();
@@ -169,6 +187,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
       } else if ($scope.searchWord == "Keyword"){
         if (checkDuplicates($scope.newKeyword, $scope.search_parameters.keywords)){
           $scope.newKeyword = '';
+          Message.sendNoty("warning","Please type something new");
         } else {
           $scope.search_parameters.keywords.push($scope.newKeyword);
           $scope.submitParams();
@@ -178,6 +197,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', 'TagServi
     } else {
       $scope.newKeyword = '';
       // needs notification of empty string
+      Message.sendNoty("warning","Something over 3 characters please");
     }
   }
   $scope.removeKeyword = function(index) {
