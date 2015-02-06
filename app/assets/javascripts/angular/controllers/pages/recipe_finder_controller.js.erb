@@ -234,7 +234,7 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootSco
   
   var timer;
 
-  $(function() {
+  $scope.slider = function() {
     $( "#slider-range" ).slider({
       range: true,
       min: 0,
@@ -254,5 +254,5 @@ app.controller('RecipeFinderCtrl', ['$scope', '$http', '$routeParams', '$rootSco
     // initial slider values
     // $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ) +" mins" );
     $("#amount").val(timeConversion(0) + " to " + timeConversion(1440) );
-  });
+  };
 }]);
