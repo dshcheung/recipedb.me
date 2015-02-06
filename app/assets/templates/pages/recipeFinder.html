@@ -28,11 +28,11 @@
             <div class="filter-tags-heading">Search for:</div>
             <div class="keyword-collection">
               <!-- list of keywords -->
-              <div ng-click="removeKeyword($index)" ng-repeat='keyword in search_parameters.keywords track by $index' class='filter-tag'>
+              <div ng-click="removeKeyword($index)" ng-repeat='keyword in search_parameters.keywords track by $index' class='filter-tag keyword-tag'>
                 {{ keyword }}
                 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
-              <div ng-click="removeIngredient($index)" ng-repeat='ingredient in search_parameters.ingredients track by $index' class='filter-tag'>
+              <div ng-click="removeIngredient($index)" ng-repeat='ingredient in search_parameters.ingredients track by $index' class='filter-tag ingredient-tag'>
                 {{ ingredient }}
                 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
