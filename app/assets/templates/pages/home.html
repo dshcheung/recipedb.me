@@ -5,8 +5,8 @@
 
   <div class="jumbo row">
     <div class="col-xs-12">
-      <div class="splash-animate" ng-repeat="image in recipeImages1">
-        <img class="splash-item img-responsive col-xs-2 col-sm-1" ng-src="http://images.media-allrecipes.com/userphotos/140x140/{{ image }}.jpg">
+      <div class="splash-item col-xs-2 col-sm-1" ng-repeat="image in recipeImages1">
+        <img class="splash-animate img-responsive" ng-src="http://images.media-allrecipes.com/userphotos/140x140/{{ image }}.jpg">
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
     <div class="other-links-separator row"><p class="col-xs-12"> - or -</p></div>
     <div class="row home-other-links">
       <div class="col-xs-5 col-sm-offset-1 col-sm-4 col-md-offset-2 col-md-3 other-links-buttons">
-        <a href="/#/search" ><button class="col-xs-12 btn btn-default home-recipe-finder">Advanced Search <i class="fa fa-search"></i></button></a>
+        <a href="/#/search" ><button class="col-xs-12 btn btn-default home-recipe-finder">Adv. Search <i class="fa fa-search"></i></button></a>
       </div>
       <div class="col-xs-offset-2 col-xs-5 col-sm-offset-2 col-sm-4 col-md-offset-2 col-md-3 other-links-buttons">
         <a href="/#/myrecipes/{{user.userID}}" ><button class="col-xs-12 btn btn-default home-myrecipes"><i class="fa fa-heart"></i> My Recipes</button></a>
