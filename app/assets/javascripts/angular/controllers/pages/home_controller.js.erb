@@ -395,8 +395,8 @@ app.controller('HomeCtrl', ['$interval','$scope', '$http', '$routeParams', 'User
     var image1 = $scope.recipeImages1[value1];
     var image2 = recipeImages2[value2];
 
-    $scope.recipeImages1.splice(value1,1,image2);
     recipeImages2.splice(value2,1,image1);
+    $scope.recipeImages1.splice(value1,1,image2);
   }
 
   
