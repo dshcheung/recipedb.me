@@ -1,7 +1,5 @@
 == README
 
-## TO BE DONE
-
 I strongly apologize for not keeping this document up to date
 
 We'll be with you shortly.
