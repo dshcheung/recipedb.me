@@ -1,0 +1,108 @@
+desc "scrape all the recipes from JamieOliver.com"
+task :scrape => :environment do
+  require 'open-uri'
+  require 'nokogiri'
+
+  parameters = {
+    ingredients = [
+      "/recipes/beef-recipes", 
+      "/recipes/bread-recipes", 
+      "/recipes/cheese-recipes", 
+      "/recipes/chicken-recipes", 
+      "/recipes/chocolate-recipes", 
+      "/recipes/duck-recipes", 
+      "/recipes/eggs-recipes", 
+      "/recipes/fish-recipes", 
+      "/recipes/fruit-recipes", 
+      "/recipes/game-recipes", 
+      "/recipes/gin-recipes", 
+      "/recipes/goose-recipes", 
+      "/recipes/lamb-recipes", 
+      "/recipes/martini-recipes", 
+      "/recipes/pasta-recipes", 
+      "/recipes/pork-recipes", 
+      "/recipes/red-wine-recipes", 
+      "/recipes/rice-recipes", 
+      "/recipes/rum-recipes", 
+      "/recipes/seafood-recipes", 
+      "/recipes/tequila-recipes", 
+      "/recipes/turkey-recipes", 
+      "/recipes/vegetables-recipes", 
+      "/recipes/vodka-recipes", 
+      "/recipes/whiskey-recipes"
+    ],
+    dish_types = [
+      "/recipes/category/dishtype/antipasti", 
+      "/recipes/category/dishtype/bbq-food", 
+      "/recipes/category/dishtype/bread-doughs", 
+      "/recipes/category/dishtype/cakes-tea-time-treats", 
+      "/recipes/category/dishtype/curry", 
+      "/recipes/category/dishtype/drinks", 
+      "/recipes/category/dishtype/pasta-risotto", 
+      "/recipes/category/dishtype/pies-pastries", 
+      "/recipes/category/dishtype/pizza", 
+      "/recipes/category/dishtype/puddings-desserts", 
+      "/recipes/category/dishtype/roast", 
+      "/recipes/category/dishtype/salad", 
+      "/recipes/category/dishtype/sandwiches-wraps", 
+      "/recipes/category/dishtype/sauces-condiments", 
+      "/recipes/category/dishtype/soup", 
+      "/recipes/category/dishtype/stew", 
+      "/recipes/category/dishtype/vegetable-sides"
+    ],
+    courses = [
+      "/recipes/category/course/breakfast", 
+      "/recipes/category/course/cheap-cheerful", 
+      "/recipes/category/course/desserts", 
+      "/recipes/category/course/drinks", 
+      "/recipes/category/course/healthy-meals", 
+      "/recipes/category/course/jamie-s-table-with-woolworths", 
+      "/recipes/category/course/leftovers", 
+      "/recipes/category/course/light-meals", 
+      "/recipes/category/course/mains", 
+      "/recipes/category/course/meals-for-one", 
+      "/recipes/category/course/one-pan-recipes", 
+      "/recipes/category/course/quick-fixes", 
+      "/recipes/category/course/sauces", 
+      "/recipes/category/course/sides", 
+      "/recipes/category/course/snacks", 
+      "/recipes/category/course/starters"
+    ],
+    special_occasions = [
+      "/recipes/category/occasion/burns-night-specials", 
+      "/recipes/category/occasion/christmas", 
+      "/recipes/category/occasion/dinner-for-two", 
+      "/recipes/category/occasion/dinner-party", 
+      "/recipes/category/occasion/drinks-tube", 
+      "/recipes/category/occasion/easter-treats", 
+      "/recipes/category/occasion/father-s-day", 
+      "/recipes/category/occasion/gorgeous-winter-soups", 
+      "/recipes/category/occasion/halloween-bonfire-night", 
+      "/recipes/category/occasion/lighter-new-year", 
+      "/recipes/category/occasion/mother-s-day", 
+      "/recipes/category/occasion/new-year-party-picks", 
+      "/recipes/category/occasion/pancake-day", 
+      "/recipes/category/occasion/party-food", 
+      "/recipes/category/occasion/romantic-meals", 
+      "/recipes/category/occasion/st-george-s-day", 
+      "/recipes/category/occasion/sunday-lunch", 
+      "/recipes/category/occasion/thanksgiving", 
+      "/recipes/category/occasion/the-big-feastival-2013"
+    ],
+    cuisines = [
+      "/recipes/category/world/american", 
+      "/recipes/category/world/asian", 
+      "/recipes/category/world/british", 
+      "/recipes/category/world/chinese", 
+      "/recipes/category/world/french", 
+      "/recipes/category/world/greek", 
+      "/recipes/category/world/indian", 
+      "/recipes/category/world/italian", 
+      "/recipes/category/world/mexican", 
+      "/recipes/category/world/moroccan", 
+      "/recipes/category/world/other-world-flavours", 
+      "/recipes/category/world/spanish"
+    ]
+  }
+
+end
